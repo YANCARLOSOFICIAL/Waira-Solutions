@@ -1,0 +1,7 @@
+allowBuilds:
+  sharp: set this to true or false
+minimumReleaseAgeExclude:
+  - '@types/three@0.185.0'
+  - framer-motion@12.42.0
+  - motion-dom@12.42.0
+  - three@0.185.0
