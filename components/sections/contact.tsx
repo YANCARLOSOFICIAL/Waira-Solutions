@@ -18,7 +18,7 @@ export function Contact() {
       icon: MessageCircle,
       label: info.whatsappLabel,
       value: info.whatsapp,
-      href: 'https://wa.me/573000000000',
+      href: 'https://wa.me/573229369995',
     },
     { icon: MapPin, label: info.locationLabel, value: info.location, href: undefined },
     { icon: Clock, label: info.hoursLabel, value: info.hours, href: undefined },

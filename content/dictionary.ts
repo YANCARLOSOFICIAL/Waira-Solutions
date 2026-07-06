@@ -2,9 +2,6 @@ import type { Locale } from '@/lib/i18n/config'
 
 /**
  * Bilingual content dictionary for Waira Solutions.
- *
- * NOTE: Items marked with `[PLACEHOLDER]` use temporary content because no
- * verified public information was found. Replace these with real company data.
  */
 export const dictionary = {
   es: {
@@ -29,6 +26,7 @@ export const dictionary = {
       ctaPrimary: 'Iniciar proyecto',
       ctaSecondary: 'Ver servicios',
       trustedBy: 'Tecnologías y aliados que dominamos',
+      trustBadges: ['Trato directo', 'Código propio', 'Soporte cercano'],
       metrics: [
         { value: '+30', label: 'Proyectos entregados', suffix: '' },
         { value: '98', label: 'Satisfacción de clientes', suffix: '%' },
@@ -139,9 +137,9 @@ export const dictionary = {
       ],
     },
     cases: {
-      eyebrow: 'Casos de éxito',
-      title: 'Resultados que hablan por sí solos',
-      subtitle: 'Proyectos que demuestran el impacto real de nuestra tecnología en diferentes industrias.',
+      eyebrow: 'Casos de uso',
+      title: 'Ejemplos de lo que podemos construir para ti',
+      subtitle: 'Ejemplos ilustrativos del tipo de soluciones que diseñamos para distintas industrias.',
       items: [
         {
           tag: 'Retail',
@@ -175,32 +173,25 @@ export const dictionary = {
         },
       ],
     },
-    clients: {
-      title: 'Empresas que confían en la tecnología',
-      note: '[PLACEHOLDER] Logos ilustrativos.',
-    },
     testimonials: {
-      eyebrow: 'Testimonios',
-      title: 'Lo que dicen nuestros clientes',
-      subtitle: 'Líderes y equipos que han vivido la diferencia de trabajar con Waira Solutions.',
+      eyebrow: 'Diferenciales',
+      title: 'Por qué elegir Waira Solutions',
+      subtitle: 'Somos un equipo joven con la ambición de construir productos que realmente muevan la aguja para tu negocio.',
       items: [
         {
-          quote: 'Waira transformó nuestra operación. El equipo es técnico, cercano y entrega a tiempo.',
-          name: 'Cliente Ejemplo',
-          role: 'CEO',
-          company: 'Empresa Demo',
+          icon: 'Users',
+          title: 'Trato directo',
+          text: 'Hablas con quienes diseñan y construyen tu producto, sin intermediarios ni capas de gestión innecesarias.',
         },
         {
-          quote: 'La solución de IA superó nuestras expectativas y se integró sin fricción.',
-          name: 'Cliente Ejemplo',
-          role: 'Directora de Tecnología',
-          company: 'Empresa Demo',
+          icon: 'ShieldCheck',
+          title: 'Compromiso con la calidad',
+          text: 'Cuidamos cada detalle técnico y de diseño como si fuera nuestro propio producto.',
         },
         {
-          quote: 'Profesionalismo y calidad de principio a fin. Los recomiendo totalmente.',
-          name: 'Cliente Ejemplo',
-          role: 'Gerente de Producto',
-          company: 'Empresa Demo',
+          icon: 'Rocket',
+          title: 'Agilidad real',
+          text: 'Ciclos cortos de entrega para que veas resultados tangibles desde las primeras semanas.',
         },
       ],
     },
@@ -256,7 +247,7 @@ export const dictionary = {
       },
       info: {
         emailLabel: 'Correo',
-        email: 'contactanos@infinitechcol.com',
+        email: 'infitechcol308@gmail.com',
         locationLabel: 'Ubicación',
         location: 'Popayán, Cauca, Colombia',
         whatsappLabel: 'WhatsApp',
@@ -270,15 +261,21 @@ export const dictionary = {
       columns: [
         {
           title: 'Servicios',
-          links: ['Desarrollo de software', 'Inteligencia Artificial', 'Automatización', 'Cloud & DevOps'],
+          links: [
+            { label: 'Desarrollo de software', href: '#servicios' },
+            { label: 'Inteligencia Artificial', href: '#servicios' },
+            { label: 'Automatización', href: '#servicios' },
+            { label: 'Cloud & DevOps', href: '#servicios' },
+          ],
         },
         {
           title: 'Empresa',
-          links: ['Sobre nosotros', 'Proceso', 'Casos de éxito', 'Contacto'],
-        },
-        {
-          title: 'Recursos',
-          links: ['Blog', 'Soporte', 'Privacidad', 'Términos'],
+          links: [
+            { label: 'Sobre nosotros', href: '#nosotros' },
+            { label: 'Proceso', href: '#proceso' },
+            { label: 'Casos de éxito', href: '#casos' },
+            { label: 'Contacto', href: '#contacto' },
+          ],
         },
       ],
       rights: 'Todos los derechos reservados.',
@@ -309,6 +306,7 @@ export const dictionary = {
       ctaPrimary: 'Start a project',
       ctaSecondary: 'View services',
       trustedBy: 'Technologies and partners we master',
+      trustBadges: ['Direct communication', 'Own codebase', 'Close support'],
       metrics: [
         { value: '+30', label: 'Projects delivered', suffix: '' },
         { value: '98', label: 'Client satisfaction', suffix: '%' },
@@ -419,9 +417,9 @@ export const dictionary = {
       ],
     },
     cases: {
-      eyebrow: 'Case studies',
-      title: 'Results that speak for themselves',
-      subtitle: 'Projects that demonstrate the real impact of our technology across different industries.',
+      eyebrow: 'Use cases',
+      title: 'Examples of what we can build for you',
+      subtitle: 'Illustrative examples of the kind of solutions we design across different industries.',
       items: [
         {
           tag: 'Retail',
@@ -455,32 +453,25 @@ export const dictionary = {
         },
       ],
     },
-    clients: {
-      title: 'Companies that trust in technology',
-      note: '[PLACEHOLDER] Illustrative logos.',
-    },
     testimonials: {
-      eyebrow: 'Testimonials',
-      title: 'What our clients say',
-      subtitle: 'Leaders and teams who have experienced the difference of working with Waira Solutions.',
+      eyebrow: 'Differentiators',
+      title: 'Why choose Waira Solutions',
+      subtitle: 'We are a young team with the ambition to build products that truly move the needle for your business.',
       items: [
         {
-          quote: 'Waira transformed our operation. The team is technical, close and delivers on time.',
-          name: 'Sample Client',
-          role: 'CEO',
-          company: 'Demo Company',
+          icon: 'Users',
+          title: 'Direct communication',
+          text: 'You talk to the people designing and building your product — no intermediaries, no unnecessary management layers.',
         },
         {
-          quote: 'The AI solution exceeded our expectations and integrated with zero friction.',
-          name: 'Sample Client',
-          role: 'CTO',
-          company: 'Demo Company',
+          icon: 'ShieldCheck',
+          title: 'Commitment to quality',
+          text: 'We care about every technical and design detail as if it were our own product.',
         },
         {
-          quote: 'Professionalism and quality from start to finish. Highly recommended.',
-          name: 'Sample Client',
-          role: 'Product Manager',
-          company: 'Demo Company',
+          icon: 'Rocket',
+          title: 'Real agility',
+          text: 'Short delivery cycles so you see tangible results from the first few weeks.',
         },
       ],
     },
@@ -536,7 +527,7 @@ export const dictionary = {
       },
       info: {
         emailLabel: 'Email',
-        email: 'contactanos@infinitechcol.com',
+        email: 'infitechcol308@gmail.com',
         locationLabel: 'Location',
         location: 'Popayán, Cauca, Colombia',
         whatsappLabel: 'WhatsApp',
@@ -550,15 +541,21 @@ export const dictionary = {
       columns: [
         {
           title: 'Services',
-          links: ['Software development', 'Artificial Intelligence', 'Automation', 'Cloud & DevOps'],
+          links: [
+            { label: 'Software development', href: '#servicios' },
+            { label: 'Artificial Intelligence', href: '#servicios' },
+            { label: 'Automation', href: '#servicios' },
+            { label: 'Cloud & DevOps', href: '#servicios' },
+          ],
         },
         {
           title: 'Company',
-          links: ['About us', 'Process', 'Case studies', 'Contact'],
-        },
-        {
-          title: 'Resources',
-          links: ['Blog', 'Support', 'Privacy', 'Terms'],
+          links: [
+            { label: 'About us', href: '#nosotros' },
+            { label: 'Process', href: '#proceso' },
+            { label: 'Case studies', href: '#casos' },
+            { label: 'Contact', href: '#contacto' },
+          ],
         },
       ],
       rights: 'All rights reserved.',

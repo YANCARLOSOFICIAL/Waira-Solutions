@@ -14,8 +14,6 @@ const HeroScene = dynamic(() => import('@/components/three/hero-scene'), {
   loading: () => null,
 })
 
-const TRUST_BADGES = ['SOC 2', 'GDPR', 'ISO 27001']
-
 export function Hero() {
   const { t } = useLanguage()
 
@@ -109,7 +107,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.32 }}
               className="mt-6 flex flex-wrap items-center gap-3"
             >
-              {TRUST_BADGES.map((badge) => (
+              {t.hero.trustBadges.map((badge) => (
                 <span
                   key={badge}
                   className="inline-flex items-center gap-1.5 text-xs text-muted-foreground"

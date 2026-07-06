@@ -34,7 +34,7 @@ const socials = [
   { Icon: FacebookIcon, href: 'https://www.facebook.com/WairaSolutions', label: 'Facebook' },
   { Icon: LinkedInIcon, href: 'https://www.linkedin.com/company/wairasolutions', label: 'LinkedIn' },
   { Icon: InstagramIcon, href: 'https://www.instagram.com/wairasolutions', label: 'Instagram' },
-  { Icon: ({ className }: { className?: string }) => <Mail className={className} />, href: 'mailto:contactanos@infinitechcol.com', label: 'Email' },
+  { Icon: ({ className }: { className?: string }) => <Mail className={className} />, href: 'mailto:infitechcol308@gmail.com', label: 'Email' },
 ]
 
 export function Footer() {
@@ -44,7 +44,7 @@ export function Footer() {
   return (
     <footer className="relative border-t border-border/60 bg-card/30">
       <Container className="py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <Logo />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
@@ -75,12 +75,12 @@ export function Footer() {
               <h3 className="text-sm font-semibold text-foreground">{col.title}</h3>
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
-                  <li key={link}>
+                  <li key={link.label}>
                     <a
-                      href="#"
+                      href={link.href}
                       className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
-                      {link}
+                      {link.label}
                     </a>
                   </li>
                 ))}

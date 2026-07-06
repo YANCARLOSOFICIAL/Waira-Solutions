@@ -4,7 +4,6 @@ import { ScrollProgress } from '@/components/layout/scroll-progress'
 import { BackgroundGrid } from '@/components/ui/background-grid'
 import { JsonLd } from '@/components/seo/json-ld'
 import { Hero } from '@/components/sections/hero'
-import { Clients } from '@/components/sections/clients'
 import { About } from '@/components/sections/about'
 import { Services } from '@/components/sections/services'
 import { Solutions } from '@/components/sections/solutions'
@@ -31,7 +30,6 @@ export default function Home() {
       <Navbar />
       <main id="main">
         <Hero />
-        <Clients />
         <About />
         <Services />
         <Solutions />

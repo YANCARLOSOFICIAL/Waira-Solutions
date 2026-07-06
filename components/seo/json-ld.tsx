@@ -7,14 +7,19 @@ export function JsonLd() {
     logo: 'https://wairasolutions.com/og-image.png',
     description:
       'Empresa colombiana de tecnología especializada en desarrollo de software, inteligencia artificial, automatización, cloud y transformación digital.',
-    email: 'contactanos@infinitechcol.com',
+    email: 'infitechcol308@gmail.com',
+    telephone: '+573229369995',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Popayán',
       addressRegion: 'Cauca',
       addressCountry: 'CO',
     },
-    sameAs: ['https://www.facebook.com/WairaSolutions/'],
+    sameAs: [
+      'https://www.facebook.com/WairaSolutions/',
+      'https://www.linkedin.com/company/wairasolutions',
+      'https://www.instagram.com/wairasolutions',
+    ],
     areaServed: 'Latin America',
     knowsAbout: [
       'Software Development',
