@@ -5,3 +5,5 @@ minimumReleaseAgeExclude:
   - framer-motion@12.42.0
   - motion-dom@12.42.0
   - three@0.185.0
+overrides:
+  hono: 4.12.25
