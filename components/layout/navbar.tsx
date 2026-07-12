@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion'
+import { Menu, MessageCircle, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
@@ -15,13 +15,11 @@ export function Navbar() {
   const { t } = useLanguage()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const { scrollY } = useScroll()
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    setScrolled(latest > 12)
+  })
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
@@ -58,6 +56,15 @@ export function Navbar() {
           <div className="hidden items-center gap-1 lg:flex">
             <LanguageToggle />
             <ThemeToggle />
+            <a
+              href="https://wa.me/573229369995"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="flex size-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-[#25D366]"
+            >
+              <MessageCircle className="size-5" />
+            </a>
             <Button
               render={<a href="#contacto" />}
               className="ml-2 h-9 rounded-full px-4"
@@ -69,6 +76,15 @@ export function Navbar() {
           <div className="flex items-center gap-1 lg:hidden">
             <LanguageToggle />
             <ThemeToggle />
+            <a
+              href="https://wa.me/573229369995"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="flex size-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-[#25D366]"
+            >
+              <MessageCircle className="size-5" />
+            </a>
             <Button
               variant="ghost"
               size="icon"
@@ -103,13 +119,24 @@ export function Navbar() {
                   {link.label}
                 </a>
               ))}
-              <Button
-                render={<a href="#contacto" />}
-                onClick={() => setOpen(false)}
-                className="mt-2 h-11 rounded-full"
-              >
-                {t.nav.cta}
-              </Button>
+              <div className="mt-2 flex gap-2">
+                <a
+                  href="https://wa.me/573229369995"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-full border border-border bg-[#25D366]/10 py-3 text-sm font-medium text-[#25D366] transition-colors hover:bg-[#25D366]/20"
+                >
+                  <MessageCircle className="size-4" />
+                  WhatsApp
+                </a>
+                <Button
+                  render={<a href="#contacto" />}
+                  onClick={() => setOpen(false)}
+                  className="flex-1 h-11 rounded-full"
+                >
+                  {t.nav.cta}
+                </Button>
+              </div>
             </Container>
           </motion.div>
         ) : null}

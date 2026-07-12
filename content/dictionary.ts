@@ -99,7 +99,7 @@ export const dictionary = {
       cta: 'Conversemos sobre tu proyecto',
     },
     solutions: {
-      eyebrow: 'Soluciones',
+      eyebrow: '',
       title: 'Plataformas listas para escalar',
       subtitle: 'Combinamos nuestras capacidades en soluciones de alto impacto para tu industria.',
       items: [
@@ -112,7 +112,7 @@ export const dictionary = {
       ],
     },
     tech: {
-      eyebrow: 'Tecnologías',
+      eyebrow: '',
       title: 'Un stack moderno y probado',
       subtitle: 'Trabajamos con las herramientas que usan los mejores equipos del mundo.',
       groups: [
@@ -123,7 +123,7 @@ export const dictionary = {
       ],
     },
     process: {
-      eyebrow: 'Proceso',
+      eyebrow: '',
       title: 'Cómo trabajamos contigo',
       subtitle: 'Un método claro y colaborativo que reduce riesgos y acelera resultados.',
       steps: [
@@ -137,7 +137,7 @@ export const dictionary = {
       ],
     },
     cases: {
-      eyebrow: 'Casos de uso',
+      eyebrow: '',
       title: 'Ejemplos de lo que podemos construir para ti',
       subtitle: 'Ejemplos ilustrativos del tipo de soluciones que diseñamos para distintas industrias.',
       items: [
@@ -174,7 +174,7 @@ export const dictionary = {
       ],
     },
     testimonials: {
-      eyebrow: 'Diferenciales',
+      eyebrow: '',
       title: 'Por qué elegir Waira Solutions',
       subtitle: 'Somos un equipo joven con la ambición de construir productos que realmente muevan la aguja para tu negocio.',
       items: [
@@ -196,7 +196,7 @@ export const dictionary = {
       ],
     },
     faq: {
-      eyebrow: 'Preguntas frecuentes',
+      eyebrow: '',
       title: 'Resolvemos tus dudas',
       items: [
         {
@@ -379,7 +379,7 @@ export const dictionary = {
       cta: "Let's talk about your project",
     },
     solutions: {
-      eyebrow: 'Solutions',
+      eyebrow: '',
       title: 'Platforms ready to scale',
       subtitle: 'We combine our capabilities into high-impact solutions for your industry.',
       items: [
@@ -392,7 +392,7 @@ export const dictionary = {
       ],
     },
     tech: {
-      eyebrow: 'Technologies',
+      eyebrow: '',
       title: 'A modern, battle-tested stack',
       subtitle: 'We work with the tools used by the best teams in the world.',
       groups: [
@@ -403,7 +403,7 @@ export const dictionary = {
       ],
     },
     process: {
-      eyebrow: 'Process',
+      eyebrow: '',
       title: 'How we work with you',
       subtitle: 'A clear, collaborative method that reduces risk and accelerates results.',
       steps: [
@@ -417,7 +417,7 @@ export const dictionary = {
       ],
     },
     cases: {
-      eyebrow: 'Use cases',
+      eyebrow: '',
       title: 'Examples of what we can build for you',
       subtitle: 'Illustrative examples of the kind of solutions we design across different industries.',
       items: [
@@ -454,7 +454,7 @@ export const dictionary = {
       ],
     },
     testimonials: {
-      eyebrow: 'Differentiators',
+      eyebrow: '',
       title: 'Why choose Waira Solutions',
       subtitle: 'We are a young team with the ambition to build products that truly move the needle for your business.',
       items: [
@@ -476,7 +476,7 @@ export const dictionary = {
       ],
     },
     faq: {
-      eyebrow: 'FAQ',
+      eyebrow: '',
       title: 'We answer your questions',
       items: [
         {

@@ -45,7 +45,7 @@ export function Hero() {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-3 rounded-2xl border border-brand/20 bg-brand/5 pl-1.5 pr-4 py-1.5 text-xs font-medium text-brand"
             >
-              <span className="overflow-hidden rounded-xl ring-1 ring-brand/40 shadow-[0_0_10px_rgba(0,212,255,0.35)] flex-shrink-0">
+              <span className="overflow-hidden rounded-full ring-1 ring-brand/40 shadow-[0_0_10px_rgba(0,212,255,0.35)] flex-shrink-0">
                 <Image
                   src="/waira-logo-fb.jpg"
                   alt=""

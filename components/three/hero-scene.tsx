@@ -1,140 +1,183 @@
 'use client'
 
-import { Suspense, useRef, useState, useEffect, useMemo } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Suspense, useRef } from 'react'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { Float, Sparkles } from '@react-three/drei'
 import * as THREE from 'three'
 
 /* ──────────────────────────────────────────────────────
-   Load and crop the 3D logo (remove "WAIRA SOLUTIONS"
-   text row at the bottom — top 70 % is the jaguar).
+   Orbital ring — torus that rotates around the logo
 ─────────────────────────────────────────────────────── */
-function useJaguarTexture() {
-  const [texture, setTexture] = useState<THREE.Texture | null>(null)
+function OrbitalRing({
+  radius,
+  color,
+  speed,
+  offset = 0,
+  thickness = 0.02,
+}: {
+  radius: number
+  color: string
+  speed: number
+  offset?: number
+  thickness?: number
+}) {
+  const ref = useRef<THREE.Mesh>(null)
 
-  useEffect(() => {
-    const img = new Image()
-    img.onload = () => {
-      const cropH = Math.floor(img.height * 0.70)
-      const canvas = document.createElement('canvas')
-      canvas.width  = img.width
-      canvas.height = cropH
-      canvas.getContext('2d')!.drawImage(
-        img,
-        0, 0, img.width, cropH,
-        0, 0, img.width, cropH
-      )
-      const tex = new THREE.CanvasTexture(canvas)
-      tex.colorSpace = THREE.SRGBColorSpace
-      tex.needsUpdate = true
-      setTexture(tex)
-    }
-    // filename has a space — encode it for the browser
-    img.src = '/waira%203d%20logo.png'
-  }, [])
+  useFrame(({ clock }) => {
+    if (!ref.current) return
+    const t = clock.getElapsedTime() * speed + offset
+    ref.current.rotation.x = Math.sin(t * 0.3) * 0.3 + 0.4
+    ref.current.rotation.z = t
+    ref.current.rotation.y = t * 0.7
+  })
 
-  return texture
+  return (
+    <mesh ref={ref}>
+      <torusGeometry args={[radius, thickness, 24, 64]} />
+      <meshBasicMaterial color={color} transparent opacity={0.2} />
+    </mesh>
+  )
 }
 
 /* ──────────────────────────────────────────────────────
-   Custom material — keys out the white PNG background
-   via a fragment-shader colour-distance test (GPU-side).
+   Orbiting dot — small sphere traveling in a circle
 ─────────────────────────────────────────────────────── */
-function useKeyMaterial(texture: THREE.Texture | null) {
-  return useMemo(() => {
-    if (!texture) return null
+function OrbitingDot({
+  radius,
+  color,
+  speed,
+  phase = 0,
+  yOffset = 0,
+}: {
+  radius: number
+  color: string
+  speed: number
+  phase?: number
+  yOffset?: number
+}) {
+  const ref = useRef<THREE.Mesh>(null)
 
-    const mat = new THREE.MeshBasicMaterial({
-      map: texture,
-      transparent: true,
-      side: THREE.DoubleSide,
-      depthWrite: false,
-    })
+  useFrame(({ clock }) => {
+    if (!ref.current) return
+    const t = clock.getElapsedTime() * speed + phase
+    ref.current.position.x = Math.cos(t) * radius
+    ref.current.position.z = Math.sin(t) * radius
+    ref.current.position.y = Math.sin(t * 0.5) * 0.3 + yOffset
+  })
 
-    mat.onBeforeCompile = (shader) => {
-      shader.fragmentShader = shader.fragmentShader.replace(
-        '#include <dithering_fragment>',
-        /* glsl */ `
-        #include <dithering_fragment>
-
-        // Key out white PNG background.
-        // Pixels close to pure white → transparent.
-        // Jaguar blues/oranges are far from white → fully opaque.
-        float keyDist = distance(gl_FragColor.rgb, vec3(1.0, 1.0, 1.0));
-        gl_FragColor.a = smoothstep(0.08, 0.38, keyDist);
-        `
-      )
-    }
-
-    mat.needsUpdate = true
-    return mat
-  }, [texture])
+  return (
+    <mesh ref={ref}>
+      <sphereGeometry args={[0.04, 8, 8]} />
+      <meshBasicMaterial color={color} />
+    </mesh>
+  )
 }
 
 /* ──────────────────────────────────────────────────────
-   Jaguar mesh — floating plane, no rings
+   Logo mesh — round logo floating with orbital elements
 ─────────────────────────────────────────────────────── */
-function JaguarMesh() {
-  const texture = useJaguarTexture()
-  const keyMat  = useKeyMaterial(texture)
+function Logo3D() {
+  const texture = useLoader(THREE.TextureLoader, '/logo-redondo.png')
 
   const groupRef = useRef<THREE.Group>(null)
-  const haloRef  = useRef<THREE.Mesh>(null)
+  const glowRef  = useRef<THREE.Mesh>(null)
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime()
 
-    // Gentle Y pendulum — shows depth
     if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(t * 0.32) * 0.15
+      groupRef.current.rotation.y = Math.sin(t * 0.28) * 0.12
     }
 
-    // Breathing halo
-    if (haloRef.current) {
-      ;(haloRef.current.material as THREE.MeshBasicMaterial).opacity =
-        0.10 + Math.sin(t * 0.9) * 0.05
+    if (glowRef.current) {
+      const mat = glowRef.current.material as THREE.MeshBasicMaterial
+      mat.opacity = 0.08 + Math.sin(t * 0.7) * 0.04
     }
   })
 
-  if (!keyMat) return null
-
-  // 70 % crop → aspect ratio 1 : 0.70
-  const W = 3.2
-  const H = W * 0.70
+  const SIZE = 2.6
 
   return (
-    <Float speed={1.1} rotationIntensity={0.05} floatIntensity={0.85}>
-      <group ref={groupRef}>
+    <group>
+      <Float speed={0.8} rotationIntensity={0.04} floatIntensity={0.6}>
+        <group ref={groupRef}>
+          {/* Soft glow halo behind the logo */}
+          <mesh ref={glowRef} position={[0, 0, -0.15]}>
+            <circleGeometry args={[1.8, 64]} />
+            <meshBasicMaterial color="#00D4FF" transparent opacity={0.08} />
+          </mesh>
 
-        {/* Soft glow halo behind the jaguar */}
-        <mesh ref={haloRef} position={[0, 0.1, -0.12]}>
-          <circleGeometry args={[1.6, 64]} />
-          <meshBasicMaterial color="#00D4FF" transparent opacity={0.10} />
-        </mesh>
+          {/* Secondary larger glow */}
+          <mesh position={[0, 0, -0.25]}>
+            <circleGeometry args={[2.4, 64]} />
+            <meshBasicMaterial color="#6366F1" transparent opacity={0.04} />
+          </mesh>
 
-        {/* Jaguar — white background keyed out */}
-        <mesh>
-          <planeGeometry args={[W, H]} />
-          <primitive object={keyMat} attach="material" />
-        </mesh>
+          {/* Round logo */}
+          <mesh>
+            <circleGeometry args={[SIZE / 2, 64]} />
+            <meshBasicMaterial map={texture} side={THREE.DoubleSide} transparent />
+          </mesh>
+        </group>
+      </Float>
 
-      </group>
-    </Float>
+      {/* Orbital rings — circle around the round logo naturally */}
+      <OrbitalRing radius={1.8} color="#00D4FF" speed={0.4} thickness={0.015} />
+      <OrbitalRing radius={2.1} color="#6366F1" speed={-0.3} offset={1.2} thickness={0.012} />
+      <OrbitalRing radius={1.5} color="#5fe6d6" speed={0.5} offset={2.5} thickness={0.01} />
+
+      {/* Orbiting dots */}
+      <OrbitingDot radius={1.8} color="#00D4FF" speed={0.4} />
+      <OrbitingDot radius={2.1} color="#6366F1" speed={-0.3} phase={1.5} yOffset={0.2} />
+      <OrbitingDot radius={1.5} color="#5fe6d6" speed={0.5} phase={3.0} yOffset={-0.15} />
+    </group>
   )
 }
 
 /* ────────────────────── Scene ────────────────────── */
 function Scene() {
+  const lightRef = useRef<THREE.DirectionalLight>(null)
+
+  useFrame(({ clock }) => {
+    if (!lightRef.current) return
+    const t = clock.getElapsedTime() * 0.15
+    lightRef.current.position.x = Math.sin(t) * 5
+    lightRef.current.position.z = Math.cos(t) * 5
+  })
+
   return (
     <>
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[4, 6, 5]}   intensity={2.2} color="#7ff0e6" />
-      <pointLight       position={[-4, -2, -3]} intensity={1.5} color="#6366F1" />
-      <pointLight       position={[3, 1, 3]}    intensity={1.0} color="#00D4FF" />
+      <ambientLight intensity={0.5} />
 
-      <JaguarMesh />
+      <directionalLight
+        ref={lightRef}
+        position={[4, 6, 5]}
+        intensity={2.5}
+        color="#7ff0e6"
+      />
 
-      <Sparkles count={70} scale={7} size={2.8} speed={0.35} opacity={0.4} color="#5fe6d6" />
+      <pointLight position={[-4, -2, -3]} intensity={1.8} color="#6366F1" />
+      <pointLight position={[3, 1, 3]}    intensity={1.2} color="#00D4FF" />
+      <pointLight position={[0, -3, 2]}   intensity={0.8} color="#5fe6d6" />
+
+      <Logo3D />
+
+      <Sparkles
+        count={120}
+        scale={8}
+        size={[1.5, 3.5]}
+        speed={0.3}
+        opacity={0.35}
+        color="#5fe6d6"
+      />
+      <Sparkles
+        count={40}
+        scale={6}
+        size={[1, 2]}
+        speed={0.2}
+        opacity={0.2}
+        color="#6366F1"
+      />
     </>
   )
 }

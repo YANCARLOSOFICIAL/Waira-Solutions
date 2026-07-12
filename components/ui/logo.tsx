@@ -27,7 +27,7 @@ export function LogoMark({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        'relative inline-flex shrink-0 overflow-hidden rounded-xl',
+        'relative inline-flex shrink-0 overflow-hidden rounded-full',
         'ring-1 ring-brand/40',
         'shadow-[0_0_14px_rgba(0,212,255,0.35)]',
         className,
