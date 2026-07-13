@@ -23,7 +23,7 @@ export async function submitContact(
 
   const apiKey = process.env.RESEND_API_KEY
   const to = process.env.CONTACT_EMAIL_TO ?? 'infitechcol308@gmail.com'
-  const from = process.env.CONTACT_EMAIL_FROM ?? 'onboarding@resend.dev'
+  const from = process.env.CONTACT_EMAIL_FROM ?? 'Waira Solutions <contacto@wairasolutions.com>'
 
   if (!apiKey) {
     console.warn('[contact] RESEND_API_KEY not set — falling back to log-only')
