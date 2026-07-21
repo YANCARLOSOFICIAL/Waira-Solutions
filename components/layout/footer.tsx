@@ -5,7 +5,6 @@ import { Container } from '@/components/ui/container'
 import { Logo } from '@/components/ui/logo'
 import { useLanguage } from '@/components/providers/language-provider'
 
-// SVG brand icons — lucide-react v1.x removed social brand icons
 const LinkedInIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="size-4" aria-hidden>
     <path d="M19 0H5C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.73c-.97 0-1.75-.79-1.75-1.75S5.53 3.23 6.5 3.23s1.75.79 1.75 1.75S7.47 6.73 6.5 6.73zM20 19h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97V19h-3V8h2.88v1.5h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.6V19z" />
@@ -24,14 +23,7 @@ const InstagramIcon = () => (
   </svg>
 )
 
-const FacebookIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="size-4" aria-hidden>
-    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-  </svg>
-)
-
 const socials = [
-  { Icon: FacebookIcon, href: 'https://www.facebook.com/WairaSolutions', label: 'Facebook' },
   { Icon: LinkedInIcon, href: 'https://www.linkedin.com/company/wairasolutions', label: 'LinkedIn' },
   { Icon: InstagramIcon, href: 'https://www.instagram.com/wairasolutions', label: 'Instagram' },
   { Icon: ({ className }: { className?: string }) => <Mail className={className} />, href: 'mailto:infitechcol308@gmail.com', label: 'Email' },
@@ -62,7 +54,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex size-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-brand/50 hover:text-foreground"
+                  className="flex size-9 items-center justify-center rounded-full border border-border/60 text-muted-foreground transition-all duration-200 hover:border-brand/50 hover:text-foreground hover:bg-brand/5 hover:-translate-y-0.5"
                 >
                   <Icon className="size-4" />
                 </a>

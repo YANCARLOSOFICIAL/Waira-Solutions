@@ -31,7 +31,7 @@ export function Technologies() {
               as="article"
               className="h-full"
             >
-              <SpotlightCard className="flex h-full flex-col rounded-2xl border border-border bg-card/40 overflow-hidden">
+              <SpotlightCard className="flex h-full flex-col rounded-2xl border border-border/60 bg-card/40 overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/40">
                 <div className={`bg-gradient-to-br ${groupColors[gi % groupColors.length]} px-6 pt-6 pb-4`}>
                   <h3 className="flex items-center gap-2 font-heading text-base font-semibold">
                     <span className={`size-2 rounded-full ${dotColors[gi % dotColors.length]}`} aria-hidden />
@@ -48,7 +48,7 @@ export function Technologies() {
                       transition={{ duration: 0.3, delay: gi * 0.05 + ii * 0.04 }}
                       whileHover={{ scale: 1.04, transition: { duration: 0.15 } }}
                     >
-                      <span className="inline-block cursor-default rounded-full border border-border bg-secondary/60 px-3 py-1.5 text-sm text-foreground/80 transition-colors hover:border-brand/50 hover:bg-brand/5 hover:text-foreground">
+                      <span className="inline-block cursor-default rounded-full border border-border/60 bg-secondary/60 px-3 py-1.5 text-sm text-foreground/80 transition-all duration-200 hover:border-brand/50 hover:bg-brand/5 hover:text-foreground hover:shadow-[0_0_12px_-4px_oklch(0.82_0.13_196/0.2)]">
                         {item}
                       </span>
                     </motion.li>
@@ -59,7 +59,6 @@ export function Technologies() {
           ))}
         </StaggerGroup>
 
-        {/* Floating tech marquee row */}
         <div className="mt-14 overflow-hidden mask-fade-x" aria-hidden>
           <div className="flex w-max animate-marquee items-center gap-8 [--marquee-duration:50s]">
             {[
@@ -68,7 +67,7 @@ export function Technologies() {
             ].map((item, i) => (
               <span
                 key={`${item}-${i}`}
-                className="rounded-full border border-border/40 bg-card/30 px-4 py-1.5 text-sm whitespace-nowrap text-muted-foreground/50"
+                className="rounded-full border border-border/40 bg-card/30 px-4 py-1.5 text-sm whitespace-nowrap text-muted-foreground/50 transition-colors hover:text-foreground hover:border-brand/40"
               >
                 {item}
               </span>

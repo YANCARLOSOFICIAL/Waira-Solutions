@@ -27,7 +27,7 @@ export function Solutions() {
       <Container className="relative">
         <SectionHeading eyebrow={t.solutions.eyebrow} title={t.solutions.title} subtitle={t.solutions.subtitle} />
 
-        <StaggerGroup className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <StaggerGroup className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
           {t.solutions.items.map((item, i) => {
             const { icon: Icon, span, featured } = meta[i % meta.length]
             return (
@@ -38,7 +38,7 @@ export function Solutions() {
               >
                 <SpotlightCard
                   className={cn(
-                    'group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card/50 transition-all duration-300 hover:border-brand/40',
+                    'group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/50 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-[0_8px_24px_-8px_oklch(0.82_0.13_196/0.15)]',
                     featured ? 'min-h-52' : 'min-h-44',
                   )}
                 >
@@ -47,7 +47,7 @@ export function Solutions() {
                       className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand/[0.06] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                       aria-hidden
                     />
-                    <span className="relative flex size-11 items-center justify-center rounded-xl border border-border bg-background/60 text-brand transition-colors group-hover:border-brand/40 group-hover:bg-brand/10">
+                    <span className="relative flex size-11 items-center justify-center rounded-xl border border-border/60 bg-background/60 text-brand transition-all duration-300 group-hover:border-brand/40 group-hover:bg-brand/10 group-hover:shadow-[0_0_16px_-4px_oklch(0.82_0.13_196/0.3)]">
                       <Icon className="size-5" />
                     </span>
                     <div className="relative mt-6">

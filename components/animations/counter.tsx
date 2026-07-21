@@ -1,12 +1,8 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useInView } from 'framer-motion'
 
-/**
- * Animated number counter. Extracts the leading number from a label like
- * "+30" or "98" and animates to it, preserving prefixes/suffixes.
- */
 export function Counter({
   value,
   suffix = '',
@@ -20,15 +16,21 @@ export function Counter({
 }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
-  const [display, setDisplay] = useState(value)
 
-  const match = value.match(/^([^\d]*)(\d+)(.*)$/)
+  const parsed = useMemo(() => {
+    const m = value.match(/^([^\d]*)(\d+)(.*)$/)
+    if (!m) return null
+    return { prefix: m[1], target: Number.parseInt(m[2], 10), tail: m[3] }
+  }, [value])
+
+  const [display, setDisplay] = useState(() => {
+    const m = value.match(/^([^\d]*)(\d+)(.*)$/)
+    return m ? `${m[1]}0${m[3]}` : value
+  })
 
   useEffect(() => {
-    if (!inView || !match) return
-    const prefix = match[1]
-    const target = Number.parseInt(match[2], 10)
-    const tail = match[3]
+    if (!inView || !parsed) return
+    const { prefix, target, tail } = parsed
     const start = performance.now()
     let raf = 0
 
@@ -40,11 +42,11 @@ export function Counter({
     }
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
-  }, [inView, match, duration])
+  }, [inView, parsed, duration])
 
   return (
     <span ref={ref} className={className}>
-      {match ? display : value}
+      {parsed ? display : value}
       {suffix}
     </span>
   )

@@ -35,7 +35,7 @@ export function Testimonials() {
   }, [emblaApi, onSelect])
 
   return (
-    <section className="relative scroll-mt-20 py-24 sm:py-28">
+    <section className="relative scroll-mt-20 border-t border-border/60 py-24 sm:py-28">
       <Container>
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <SectionHeading
@@ -75,7 +75,7 @@ export function Testimonials() {
                   key={i}
                   className="min-w-0 flex-[0_0_100%] sm:flex-[0_0_calc(50%-10px)] lg:flex-[0_0_calc(33.333%-14px)]"
                 >
-                  <SpotlightCard className="flex h-full flex-col rounded-2xl border border-border bg-card/40 p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/30 hover:shadow-[0_8px_24px_-8px_oklch(0.82_0.13_196/0.15)]">
+                  <SpotlightCard className="flex h-full flex-col rounded-2xl border border-border/60 bg-card/40 p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/30 hover:shadow-[0_8px_24px_-8px_oklch(0.82_0.13_196/0.15)]">
                     <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand/10 text-brand">
                       <Icon className="size-5" aria-hidden />
                     </span>
@@ -100,8 +100,8 @@ export function Testimonials() {
               aria-label={`Slide ${i + 1}`}
               onClick={() => emblaApi?.scrollTo(i)}
               className={cn(
-                'h-1.5 rounded-full transition-all duration-300',
-                selected === i ? 'w-6 bg-brand' : 'w-1.5 bg-border hover:bg-muted-foreground/40',
+                'h-2 rounded-full transition-all duration-300 cursor-pointer',
+                selected === i ? 'w-7 bg-brand' : 'w-2 bg-border hover:bg-muted-foreground/40',
               )}
             />
           ))}

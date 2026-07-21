@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { BrainCircuit, Check, Cloud, Code2, Compass, LineChart, Workflow, type LucideIcon } from 'lucide-react'
+import { ArrowRight, BrainCircuit, Check, Cloud, Code2, Compass, LineChart, Workflow, type LucideIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import { SectionHeading } from '@/components/ui/section-heading'
@@ -19,7 +19,6 @@ const icons: Record<string, LucideIcon> = {
   Compass,
 }
 
-// Alternating zig-zag layout: row 0 = 2+1, row 1 = 1+2, row 2 = 2+1
 const SPANS = [
   { col: 'lg:col-span-4', featured: true },
   { col: 'lg:col-span-2', featured: false },
@@ -37,7 +36,7 @@ export function Services() {
       <Container>
         <SectionHeading eyebrow={t.services.eyebrow} title={t.services.title} subtitle={t.services.subtitle} />
 
-        <StaggerGroup className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
+        <StaggerGroup className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6">
           {t.services.items.map((service, i) => {
             const Icon = icons[service.icon] ?? Code2
             const { col, featured } = SPANS[i] ?? { col: 'lg:col-span-2', featured: false }
@@ -48,13 +47,14 @@ export function Services() {
                 as="article"
                 className={cn('sm:col-span-1', col)}
               >
-                <SpotlightCard className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card/40 p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-[0_8px_32px_-8px_oklch(0.82_0.13_196/0.2)]">
+                <SpotlightCard className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/40 p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-[0_8px_32px_-8px_oklch(0.82_0.13_196/0.2)]">
                   <div className="flex flex-col flex-1">
                     <div className="flex items-start gap-4">
                       <span
                         className={cn(
-                          'flex shrink-0 items-center justify-center rounded-xl transition-colors group-hover:bg-brand group-hover:text-primary-foreground',
+                          'flex shrink-0 items-center justify-center rounded-xl transition-all duration-300',
                           featured ? 'size-14 bg-secondary' : 'size-12 bg-secondary',
+                          'group-hover:bg-brand group-hover:text-primary-foreground group-hover:shadow-[0_0_20px_-4px_oklch(0.82_0.13_196/0.4)]',
                         )}
                       >
                         <Icon className={cn(featured ? 'size-7' : 'size-5')} />
@@ -74,10 +74,12 @@ export function Services() {
                       </div>
                     </div>
 
-                    <ul className="mt-5 space-y-2">
+                    <ul className="mt-5 space-y-2.5">
                       {service.benefits.map((b) => (
-                        <li key={b} className="flex items-center gap-2 text-sm text-foreground/80">
-                          <Check className="size-3.5 shrink-0 text-brand" aria-hidden />
+                        <li key={b} className="flex items-center gap-2.5 text-sm text-foreground/80">
+                          <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-brand/10">
+                            <Check className="size-3 text-brand" aria-hidden />
+                          </span>
                           {b}
                         </li>
                       ))}
@@ -106,11 +108,13 @@ export function Services() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-10 flex justify-center"
         >
-          <Button render={<a href="#contacto" />} variant="outline" className="h-11 rounded-full px-7 text-sm">
+          <Button render={<a href="#contacto" />} variant="outline" className="group h-11 rounded-full px-7 text-sm">
             {t.services.cta}
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </motion.div>
       </Container>
     </section>
   )
 }
+

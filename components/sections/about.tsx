@@ -129,8 +129,8 @@ export function About() {
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.55, delay: delays[i] ?? 0, ease: [0.21, 0.47, 0.32, 0.98] }}
                   >
-                    <SpotlightCard className="group flex h-full flex-col rounded-2xl border border-border bg-card/40 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/40">
-                      <span className="flex size-10 items-center justify-center rounded-lg bg-secondary transition-colors group-hover:bg-brand/10">
+                    <SpotlightCard className="group flex h-full flex-col rounded-2xl border border-border/60 bg-card/40 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-[0_8px_24px_-8px_oklch(0.82_0.13_196/0.12)]">
+                      <span className="flex size-10 items-center justify-center rounded-lg bg-secondary transition-all duration-300 group-hover:bg-brand/10 group-hover:shadow-[0_0_12px_-2px_oklch(0.82_0.13_196/0.25)]">
                         <Icon className="size-4.5 text-muted-foreground transition-colors group-hover:text-brand" />
                       </span>
                       <h4 className="mt-4 font-heading text-base font-semibold">{value.title}</h4>

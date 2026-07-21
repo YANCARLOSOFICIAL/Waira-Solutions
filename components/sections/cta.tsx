@@ -16,7 +16,6 @@ export function CTA() {
       <Container>
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card px-6 py-16 text-center sm:px-12 sm:py-20">
-            {/* Glow accents */}
             <div
               aria-hidden
               className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-primary/20 blur-[100px]"
@@ -27,7 +26,6 @@ export function CTA() {
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
               className="pointer-events-none absolute inset-0 [background-image:linear-gradient(to_right,var(--color-foreground)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-foreground)_1px,transparent_1px)] [background-size:40px_40px]"
             />
-            {/* Brand gradient border at top */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent"
@@ -43,10 +41,10 @@ export function CTA() {
                 <Button
                   render={<a href="#contacto" />}
                   size="lg"
-                  className="group h-11 w-full gap-2 rounded-full px-7 text-sm sm:w-auto"
+                  className="group h-11 w-full gap-2 rounded-full px-7 text-sm sm:w-auto glow-brand-sm"
                 >
                   {cta.primary}
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                 </Button>
                 <Button
                   render={<a href="#contacto" />}
