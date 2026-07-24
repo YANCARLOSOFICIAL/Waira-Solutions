@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion'
-import { Menu, MessageCircle, X } from 'lucide-react'
+import { List, WhatsappLogo, X } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
@@ -61,10 +61,8 @@ export function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50">
       <div
         className={cn(
-          'transition-all duration-400 ease-out',
-          scrolled
-            ? 'border-b border-border/60 glass-strong shadow-sm'
-            : 'border-b border-transparent',
+          'transition-all duration-300 ease-out',
+          scrolled ? 'glass border-b border-border' : 'border-b border-transparent',
         )}
       >
         <Container className="flex h-16 items-center justify-between gap-4">
@@ -80,8 +78,8 @@ export function Navbar() {
                 className={cn(
                   'rounded-full px-3.5 py-2 text-sm transition-all duration-200',
                   active === link.href.replace('#', '')
-                    ? 'text-foreground bg-muted/60'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/30',
+                    ? 'text-foreground bg-muted'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50',
                 )}
               >
                 {link.label}
@@ -99,12 +97,9 @@ export function Navbar() {
               aria-label="WhatsApp"
               className="flex size-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-[#25D366] hover:bg-[#25D366]/10"
             >
-              <MessageCircle className="size-5" />
+              <WhatsappLogo weight="bold" className="size-5" />
             </a>
-            <Button
-              render={<a href="#contacto" />}
-              className="ml-2 h-9 rounded-full px-5 text-sm glow-brand-sm"
-            >
+            <Button render={<a href="#contacto" />} className="ml-2 h-9 px-5 text-sm">
               {t.nav.cta}
             </Button>
           </div>
@@ -119,7 +114,7 @@ export function Navbar() {
               aria-label="WhatsApp"
               className="flex size-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-[#25D366]"
             >
-              <MessageCircle className="size-5" />
+              <WhatsappLogo weight="bold" className="size-5" />
             </a>
             <Button
               variant="ghost"
@@ -127,12 +122,9 @@ export function Navbar() {
               aria-label="Menu"
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
-              className={cn(
-                'size-9 rounded-full transition-colors',
-                open ? 'bg-muted text-foreground' : '',
-              )}
+              className={cn('size-9 rounded-full transition-colors', open ? 'bg-muted text-foreground' : '')}
             >
-              {open ? <X className="size-5" /> : <Menu className="size-5" />}
+              {open ? <X className="size-5" /> : <List className="size-5" />}
             </Button>
           </div>
         </Container>
@@ -145,7 +137,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="glass-strong border-b border-border/60 lg:hidden"
+            className="glass border-b border-border lg:hidden"
           >
             <Container className="flex flex-col gap-1 py-5">
               {t.nav.links.map((link, i) => (
@@ -156,7 +148,7 @@ export function Navbar() {
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.25, delay: i * 0.04 }}
-                  className="rounded-xl px-4 py-3 text-base text-foreground/90 transition-colors hover:bg-muted"
+                  className="rounded-lg px-4 py-3 text-base text-foreground/90 transition-colors hover:bg-muted"
                 >
                   {link.label}
                 </motion.a>
@@ -171,16 +163,12 @@ export function Navbar() {
                   href="https://wa.me/573229369995"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-1 items-center justify-center gap-2 rounded-full border border-border bg-[#25D366]/10 py-3 text-sm font-medium text-[#25D366] transition-colors hover:bg-[#25D366]/20"
+                  className="border-border flex flex-1 items-center justify-center gap-2 rounded-lg border bg-[#25D366]/10 py-3 text-sm font-medium text-[#25D366] transition-colors hover:bg-[#25D366]/20"
                 >
-                  <MessageCircle className="size-4" />
+                  <WhatsappLogo weight="bold" className="size-4" />
                   WhatsApp
                 </a>
-                <Button
-                  render={<a href="#contacto" />}
-                  onClick={() => setOpen(false)}
-                  className="flex-1 h-11 rounded-full"
-                >
+                <Button render={<a href="#contacto" />} onClick={() => setOpen(false)} className="flex-1 h-11">
                   {t.nav.cta}
                 </Button>
               </motion.div>

@@ -5,7 +5,7 @@ export function SectionHeading({
   eyebrow,
   title,
   subtitle,
-  align = 'center',
+  align = 'left',
   className,
 }: {
   eyebrow?: string
@@ -17,15 +17,14 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        'flex flex-col gap-5',
+        'flex flex-col gap-4',
         align === 'center' ? 'items-center text-center' : 'items-start text-left',
         className,
       )}
     >
       {eyebrow ? (
         <Reveal>
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-3 py-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
-            <span className="size-1.5 rounded-full bg-brand" aria-hidden />
+          <span className="font-mono text-xs font-medium tracking-[0.12em] text-muted-foreground uppercase">
             {eyebrow}
           </span>
         </Reveal>
@@ -33,7 +32,7 @@ export function SectionHeading({
       <Reveal delay={0.05}>
         <h2
           className={cn(
-            'font-heading text-3xl font-semibold tracking-tight text-balance sm:text-4xl md:text-5xl',
+            'font-heading text-3xl font-medium tracking-tight text-balance sm:text-4xl md:text-[2.75rem]',
             align === 'center' ? 'mx-auto max-w-3xl' : 'max-w-2xl',
           )}
         >
@@ -44,7 +43,7 @@ export function SectionHeading({
         <Reveal delay={0.1}>
           <p
             className={cn(
-              'text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg',
+              'text-base leading-relaxed text-pretty text-muted-foreground',
               align === 'center' ? 'mx-auto max-w-2xl' : 'max-w-xl',
             )}
           >

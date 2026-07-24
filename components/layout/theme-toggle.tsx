@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
-import { Moon, Sun } from 'lucide-react'
+import { Moon, Sun } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { useLanguage } from '@/components/providers/language-provider'
 
@@ -25,9 +25,9 @@ export function ThemeToggle() {
       className="size-9 rounded-full text-muted-foreground hover:text-foreground"
     >
       {mounted && isDark ? (
-        <Sun className="size-[18px]" />
+        <Sun weight="bold" className="size-[18px]" />
       ) : (
-        <Moon className="size-[18px]" />
+        <Moon weight="bold" className="size-[18px]" />
       )}
       <span className="sr-only">{t.theme.toggle}</span>
     </Button>

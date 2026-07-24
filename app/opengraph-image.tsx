@@ -13,7 +13,7 @@ export default function OGImage() {
     (
       <div
         style={{
-          background: '#0A0F1E',
+          background: '#F9F8F5',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -24,31 +24,14 @@ export default function OGImage() {
           overflow: 'hidden',
         }}
       >
-        {/* Glow top */}
+        {/* Faint structural grid */}
         <div
           style={{
             position: 'absolute',
-            top: -120,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: 700,
-            height: 400,
-            background:
-              'radial-gradient(ellipse, rgba(0,212,255,0.18) 0%, transparent 70%)',
-            borderRadius: '50%',
-          }}
-        />
-        {/* Glow bottom-right */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: -80,
-            right: -80,
-            width: 400,
-            height: 300,
-            background:
-              'radial-gradient(ellipse, rgba(99,102,241,0.12) 0%, transparent 70%)',
-            borderRadius: '50%',
+            inset: 0,
+            backgroundImage:
+              'linear-gradient(to right, rgba(58,53,45,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(58,53,45,0.05) 1px, transparent 1px)',
+            backgroundSize: '56px 56px',
           }}
         />
 
@@ -59,6 +42,7 @@ export default function OGImage() {
             flexDirection: 'column',
             alignItems: 'center',
             gap: 32,
+            position: 'relative',
           }}
         >
           {/* Logo + company name row */}
@@ -67,9 +51,9 @@ export default function OGImage() {
               display: 'flex',
               alignItems: 'center',
               gap: 28,
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: 24,
+              background: '#FFFFFF',
+              border: '1px solid #EAE7E0',
+              borderRadius: 14,
               padding: '20px 36px',
             }}
           >
@@ -79,25 +63,25 @@ export default function OGImage() {
               width={100}
               height={100}
               alt=""
-              style={{ borderRadius: 16 }}
+              style={{ borderRadius: 10 }}
             />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               <span
                 style={{
                   fontSize: 52,
-                  fontWeight: 700,
-                  color: '#ffffff',
+                  fontWeight: 600,
+                  color: '#2A2620',
                   letterSpacing: '-1px',
                   lineHeight: 1,
                 }}
               >
                 Waira
-                <span style={{ color: '#00D4FF' }}>.</span>
+                <span style={{ color: '#3E6E8E' }}>.</span>
               </span>
               <span
                 style={{
                   fontSize: 20,
-                  color: 'rgba(255,255,255,0.55)',
+                  color: '#8A8375',
                   letterSpacing: '0.05em',
                   textTransform: 'uppercase',
                 }}
@@ -111,7 +95,7 @@ export default function OGImage() {
           <div
             style={{
               fontSize: 28,
-              color: 'rgba(255,255,255,0.75)',
+              color: '#5C5648',
               textAlign: 'center',
               maxWidth: 700,
               lineHeight: 1.4,
@@ -126,11 +110,11 @@ export default function OGImage() {
               display: 'flex',
               alignItems: 'center',
               gap: 8,
-              background: 'rgba(0,212,255,0.08)',
-              border: '1px solid rgba(0,212,255,0.2)',
+              background: '#E4EEF3',
+              border: '1px solid #CFE0E8',
               borderRadius: 999,
               padding: '8px 24px',
-              color: '#00D4FF',
+              color: '#3E6E8E',
               fontSize: 18,
             }}
           >

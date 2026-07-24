@@ -1,62 +1,50 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { Container } from '@/components/ui/container'
 import { SectionHeading } from '@/components/ui/section-heading'
-import { SpotlightCard } from '@/components/ui/spotlight-card'
 import { StaggerGroup, StaggerItem } from '@/components/animations/reveal'
 import { useLanguage } from '@/components/providers/language-provider'
 
-const groupColors = [
-  'from-brand/10 to-brand/5',
-  'from-brand-2/10 to-brand-2/5',
-  'from-info/10 to-info/5',
-  'from-warning/10 to-warning/5',
+const groupStyles = [
+  { tag: 'bg-pastel-blue-bg text-pastel-blue-fg', dot: 'bg-pastel-blue-fg' },
+  { tag: 'bg-pastel-coral-bg text-pastel-coral-fg', dot: 'bg-pastel-coral-fg' },
+  { tag: 'bg-pastel-green-bg text-pastel-green-fg', dot: 'bg-pastel-green-fg' },
+  { tag: 'bg-pastel-yellow-bg text-pastel-yellow-fg', dot: 'bg-pastel-yellow-fg' },
 ]
-
-const dotColors = ['bg-brand', 'bg-brand-2', 'bg-info', 'bg-warning']
 
 export function Technologies() {
   const { t } = useLanguage()
 
   return (
-    <section id="tecnologias" className="relative scroll-mt-20 border-t border-border/60 py-24 sm:py-28">
+    <section id="tecnologias" className="relative scroll-mt-20 border-t border-border py-24 sm:py-28">
       <Container>
         <SectionHeading eyebrow={t.tech.eyebrow} title={t.tech.title} subtitle={t.tech.subtitle} />
 
-        <StaggerGroup className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {t.tech.groups.map((group, gi) => (
-            <StaggerItem
-              key={group.name}
-              as="article"
-              className="h-full"
-            >
-              <SpotlightCard className="flex h-full flex-col rounded-2xl border border-border/60 bg-card/40 overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/40">
-                <div className={`bg-gradient-to-br ${groupColors[gi % groupColors.length]} px-6 pt-6 pb-4`}>
-                  <h3 className="flex items-center gap-2 font-heading text-base font-semibold">
-                    <span className={`size-2 rounded-full ${dotColors[gi % dotColors.length]}`} aria-hidden />
-                    {group.name}
-                  </h3>
+        <StaggerGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {t.tech.groups.map((group, gi) => {
+            const style = groupStyles[gi % groupStyles.length]
+            return (
+              <StaggerItem key={group.name} as="article" className="h-full">
+                <div className="border-border flex h-full flex-col overflow-hidden rounded-xl border bg-card">
+                  <div className="px-6 pt-6 pb-4">
+                    <h3 className="flex items-center gap-2 font-heading text-base font-medium">
+                      <span className={`size-2 rounded-full ${style.dot}`} aria-hidden />
+                      {group.name}
+                    </h3>
+                  </div>
+                  <ul className="flex flex-wrap gap-2 px-6 pb-6 pt-1">
+                    {group.items.map((item) => (
+                      <li key={item}>
+                        <span className={`${style.tag} inline-block rounded-full px-3 py-1.5 text-sm`}>
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="flex flex-wrap gap-2 px-6 pb-6 pt-4">
-                  {group.items.map((item, ii) => (
-                    <motion.li
-                      key={item}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: gi * 0.05 + ii * 0.04 }}
-                      whileHover={{ scale: 1.04, transition: { duration: 0.15 } }}
-                    >
-                      <span className="inline-block cursor-default rounded-full border border-border/60 bg-secondary/60 px-3 py-1.5 text-sm text-foreground/80 transition-all duration-200 hover:border-brand/50 hover:bg-brand/5 hover:text-foreground hover:shadow-[0_0_12px_-4px_oklch(0.82_0.13_196/0.2)]">
-                        {item}
-                      </span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </SpotlightCard>
-            </StaggerItem>
-          ))}
+              </StaggerItem>
+            )
+          })}
         </StaggerGroup>
 
         <div className="mt-14 overflow-hidden mask-fade-x" aria-hidden>
@@ -67,7 +55,7 @@ export function Technologies() {
             ].map((item, i) => (
               <span
                 key={`${item}-${i}`}
-                className="rounded-full border border-border/40 bg-card/30 px-4 py-1.5 text-sm whitespace-nowrap text-muted-foreground/50 transition-colors hover:text-foreground hover:border-brand/40"
+                className="border-border rounded-full border px-4 py-1.5 text-sm whitespace-nowrap text-muted-foreground/60"
               >
                 {item}
               </span>

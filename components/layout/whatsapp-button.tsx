@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { MessageCircle, X } from 'lucide-react'
+import { WhatsappLogo, X } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const PHONE = '573229369995'
@@ -15,37 +15,34 @@ export function WhatsAppButton() {
       <AnimatePresence>
         {open ? (
           <motion.div
-            initial={{ opacity: 0, y: 16, scale: 0.9 }}
+            initial={{ opacity: 0, y: 16, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.9 }}
-            transition={{ duration: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="w-72 overflow-hidden rounded-2xl border border-border/60 bg-card shadow-xl"
+            exit={{ opacity: 0, y: 16, scale: 0.96 }}
+            transition={{ duration: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="border-border w-72 overflow-hidden rounded-xl border bg-card shadow-[0_8px_24px_-8px_rgba(0,0,0,0.15)]"
           >
-            {/* Header */}
             <div className="bg-[#25D366] px-4 py-3.5 text-white">
               <p className="text-sm font-semibold">WhatsApp</p>
               <p className="mt-0.5 text-xs text-white/80">
                 Por lo general responde en minutos
               </p>
             </div>
-            {/* Body */}
             <div className="p-4">
-              <div className="rounded-xl bg-muted px-3.5 py-2.5 text-sm leading-relaxed text-foreground">
+              <div className="bg-muted rounded-lg px-3.5 py-2.5 text-sm leading-relaxed text-foreground">
                 ¡Hola! Me gustaría recibir más información sobre sus servicios.
               </div>
               <p className="mt-2 text-xs text-muted-foreground">
                 Waira Solutions — Popayán, Colombia
               </p>
             </div>
-            {/* CTA */}
-            <div className="border-t border-border/60 px-4 py-3">
+            <div className="border-border border-t px-4 py-3">
               <a
                 href={`https://wa.me/${PHONE}?text=${MESSAGE}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                className="flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
               >
-                <MessageCircle className="size-4" />
+                <WhatsappLogo weight="bold" className="size-4" />
                 Abrir WhatsApp
               </a>
             </div>
@@ -53,35 +50,18 @@ export function WhatsAppButton() {
         ) : null}
       </AnimatePresence>
 
-      {/* FAB */}
-      <div className="relative">
-        {/* Pulse rings */}
-        <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366]/30" />
-        <span className="absolute inset-1 animate-pulse rounded-full bg-[#25D366]/20" />
-
-        <motion.button
-          type="button"
-          aria-label={open ? 'Cerrar WhatsApp' : 'Contactar por WhatsApp'}
-          onClick={() => setOpen((v) => !v)}
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{
-            type: 'spring',
-            stiffness: 400,
-            damping: 24,
-            delay: 1.5,
-          }}
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.92 }}
-          className="relative flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-shadow hover:shadow-[0_8px_32px_-4px_rgba(37,211,102,0.5)]"
-        >
-          {open ? (
-            <X className="size-6" />
-          ) : (
-            <MessageCircle className="size-7" />
-          )}
-        </motion.button>
-      </div>
+      <motion.button
+        type="button"
+        aria-label={open ? 'Cerrar WhatsApp' : 'Contactar por WhatsApp'}
+        onClick={() => setOpen((v) => !v)}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 24, delay: 1 }}
+        whileTap={{ scale: 0.94 }}
+        className="flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_4px_14px_-4px_rgba(0,0,0,0.2)]"
+      >
+        {open ? <X className="size-6" /> : <WhatsappLogo weight="fill" className="size-6" />}
+      </motion.button>
     </div>
   )
 }

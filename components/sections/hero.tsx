@@ -1,53 +1,35 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle } from 'lucide-react'
+import { ArrowRight, CheckCircle } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import { Counter } from '@/components/animations/counter'
 import { useLanguage } from '@/components/providers/language-provider'
-
-const HeroScene = dynamic(() => import('@/components/three/hero-scene'), {
-  ssr: false,
-  loading: () => null,
-})
 
 export function Hero() {
   const { t } = useLanguage()
 
   return (
     <section id="inicio" className="relative overflow-hidden pt-28 pb-16 sm:pt-32 lg:pt-40">
-      <div className="bg-grid pointer-events-none absolute inset-0 opacity-60 mask-fade-b" aria-hidden />
-      <div
-        className="pointer-events-none absolute -top-40 left-1/2 size-[700px] -translate-x-1/2 rounded-full bg-brand/15 blur-[160px]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute top-60 -right-20 size-[400px] rounded-full bg-brand-2/10 blur-[120px]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-x-0 top-16 h-px bg-gradient-to-r from-transparent via-brand/30 to-transparent"
-        aria-hidden
-      />
+      <div className="bg-grid pointer-events-none absolute inset-0 opacity-30 mask-fade-b" aria-hidden />
 
       <Container className="relative">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="grid items-center gap-14 lg:grid-cols-2">
           <div className="flex flex-col items-start">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-3 rounded-full border border-brand/20 bg-brand/5 pl-1 pr-4 py-1 text-xs font-medium text-brand"
+              className="inline-flex items-center gap-2.5 rounded-full border border-border pl-1 pr-4 py-1 text-xs font-medium text-muted-foreground"
             >
-              <span className="overflow-hidden rounded-full ring-1 ring-brand/40 shadow-[0_0_10px_rgba(0,212,255,0.35)] flex-shrink-0">
+              <span className="overflow-hidden rounded-full flex-shrink-0">
                 <Image
                   src="/waira-logo-fb.jpg"
                   alt=""
-                  width={28}
-                  height={28}
+                  width={26}
+                  height={26}
                   className="block"
                   aria-hidden
                 />
@@ -59,10 +41,10 @@ export function Hero() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.06 }}
-              className="mt-6 font-heading text-4xl font-semibold tracking-tight text-balance sm:text-[3.25rem] sm:leading-[1.12] lg:text-[3.75rem] lg:leading-[1.1]"
+              className="mt-6 font-heading text-4xl leading-[1.1] font-medium tracking-tight text-balance sm:text-5xl lg:text-[3.4rem] lg:leading-[1.08]"
             >
               {t.hero.titleLead}{' '}
-              <span className="text-gradient-brand">{t.hero.titleHighlight}</span>{' '}
+              <em className="text-brand not-italic">{t.hero.titleHighlight}</em>{' '}
               {t.hero.titleTail}
             </motion.h1>
 
@@ -81,18 +63,11 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mt-8 flex flex-col gap-3 sm:flex-row"
             >
-              <Button
-                render={<a href="#contacto" />}
-                className="group h-11 rounded-full px-7 text-sm glow-brand"
-              >
+              <Button render={<a href="#contacto" />} className="group h-11 px-7 text-sm">
                 {t.hero.ctaPrimary}
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button
-                variant="outline"
-                render={<a href="#servicios" />}
-                className="h-11 rounded-full px-7 text-sm"
-              >
+              <Button variant="outline" render={<a href="#servicios" />} className="h-11 px-7 text-sm">
                 {t.hero.ctaSecondary}
               </Button>
             </motion.div>
@@ -108,7 +83,7 @@ export function Hero() {
                   key={badge}
                   className="inline-flex items-center gap-1.5 text-xs text-muted-foreground"
                 >
-                  <CheckCircle className="size-3.5 text-brand/70" aria-hidden />
+                  <CheckCircle weight="fill" className="size-3.5 text-brand/70" aria-hidden />
                   {badge}
                 </span>
               ))}
@@ -118,12 +93,12 @@ export function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.36 }}
-              className="mt-10 grid w-full grid-cols-2 gap-x-6 gap-y-5 rounded-2xl border border-border/40 bg-card/30 px-6 py-6 sm:grid-cols-4 sm:px-8"
+              className="mt-10 grid w-full grid-cols-2 gap-x-6 gap-y-5 rounded-xl border border-border bg-card px-6 py-6 sm:grid-cols-4 sm:px-8"
             >
               {t.hero.metrics.map((m) => (
                 <div key={m.label}>
                   <dt className="sr-only">{m.label}</dt>
-                  <dd className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+                  <dd className="font-heading text-2xl font-medium text-foreground sm:text-3xl">
                     <Counter value={m.value} suffix={m.suffix} />
                   </dd>
                   <p className="mt-1 text-xs leading-snug text-muted-foreground/80">{m.label}</p>
@@ -133,20 +108,30 @@ export function Hero() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.18, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="relative mx-auto aspect-square w-full max-w-md lg:max-w-none"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.18, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="relative mx-auto w-full max-w-md lg:max-w-none"
           >
-            <div className="absolute inset-8 rounded-full border border-brand/10" aria-hidden />
-            <div className="absolute inset-16 rounded-full border border-brand/5" aria-hidden />
-            <div className="absolute inset-0 rounded-full bg-brand/8 blur-3xl" aria-hidden />
-            <HeroScene />
+            <div className="bg-pastel-blue-bg relative aspect-[4/5] overflow-hidden rounded-xl border border-border">
+              <Image
+                src="/waira-logo-fb.jpg"
+                alt="Waira Solutions"
+                fill
+                sizes="(max-width: 1024px) 400px, 480px"
+                className="object-contain p-16"
+                priority
+              />
+            </div>
+            <div className="absolute -bottom-5 -left-5 flex items-center gap-2.5 rounded-lg border border-border bg-card px-4 py-3 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.08)]">
+              <span className="bg-success size-2 shrink-0 rounded-full" aria-hidden />
+              <span className="text-sm font-medium">{t.hero.availability}</span>
+            </div>
           </motion.div>
         </div>
 
         <div className="mt-16 sm:mt-20">
-          <p className="text-center text-xs font-medium tracking-widest text-muted-foreground/60 uppercase">
+          <p className="text-center text-xs font-medium tracking-widest text-muted-foreground/70 uppercase">
             {t.hero.trustedBy}
           </p>
           <div className="mt-6 overflow-hidden mask-fade-x">

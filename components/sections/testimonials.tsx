@@ -2,15 +2,14 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
-import { ChevronLeft, ChevronRight, Rocket, ShieldCheck, Users, type LucideIcon } from 'lucide-react'
+import { CaretLeft, CaretRight, Rocket, ShieldCheck, Users, type Icon } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import { SectionHeading } from '@/components/ui/section-heading'
-import { SpotlightCard } from '@/components/ui/spotlight-card'
 import { useLanguage } from '@/components/providers/language-provider'
 
-const icons: Record<string, LucideIcon> = {
+const icons: Record<string, Icon> = {
   Users,
   ShieldCheck,
   Rocket,
@@ -35,7 +34,7 @@ export function Testimonials() {
   }, [emblaApi, onSelect])
 
   return (
-    <section className="relative scroll-mt-20 border-t border-border/60 py-24 sm:py-28">
+    <section className="relative scroll-mt-20 border-t border-border py-24 sm:py-28">
       <Container>
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <SectionHeading
@@ -45,47 +44,28 @@ export function Testimonials() {
             subtitle={t.testimonials.subtitle}
           />
           <div className="hidden gap-2 md:flex">
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label="Anterior"
-              onClick={() => emblaApi?.scrollPrev()}
-              className="size-10 rounded-full transition-colors hover:border-brand/50"
-            >
-              <ChevronLeft className="size-5" />
+            <Button variant="outline" size="icon" aria-label="Anterior" onClick={() => emblaApi?.scrollPrev()} className="size-10 rounded-full">
+              <CaretLeft className="size-5" />
             </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label="Siguiente"
-              onClick={() => emblaApi?.scrollNext()}
-              className="size-10 rounded-full transition-colors hover:border-brand/50"
-            >
-              <ChevronRight className="size-5" />
+            <Button variant="outline" size="icon" aria-label="Siguiente" onClick={() => emblaApi?.scrollNext()} className="size-10 rounded-full">
+              <CaretRight className="size-5" />
             </Button>
           </div>
         </div>
 
         <div className="mt-12 overflow-hidden" ref={emblaRef}>
-          <div className="flex gap-5">
+          <div className="flex gap-4">
             {t.testimonials.items.map((item, i) => {
               const Icon = icons[item.icon] ?? Users
               return (
-                <div
-                  key={i}
-                  className="min-w-0 flex-[0_0_100%] sm:flex-[0_0_calc(50%-10px)] lg:flex-[0_0_calc(33.333%-14px)]"
-                >
-                  <SpotlightCard className="flex h-full flex-col rounded-2xl border border-border/60 bg-card/40 p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/30 hover:shadow-[0_8px_24px_-8px_oklch(0.82_0.13_196/0.15)]">
-                    <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand/10 text-brand">
-                      <Icon className="size-5" aria-hidden />
+                <div key={i} className="min-w-0 flex-[0_0_100%] sm:flex-[0_0_calc(50%-8px)] lg:flex-[0_0_calc(33.333%-11px)]">
+                  <div className="border-border flex h-full flex-col rounded-xl border bg-card p-7">
+                    <span className="bg-secondary flex size-10 shrink-0 items-center justify-center rounded-lg">
+                      <Icon weight="bold" className="size-5" aria-hidden />
                     </span>
-                    <h3 className="mt-5 font-heading text-lg font-semibold tracking-tight">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                      {item.text}
-                    </p>
-                  </SpotlightCard>
+                    <h3 className="mt-5 font-heading text-lg font-medium tracking-tight">{item.title}</h3>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+                  </div>
                 </div>
               )
             })}
@@ -100,8 +80,8 @@ export function Testimonials() {
               aria-label={`Slide ${i + 1}`}
               onClick={() => emblaApi?.scrollTo(i)}
               className={cn(
-                'h-2 rounded-full transition-all duration-300 cursor-pointer',
-                selected === i ? 'w-7 bg-brand' : 'w-2 bg-border hover:bg-muted-foreground/40',
+                'h-1.5 rounded-full transition-all duration-300 cursor-pointer',
+                selected === i ? 'w-6 bg-brand' : 'w-1.5 bg-border hover:bg-muted-foreground/40',
               )}
             />
           ))}

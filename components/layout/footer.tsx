@@ -1,6 +1,6 @@
 'use client'
 
-import { Mail, MapPin } from 'lucide-react'
+import { EnvelopeSimple, MapPin } from '@phosphor-icons/react'
 import { Container } from '@/components/ui/container'
 import { Logo } from '@/components/ui/logo'
 import { useLanguage } from '@/components/providers/language-provider'
@@ -26,7 +26,7 @@ const InstagramIcon = () => (
 const socials = [
   { Icon: LinkedInIcon, href: 'https://www.linkedin.com/company/wairasolutions', label: 'LinkedIn' },
   { Icon: InstagramIcon, href: 'https://www.instagram.com/wairasolutions', label: 'Instagram' },
-  { Icon: ({ className }: { className?: string }) => <Mail className={className} />, href: 'mailto:infitechcol308@gmail.com', label: 'Email' },
+  { Icon: ({ className }: { className?: string }) => <EnvelopeSimple weight="bold" className={className} />, href: 'mailto:infitechcol308@gmail.com', label: 'Email' },
 ]
 
 export function Footer() {
@@ -34,7 +34,7 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="relative border-t border-border/60 bg-card/30">
+    <footer className="border-border relative border-t bg-card">
       <Container className="py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
@@ -43,7 +43,7 @@ export function Footer() {
               {t.footer.tagline}
             </p>
             <div className="mt-5 flex items-center gap-2 text-sm text-muted-foreground">
-              <MapPin className="size-4 text-brand" aria-hidden />
+              <MapPin weight="bold" className="text-brand size-4" aria-hidden />
               {t.contact.info.location}
             </div>
             <div className="mt-5 flex gap-2">
@@ -54,7 +54,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex size-9 items-center justify-center rounded-full border border-border/60 text-muted-foreground transition-all duration-200 hover:border-brand/50 hover:text-foreground hover:bg-brand/5 hover:-translate-y-0.5"
+                  className="border-border flex size-9 items-center justify-center rounded-full border text-muted-foreground transition-colors duration-200 hover:border-foreground/30 hover:text-foreground"
                 >
                   <Icon className="size-4" />
                 </a>
@@ -81,7 +81,7 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-6 text-sm text-muted-foreground sm:flex-row">
+        <div className="border-border mt-12 flex flex-col items-center justify-between gap-4 border-t pt-6 text-sm text-muted-foreground sm:flex-row">
           <p>
             &copy; {year} Waira Solutions. {t.footer.rights}
           </p>

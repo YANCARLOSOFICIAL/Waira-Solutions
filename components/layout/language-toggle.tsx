@@ -1,6 +1,6 @@
 'use client'
 
-import { Languages } from 'lucide-react'
+import { Translate } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { useLanguage } from '@/components/providers/language-provider'
 
@@ -16,7 +16,7 @@ export function LanguageToggle() {
       aria-label={locale === 'es' ? 'Switch to English' : 'Cambiar a Español'}
       className="h-9 gap-1.5 rounded-full px-3 text-xs font-semibold text-muted-foreground hover:text-foreground"
     >
-      <Languages className="size-4" aria-hidden />
+      <Translate weight="bold" className="size-4" aria-hidden />
       <span className="tabular-nums">{locale.toUpperCase()}</span>
     </Button>
   )

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { Minus, Plus } from '@phosphor-icons/react'
 import { Container } from '@/components/ui/container'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Reveal } from '@/components/animations/reveal'
@@ -15,11 +15,11 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="relative scroll-mt-20 border-t border-border/60 py-24 sm:py-32">
+    <section id="faq" className="relative scroll-mt-20 border-t border-border py-24 sm:py-32">
       <Container className="max-w-3xl">
         <SectionHeading eyebrow={faq.eyebrow} title={faq.title} />
         <Reveal delay={0.1}>
-          <div className="mt-12 divide-y divide-border/50 rounded-2xl border border-border/60 bg-card/30 overflow-hidden">
+          <div className="border-border mt-12 divide-y divide-border border-t">
             {faq.items.map((item, i) => {
               const isOpen = open === i
               return (
@@ -29,18 +29,13 @@ export function FAQ() {
                     aria-expanded={isOpen}
                     onClick={() => setOpen(isOpen ? null : i)}
                     className={cn(
-                      'flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-base font-medium transition-colors duration-200',
-                      isOpen ? 'text-foreground bg-brand/[0.03]' : 'text-foreground/80 hover:text-foreground hover:bg-muted/20',
+                      'flex w-full items-center justify-between gap-4 py-5 text-left text-base font-medium transition-colors duration-200',
+                      isOpen ? 'text-foreground' : 'text-foreground/80 hover:text-foreground',
                     )}
                   >
                     <span className="flex-1">{item.q}</span>
-                    <span
-                      className={cn(
-                        'flex shrink-0 size-7 items-center justify-center rounded-full transition-all duration-300',
-                        isOpen ? 'bg-brand/15 text-brand rotate-180' : 'bg-secondary text-muted-foreground',
-                      )}
-                    >
-                      <ChevronDown className="size-4" />
+                    <span className="text-muted-foreground flex size-6 shrink-0 items-center justify-center">
+                      {isOpen ? <Minus className="size-4" /> : <Plus className="size-4" />}
                     </span>
                   </button>
                   <AnimatePresence initial={false}>
@@ -53,7 +48,7 @@ export function FAQ() {
                         transition={{ duration: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
                         className="overflow-hidden"
                       >
-                        <p className="px-6 pb-6 text-sm leading-relaxed text-muted-foreground">
+                        <p className="pb-6 text-sm leading-relaxed text-muted-foreground">
                           {item.a}
                         </p>
                       </motion.div>

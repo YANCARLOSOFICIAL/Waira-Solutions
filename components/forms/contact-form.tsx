@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { CheckCircle2, Loader2, Send } from 'lucide-react'
+import { CheckCircle, CircleNotch, PaperPlaneTilt } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -46,9 +46,9 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="flex h-full min-h-72 flex-col items-center justify-center gap-4 rounded-2xl border border-border/60 bg-card p-8 text-center">
-        <span className="flex size-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-          <CheckCircle2 className="size-7" />
+      <div className="border-border flex h-full min-h-72 flex-col items-center justify-center gap-4 rounded-xl border bg-card p-8 text-center">
+        <span className="bg-pastel-green-bg text-pastel-green-fg flex size-14 items-center justify-center rounded-full">
+          <CheckCircle weight="bold" className="size-7" />
         </span>
         <p className="max-w-sm text-pretty leading-relaxed text-muted-foreground">
           {form.success}
@@ -64,7 +64,7 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
-      className="rounded-2xl border border-border/60 bg-card p-6 sm:p-8"
+      className="border-border rounded-xl border bg-card p-6 sm:p-8"
     >
       <div className="grid gap-5">
         <div className="grid gap-2">
@@ -112,12 +112,12 @@ export function ContactForm() {
         <Button type="submit" size="lg" disabled={isSubmitting} className="gap-2">
           {isSubmitting ? (
             <>
-              <Loader2 className="size-4 animate-spin" />
+              <CircleNotch className="size-4 animate-spin" />
               {form.submitting}
             </>
           ) : (
             <>
-              <Send className="size-4" />
+              <PaperPlaneTilt weight="bold" className="size-4" />
               {form.submit}
             </>
           )}
