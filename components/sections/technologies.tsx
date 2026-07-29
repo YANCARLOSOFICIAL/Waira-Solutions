@@ -25,22 +25,20 @@ export function Technologies() {
             const style = groupStyles[gi % groupStyles.length]
             return (
               <StaggerItem key={group.name} as="article" className="h-full">
-                <div className="border-border flex h-full flex-col overflow-hidden rounded-xl border bg-card">
+                <div className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card">
                   <div className="px-6 pt-6 pb-4">
                     <h3 className="flex items-center gap-2 font-heading text-base font-medium">
                       <span className={`size-2 rounded-full ${style.dot}`} aria-hidden />
                       {group.name}
                     </h3>
                   </div>
-                  <ul className="flex flex-wrap gap-2 px-6 pb-6 pt-1">
+                  <div className="flex flex-wrap gap-2 px-6 pb-6">
                     {group.items.map((item) => (
-                      <li key={item}>
-                        <span className={`${style.tag} inline-block rounded-full px-3 py-1.5 text-sm`}>
-                          {item}
-                        </span>
-                      </li>
+                      <span key={item} className={`${style.tag} inline-block rounded-full px-3 py-1.5 text-sm`}>
+                        {item}
+                      </span>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </StaggerItem>
             )
@@ -55,7 +53,7 @@ export function Technologies() {
             ].map((item, i) => (
               <span
                 key={`${item}-${i}`}
-                className="border-border rounded-full border px-4 py-1.5 text-sm whitespace-nowrap text-muted-foreground/60"
+                className="rounded-full border border-border px-4 py-1.5 text-sm whitespace-nowrap text-muted-foreground/60"
               >
                 {item}
               </span>

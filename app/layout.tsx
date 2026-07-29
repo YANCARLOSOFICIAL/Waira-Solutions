@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Newsreader } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { LanguageProvider } from '@/components/providers/language-provider'
 import { WhatsAppButton } from '@/components/layout/whatsapp-button'
+import { WAIRA } from '@/lib/config'
 import './globals.css'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
@@ -15,16 +16,14 @@ const newsreader = Newsreader({
   weight: ['400', '500', '600'],
 })
 
-const siteUrl = 'https://wairasolutions.com'
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(WAIRA.url),
   title: {
-    default: 'Waira Solutions | Software, IA y Transformación Digital',
-    template: '%s | Waira Solutions',
+    default: `${WAIRA.name} | Software, IA y Transformación Digital`,
+    template: `%s | ${WAIRA.name}`,
   },
   description:
-    'Empresa colombiana de tecnología. Desarrollamos software, inteligencia artificial, automatización y soluciones cloud para hacer crecer tu negocio.',
+    'Empresa colombiana de ingeniería de software e inteligencia artificial. Construimos software, IA, automatización y cloud con enfoque de producto. +30 proyectos entregados.',
   keywords: [
     'Waira Solutions',
     'desarrollo de software',
@@ -33,41 +32,45 @@ export const metadata: Metadata = {
     'cloud',
     'transformación digital',
     'consultoría tecnológica',
+    'ingeniería de software',
+    'productos tecnológicos',
     'Colombia',
     'Popayán',
+    'Cauca',
   ],
-  authors: [{ name: 'Waira Solutions' }],
-  creator: 'Waira Solutions',
-  publisher: 'Waira Solutions',
+  authors: [{ name: WAIRA.name }],
+  creator: WAIRA.name,
+  publisher: WAIRA.name,
   alternates: {
-    canonical: siteUrl,
-    languages: { es: siteUrl, en: `${siteUrl}/en` },
+    canonical: WAIRA.url,
+    languages: { es: WAIRA.url, en: `${WAIRA.url}/en` },
   },
   openGraph: {
     type: 'website',
     locale: 'es_CO',
-    url: siteUrl,
-    siteName: 'Waira Solutions',
-    title: 'Waira Solutions | Software, IA y Transformación Digital',
+    url: WAIRA.url,
+    siteName: WAIRA.name,
+    title: `${WAIRA.name} | Software, IA y Transformación Digital`,
     description:
-      'Soluciones tecnológicas innovadoras: software, inteligencia artificial, automatización y cloud para hacer crecer tu negocio.',
+      'Empresa colombiana de ingeniería de software e inteligencia artificial. Construimos productos, plataformas y soluciones automatizadas que transforman negocios.',
+    images: [{ url: `${WAIRA.url}/og-image.png`, width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Waira Solutions | Software, IA y Transformación Digital',
+    title: `${WAIRA.name} | Software, IA y Transformación Digital`,
     description:
-      'Soluciones tecnológicas innovadoras: software, IA, automatización y cloud para hacer crecer tu negocio.',
+      'Ingeniería de software, inteligencia artificial y productos tecnológicos con impacto real.',
+    images: [`${WAIRA.url}/og-image.png`],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
   icons: {
     icon: [
+      { url: '/favicon-32x32.png', sizes: '32x32' },
       { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/icon-light-32x32.png', sizes: '32x32', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', sizes: '32x32', media: '(prefers-color-scheme: dark)' },
     ],
     apple: '/apple-icon.png',
   },

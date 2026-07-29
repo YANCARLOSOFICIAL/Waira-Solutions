@@ -3,9 +3,7 @@
 import { useState } from 'react'
 import { WhatsappLogo, X } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
-
-const PHONE = '573229369995'
-const MESSAGE = encodeURIComponent('¡Hola! Me gustaría recibir más información sobre sus servicios.')
+import { WAIRA, getWhatsAppUrl } from '@/lib/config'
 
 export function WhatsAppButton() {
   const [open, setOpen] = useState(false)
@@ -19,7 +17,7 @@ export function WhatsAppButton() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ duration: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="border-border w-72 overflow-hidden rounded-xl border bg-card shadow-[0_8px_24px_-8px_rgba(0,0,0,0.15)]"
+            className="w-72 overflow-hidden rounded-xl border border-border bg-card shadow-elevated"
           >
             <div className="bg-[#25D366] px-4 py-3.5 text-white">
               <p className="text-sm font-semibold">WhatsApp</p>
@@ -28,16 +26,16 @@ export function WhatsAppButton() {
               </p>
             </div>
             <div className="p-4">
-              <div className="bg-muted rounded-lg px-3.5 py-2.5 text-sm leading-relaxed text-foreground">
-                ¡Hola! Me gustaría recibir más información sobre sus servicios.
+              <div className="rounded-lg bg-muted px-3.5 py-2.5 text-sm leading-relaxed text-foreground">
+                {WAIRA.contact.whatsappMessage}
               </div>
               <p className="mt-2 text-xs text-muted-foreground">
-                Waira Solutions — Popayán, Colombia
+                {WAIRA.name} — {WAIRA.location.full}
               </p>
             </div>
-            <div className="border-border border-t px-4 py-3">
+            <div className="border-t border-border px-4 py-3">
               <a
-                href={`https://wa.me/${PHONE}?text=${MESSAGE}`}
+                href={getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
@@ -58,7 +56,7 @@ export function WhatsAppButton() {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 400, damping: 24, delay: 1 }}
         whileTap={{ scale: 0.94 }}
-        className="flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_4px_14px_-4px_rgba(0,0,0,0.2)]"
+        className="flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-elevated"
       >
         {open ? <X className="size-6" /> : <WhatsappLogo weight="fill" className="size-6" />}
       </motion.button>

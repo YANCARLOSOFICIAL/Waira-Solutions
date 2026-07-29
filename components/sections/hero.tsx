@@ -1,11 +1,11 @@
 'use client'
 
-import Image from 'next/image'
-import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle } from '@phosphor-icons/react'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import { Counter } from '@/components/animations/counter'
+import { FlowingNetwork } from '@/components/animations/flowing-network'
 import { useLanguage } from '@/components/providers/language-provider'
 
 export function Hero() {
@@ -13,39 +13,36 @@ export function Hero() {
 
   return (
     <section id="inicio" className="relative overflow-hidden pt-28 pb-16 sm:pt-32 lg:pt-40">
-      <div className="bg-grid pointer-events-none absolute inset-0 opacity-30 mask-fade-b" aria-hidden />
+      <div className="bg-grid pointer-events-none absolute inset-0 opacity-[0.08] mask-fade-b" aria-hidden />
 
-      <Container className="relative">
-        <div className="grid items-center gap-14 lg:grid-cols-2">
+      <div className="pointer-events-none absolute -top-40 -right-40 size-[600px] rounded-full bg-brand/5 blur-[120px]" aria-hidden />
+      <div className="pointer-events-none absolute -bottom-40 left-1/3 size-[500px] rounded-full bg-brand-2/5 blur-[100px]" aria-hidden />
+
+      <FlowingNetwork />
+
+      <Container className="relative z-10">
+        <div className="grid items-center gap-14 lg:grid-cols-[1.2fr_1fr]">
           <div className="flex flex-col items-start">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2.5 rounded-full border border-border pl-1 pr-4 py-1 text-xs font-medium text-muted-foreground"
             >
-              <span className="overflow-hidden rounded-full flex-shrink-0">
-                <Image
-                  src="/waira-logo-fb.jpg"
-                  alt=""
-                  width={26}
-                  height={26}
-                  className="block"
-                  aria-hidden
-                />
+              <span className="font-mono text-xs font-medium tracking-[0.15em] text-brand uppercase">
+                {t.hero.eyebrow}
               </span>
-              {t.hero.badge}
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.06 }}
-              className="mt-6 font-heading text-4xl leading-[1.1] font-medium tracking-tight text-balance sm:text-5xl lg:text-[3.4rem] lg:leading-[1.08]"
+              className="mt-5 font-heading text-4xl leading-[1.08] font-medium tracking-tight text-balance sm:text-5xl lg:text-[3.8rem] lg:leading-[1.04]"
             >
-              {t.hero.titleLead}{' '}
-              <em className="text-brand not-italic">{t.hero.titleHighlight}</em>{' '}
-              {t.hero.titleTail}
+              {t.hero.titleLine1}{' '}
+              <span className="text-brand">{t.hero.titleHighlight}</span>
+              <br />
+              {t.hero.titleLine2}
             </motion.h1>
 
             <motion.p
@@ -63,11 +60,11 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mt-8 flex flex-col gap-3 sm:flex-row"
             >
-              <Button render={<a href="#contacto" />} className="group h-11 px-7 text-sm">
+              <Button render={<a href="#contacto" />} className="group h-12 px-8 text-sm shadow-card hover:shadow-card-hover">
                 {t.hero.ctaPrimary}
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button variant="outline" render={<a href="#servicios" />} className="h-11 px-7 text-sm">
+              <Button variant="outline" render={<a href="#servicios" />} className="h-12 px-8 text-sm">
                 {t.hero.ctaSecondary}
               </Button>
             </motion.div>
@@ -93,7 +90,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.36 }}
-              className="mt-10 grid w-full grid-cols-2 gap-x-6 gap-y-5 rounded-xl border border-border bg-card px-6 py-6 sm:grid-cols-4 sm:px-8"
+              className="mt-10 grid w-full grid-cols-2 gap-x-6 gap-y-5 rounded-xl border border-border bg-card/80 px-6 py-6 shadow-card sm:grid-cols-4 sm:px-8"
             >
               {t.hero.metrics.map((m) => (
                 <div key={m.label}>
@@ -108,30 +105,70 @@ export function Hero() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.18, ease: [0.21, 0.47, 0.32, 0.98] }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
             className="relative mx-auto w-full max-w-md lg:max-w-none"
           >
-            <div className="bg-pastel-blue-bg relative aspect-[4/5] overflow-hidden rounded-xl border border-border">
-              <Image
-                src="/waira-logo-fb.jpg"
-                alt="Waira Solutions"
-                fill
-                sizes="(max-width: 1024px) 400px, 480px"
-                className="object-contain p-16"
-                priority
-              />
-            </div>
-            <div className="absolute -bottom-5 -left-5 flex items-center gap-2.5 rounded-lg border border-border bg-card px-4 py-3 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.08)]">
-              <span className="bg-success size-2 shrink-0 rounded-full" aria-hidden />
-              <span className="text-sm font-medium">{t.hero.availability}</span>
+            <div className="relative overflow-hidden rounded-2xl border border-border bg-card/60 shadow-elevated backdrop-blur-sm">
+              <div className="grid grid-cols-3 gap-px bg-border/50">
+                {[0, 1, 2, 3, 4, 5].map((i) => (
+                  <div
+                    key={i}
+                    className="flex aspect-square items-center justify-center bg-card/80"
+                  >
+                    <div
+                      className="size-2 rounded-full"
+                      style={{
+                        backgroundColor: `oklch(0.52 0.14 240 / ${0.2 + Math.random() * 0.4})`,
+                        animation: `node-pulse ${2 + Math.random() * 3}s ease-in-out infinite`,
+                        animationDelay: `${Math.random() * 2}s`,
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="absolute size-1 rounded-full bg-brand/40"
+                  style={{
+                    top: `${20 + i * 30}%`,
+                    left: `${10 + i * 35}%`,
+                    animation: `wind-drift-${i + 1} ${5 + i * 2}s ease-in-out infinite`,
+                  }}
+                />
+              ))}
+
+              <div className="relative px-6 py-6 sm:px-8 sm:py-8">
+                <div className="flex items-center gap-2 text-xs text-muted-foreground/60">
+                  <span className="size-2 rounded-full bg-success" />
+                  <span>{t.hero.availability}</span>
+                </div>
+                <p className="mt-4 font-heading text-xl leading-snug font-medium tracking-tight sm:text-2xl">
+                  {t.hero.visualTitle}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {t.hero.visualSub}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {t.hero.visualTags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-secondary px-2.5 py-1 text-xs text-muted-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
 
         <div className="mt-16 sm:mt-20">
-          <p className="text-center text-xs font-medium tracking-widest text-muted-foreground/70 uppercase">
+          <p className="text-center text-xs font-medium tracking-widest text-muted-foreground/60 uppercase">
             {t.hero.trustedBy}
           </p>
           <div className="mt-6 overflow-hidden mask-fade-x">
@@ -139,7 +176,7 @@ export function Hero() {
               {[...TECHS, ...TECHS].map((tech, i) => (
                 <span
                   key={`${tech}-${i}`}
-                  className="font-heading text-sm font-medium whitespace-nowrap text-muted-foreground/50 transition-colors hover:text-muted-foreground"
+                  className="font-heading text-sm font-medium whitespace-nowrap text-muted-foreground/30 transition-colors hover:text-muted-foreground/60"
                 >
                   {tech}
                 </span>

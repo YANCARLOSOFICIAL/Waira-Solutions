@@ -51,17 +51,17 @@ export function Services() {
 
             return (
               <StaggerItem key={service.title} as="article" className={cn('sm:col-span-1', col)}>
-                <div className="border-border flex h-full flex-col rounded-xl border bg-card p-7">
+                <div className="flex h-full flex-col rounded-xl border border-border bg-card p-7 shadow-card hover:shadow-card-hover transition-shadow">
                   <div className="flex items-start gap-4">
                     <span
                       className={cn(
-                        'flex shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground',
-                        featured ? 'size-12' : 'size-10',
+                        'flex shrink-0 items-center justify-center rounded-lg',
+                        featured ? 'size-12 bg-brand/10 text-brand' : 'size-10 bg-secondary text-foreground',
                       )}
                     >
                       <Icon weight="bold" className={cn(featured ? 'size-6' : 'size-5')} />
                     </span>
-                    <div>
+                    <div className="min-w-0">
                       <h3 className={cn('font-heading font-medium tracking-tight', featured ? 'text-xl' : 'text-lg')}>
                         {service.title}
                       </h3>
@@ -72,7 +72,7 @@ export function Services() {
                   <ul className="mt-5 space-y-2.5">
                     {service.benefits.map((b) => (
                       <li key={b} className="flex items-center gap-2.5 text-sm text-foreground/80">
-                        <Check weight="bold" className="text-brand size-3.5 shrink-0" aria-hidden />
+                        <Check weight="bold" className="size-3.5 shrink-0 text-brand" aria-hidden />
                         {b}
                       </li>
                     ))}

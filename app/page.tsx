@@ -6,14 +6,15 @@ import { JsonLd } from '@/components/seo/json-ld'
 import { Hero } from '@/components/sections/hero'
 import { About } from '@/components/sections/about'
 import { Services } from '@/components/sections/services'
-import { Solutions } from '@/components/sections/solutions'
+import { Products } from '@/components/sections/products'
 import { Technologies } from '@/components/sections/technologies'
 import { Process } from '@/components/sections/process'
 import { Cases } from '@/components/sections/cases'
-import { Testimonials } from '@/components/sections/testimonials'
+import { WhyWaira } from '@/components/sections/why-waira'
 import { FAQ } from '@/components/sections/faq'
 import { CTA } from '@/components/sections/cta'
 import { Contact } from '@/components/sections/contact'
+import { Ecosystem } from '@/components/sections/ecosystem'
 
 export default function Home() {
   return (
@@ -32,11 +33,12 @@ export default function Home() {
         <Hero />
         <About />
         <Services />
-        <Solutions />
-        <Technologies />
-        <Process />
+        <Products />
         <Cases />
-        <Testimonials />
+        <WhyWaira />
+        <Technologies />
+        <Ecosystem />
+        <Process />
         <FAQ />
         <CTA />
         <Contact />

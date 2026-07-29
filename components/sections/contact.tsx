@@ -6,6 +6,7 @@ import { SectionHeading } from '@/components/ui/section-heading'
 import { Reveal } from '@/components/animations/reveal'
 import { ContactForm } from '@/components/forms/contact-form'
 import { useLanguage } from '@/components/providers/language-provider'
+import { WAIRA, getWhatsAppUrl } from '@/lib/config'
 
 export function Contact() {
   const { t } = useLanguage()
@@ -19,7 +20,7 @@ export function Contact() {
       tag: 'bg-pastel-green-bg text-pastel-green-fg',
       label: info.whatsappLabel,
       value: info.whatsapp,
-      href: 'https://wa.me/573229369995',
+      href: getWhatsAppUrl(),
     },
     { icon: MapPin, tag: 'bg-pastel-coral-bg text-pastel-coral-fg', label: info.locationLabel, value: info.location, href: undefined },
     { icon: Clock, tag: 'bg-pastel-yellow-bg text-pastel-yellow-fg', label: info.hoursLabel, value: info.hours, href: undefined },
@@ -27,6 +28,7 @@ export function Contact() {
 
   return (
     <section id="contacto" className="relative py-24 sm:py-32">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand/[0.02] via-transparent to-brand/[0.02]" aria-hidden />
       <Container>
         <SectionHeading eyebrow={contact.eyebrow} title={contact.title} subtitle={contact.subtitle} />
         <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:gap-12">
@@ -49,12 +51,12 @@ export function Contact() {
                   href={item.href}
                   target={item.href.startsWith('http') ? '_blank' : undefined}
                   rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="border-border flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:bg-muted/40"
+                  className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 shadow-card transition-all hover:shadow-card-hover hover:bg-muted/40"
                 >
                   {Inner}
                 </a>
               ) : (
-                <div key={item.label} className="border-border flex items-center gap-4 rounded-xl border bg-card p-4">
+                <div key={item.label} className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 shadow-card">
                   {Inner}
                 </div>
               )

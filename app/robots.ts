@@ -1,12 +1,12 @@
 import type { MetadataRoute } from 'next'
+import { WAIRA } from '@/lib/config'
 
 export default function robots(): MetadataRoute.Robots {
-  const base = 'https://wairasolutions.com'
   return {
     rules: {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: `${base}/sitemap.xml`,
+    sitemap: `${WAIRA.url}/sitemap.xml`,
   }
 }

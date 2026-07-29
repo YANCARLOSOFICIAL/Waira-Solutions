@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { ArrowUpRight, GithubLogo } from '@phosphor-icons/react'
 import { Container } from '@/components/ui/container'
 import { SectionHeading } from '@/components/ui/section-heading'
@@ -15,47 +14,51 @@ export function Cases() {
       <Container>
         <SectionHeading eyebrow={t.cases.eyebrow} title={t.cases.title} subtitle={t.cases.subtitle} />
 
-        <StaggerGroup className="mt-14 grid gap-4 lg:grid-cols-3">
+        <StaggerGroup className="mt-14 grid gap-6 lg:grid-cols-3">
           {t.cases.items.map((item) => (
-            <StaggerItem key={item.title} as="article" className="h-full">
+            <StaggerItem key={item.tag} as="article" className="h-full">
               <a
                 href={`https://github.com/${item.repo}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group border-border flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-foreground/25"
+                className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card hover:shadow-card-hover transition-all hover:border-foreground/20"
               >
-                <div className="border-border relative aspect-[16/9] overflow-hidden border-b">
-                  <Image
-                    src={`https://opengraph.githubassets.com/1/${item.repo}`}
-                    alt={item.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                    className="object-cover"
-                  />
-                  <span className="border-border bg-background absolute top-3 left-3 rounded-full border px-2.5 py-1 text-xs font-medium">
+                <div className="flex items-center gap-2 border-b border-border bg-surface-1 px-6 py-3">
+                  <span className="rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-muted-foreground">
                     {item.tag}
                   </span>
-                  <span className="border-border bg-background absolute top-3 right-3 flex size-8 items-center justify-center rounded-full border opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                    <ArrowUpRight className="size-4" />
+                  <span className="ml-auto flex size-7 items-center justify-center rounded-full border border-border opacity-0 transition-opacity group-hover:opacity-100">
+                    <ArrowUpRight className="size-3.5" />
                   </span>
                 </div>
 
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-heading text-lg font-medium tracking-tight">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+                <div className="flex flex-1 flex-col gap-4 p-6">
+                  <div>
+                    <p className="text-xs font-medium text-muted-foreground/60 uppercase tracking-wider">Problema</p>
+                    <p className="mt-1 text-sm leading-relaxed text-foreground/80">{item.problem}</p>
+                  </div>
 
-                  <ul className="mt-5 flex flex-wrap gap-1.5">
+                  <div>
+                    <p className="text-xs font-medium text-muted-foreground/60 uppercase tracking-wider">Solución</p>
+                    <p className="mt-1 text-sm leading-relaxed text-foreground/80">{item.solution}</p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5">
                     {item.tech.map((tech) => (
-                      <li key={tech} className="bg-secondary rounded-full px-2.5 py-1 text-xs text-muted-foreground">
+                      <span key={tech} className="rounded-full bg-secondary px-2.5 py-1 text-xs text-muted-foreground">
                         {tech}
-                      </li>
+                      </span>
                     ))}
-                  </ul>
+                    <span className="ml-auto flex items-center gap-1 text-xs font-medium text-brand">
+                      <GithubLogo weight="bold" className="size-3.5" />
+                      Código
+                    </span>
+                  </div>
 
-                  <span className="text-muted-foreground mt-auto flex items-center gap-1.5 pt-5 text-xs font-medium">
-                    <GithubLogo weight="bold" className="size-3.5" />
-                    {item.repo}
-                  </span>
+                  <div className="mt-auto rounded-lg bg-brand/5 px-4 py-3">
+                    <p className="text-xs font-medium text-muted-foreground/60 uppercase tracking-wider">Resultado</p>
+                    <p className="mt-0.5 text-sm font-medium text-foreground/90">{item.result}</p>
+                  </div>
                 </div>
               </a>
             </StaggerItem>

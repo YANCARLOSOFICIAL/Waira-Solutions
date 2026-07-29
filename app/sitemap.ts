@@ -1,19 +1,25 @@
 import type { MetadataRoute } from 'next'
+import { WAIRA } from '@/lib/config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://wairasolutions.com'
   return [
     {
-      url: base,
+      url: WAIRA.url,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: `${base}/en`,
+      url: `${WAIRA.url}/privacidad`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${WAIRA.url}/terminos`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
     },
   ]
 }

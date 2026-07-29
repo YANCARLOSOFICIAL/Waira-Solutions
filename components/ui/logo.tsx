@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
@@ -14,7 +12,7 @@ export function Logo({
     <span className={cn('inline-flex items-center gap-2.5', className)}>
       <LogoMark className="size-9" />
       {showWordmark ? (
-        <span className="font-heading text-lg font-semibold tracking-tight">
+        <span className="font-heading text-lg font-semibold tracking-tight text-foreground">
           Waira<span className="text-brand">.</span>
         </span>
       ) : null}
@@ -25,14 +23,14 @@ export function Logo({
 
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <span className={cn('relative inline-flex shrink-0 overflow-hidden rounded-full', className)}>
+    <span className={cn('relative inline-flex shrink-0 overflow-hidden rounded-xl', className)}>
       <Image
         src="/waira-logo-fb.jpg"
-        alt=""
-        fill
+        alt="Waira Solutions"
+        width={36}
+        height={36}
         className="object-contain"
-        sizes="48px"
-        aria-hidden
+        sizes="36px"
       />
     </span>
   )

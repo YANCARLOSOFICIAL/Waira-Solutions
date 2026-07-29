@@ -10,8 +10,9 @@ import { Logo } from '@/components/ui/logo'
 import { ThemeToggle } from './theme-toggle'
 import { LanguageToggle } from './language-toggle'
 import { useLanguage } from '@/components/providers/language-provider'
+import { getWhatsAppUrl } from '@/lib/config'
 
-const SECTION_IDS = ['inicio', 'nosotros', 'servicios', 'soluciones', 'tecnologias', 'proceso', 'casos', 'faq', 'contacto']
+const SECTION_IDS = ['inicio', 'nosotros', 'servicios', 'productos', 'casos', 'tecnologias', 'proceso', 'faq', 'contacto']
 
 export function Navbar() {
   const { t } = useLanguage()
@@ -91,7 +92,7 @@ export function Navbar() {
             <LanguageToggle />
             <ThemeToggle />
             <a
-              href="https://wa.me/573229369995"
+              href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
@@ -99,7 +100,7 @@ export function Navbar() {
             >
               <WhatsappLogo weight="bold" className="size-5" />
             </a>
-            <Button render={<a href="#contacto" />} className="ml-2 h-9 px-5 text-sm">
+            <Button render={<a href="#contacto" />} className="ml-2 h-9 px-5 text-sm shadow-card">
               {t.nav.cta}
             </Button>
           </div>
@@ -108,7 +109,7 @@ export function Navbar() {
             <LanguageToggle />
             <ThemeToggle />
             <a
-              href="https://wa.me/573229369995"
+              href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
@@ -160,10 +161,10 @@ export function Navbar() {
                 className="mt-4 flex gap-2"
               >
                 <a
-                  href="https://wa.me/573229369995"
+                  href={getWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-border flex flex-1 items-center justify-center gap-2 rounded-lg border bg-[#25D366]/10 py-3 text-sm font-medium text-[#25D366] transition-colors hover:bg-[#25D366]/20"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-border bg-[#25D366]/10 py-3 text-sm font-medium text-[#25D366] transition-colors hover:bg-[#25D366]/20"
                 >
                   <WhatsappLogo weight="bold" className="size-4" />
                   WhatsApp

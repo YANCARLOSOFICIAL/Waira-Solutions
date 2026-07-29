@@ -21,10 +21,10 @@ export function Process() {
         <SectionHeading eyebrow={t.process.eyebrow} title={t.process.title} subtitle={t.process.subtitle} />
 
         <div ref={ref} className="relative mx-auto mt-16 max-w-3xl">
-          <div className="bg-border absolute top-0 bottom-0 left-[19px] w-px md:left-1/2 md:-translate-x-1/2" aria-hidden />
+          <div className="absolute top-0 bottom-0 left-[19px] w-px bg-border md:left-1/2 md:-translate-x-1/2" aria-hidden />
           <motion.div
             style={{ scaleY: lineHeight }}
-            className="bg-brand absolute top-0 bottom-0 left-[19px] w-px origin-top md:left-1/2 md:-translate-x-1/2"
+            className="absolute top-0 bottom-0 left-[19px] w-px origin-top bg-brand md:left-1/2 md:-translate-x-1/2"
             aria-hidden
           />
 
@@ -40,8 +40,8 @@ export function Process() {
                     transition={{ duration: 0.5, delay: i * 0.06 }}
                     className={`relative ml-14 md:ml-0 ${isLeft ? 'md:col-start-1 md:pr-10 md:text-right' : 'md:col-start-2 md:pl-10'}`}
                   >
-                    <div className="border-border rounded-xl border bg-card p-6">
-                      <span className="text-brand font-mono text-xs font-semibold tracking-widest uppercase">
+                    <div className="rounded-xl border border-border bg-card p-6 shadow-card">
+                      <span className="font-mono text-xs font-semibold tracking-widest uppercase text-brand">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <h3 className="mt-2 font-heading text-lg font-medium">{step.title}</h3>
@@ -50,10 +50,10 @@ export function Process() {
                   </motion.div>
 
                   <span
-                    className="border-brand bg-background absolute top-6 left-[11px] flex size-5 items-center justify-center rounded-full border-2 md:left-1/2 md:-translate-x-1/2"
+                    className="absolute top-6 left-[11px] flex size-5 items-center justify-center rounded-full border-2 border-brand bg-background md:left-1/2 md:-translate-x-1/2"
                     aria-hidden
                   >
-                    <span className="bg-brand size-2 rounded-full" />
+                    <span className="size-2 rounded-full bg-brand" />
                   </span>
                 </li>
               )
