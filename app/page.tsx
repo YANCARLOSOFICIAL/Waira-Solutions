@@ -29,7 +29,7 @@ export default function Home() {
         Skip to content
       </a>
       <Navbar />
-      <main id="main">
+      <main id="main" className="relative w-full max-w-full overflow-x-hidden">
         <Hero />
         <About />
         <Services />

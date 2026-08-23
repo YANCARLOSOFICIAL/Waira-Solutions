@@ -29,7 +29,10 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="relative border-t border-border bg-card">
+    <footer className="relative" style={{ background: 'oklch(0.07 0.02 240)', borderTop: '1px solid oklch(0.65 0.22 230 / 0.12)' }}>
+      {/* Top circuit line */}
+      <div className="absolute inset-x-0 top-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, oklch(0.65 0.22 230 / 0.4), oklch(0.78 0.18 195 / 0.4), transparent)' }} aria-hidden />
+
       <Container className="py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
@@ -38,7 +41,7 @@ export function Footer() {
               {t.footer.tagline}
             </p>
             <div className="mt-5 flex items-center gap-2 text-sm text-muted-foreground">
-              <MapPin weight="bold" className="size-4 text-brand" aria-hidden />
+              <MapPin weight="bold" className="size-4 shrink-0" style={{ color: 'oklch(0.65 0.22 230)' }} aria-hidden />
               {t.contact.info.location}
             </div>
             <div className="mt-5 flex gap-2">
@@ -49,7 +52,22 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex size-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors duration-200 hover:border-foreground/30 hover:text-foreground"
+                  className="flex size-9 items-center justify-center rounded-md transition-all duration-200"
+                  style={{ border: '1px solid oklch(1 0 0 / 0.1)', color: 'oklch(0.55 0.02 230)' }}
+                  onMouseEnter={e => {
+                    const el = e.currentTarget as HTMLElement
+                    el.style.borderColor = 'oklch(0.65 0.22 230 / 0.35)'
+                    el.style.color = 'oklch(0.65 0.22 230)'
+                    el.style.boxShadow = '0 0 12px oklch(0.65 0.22 230 / 0.2)'
+                    el.style.background = 'oklch(0.65 0.22 230 / 0.08)'
+                  }}
+                  onMouseLeave={e => {
+                    const el = e.currentTarget as HTMLElement
+                    el.style.borderColor = 'oklch(1 0 0 / 0.1)'
+                    el.style.color = 'oklch(0.55 0.02 230)'
+                    el.style.boxShadow = 'none'
+                    el.style.background = 'transparent'
+                  }}
                 >
                   <Icon className="size-4" />
                 </a>
@@ -59,13 +77,15 @@ export function Footer() {
 
           {t.footer.columns.map((col) => (
             <nav key={col.title} aria-label={col.title}>
-              <h3 className="text-sm font-semibold text-foreground">{col.title}</h3>
-              <ul className="mt-4 space-y-3">
+              <h3 className="font-mono text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: 'oklch(0.65 0.22 230)' }}>
+                {col.title}
+              </h3>
+              <ul className="mt-5 space-y-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-sm text-muted-foreground transition-all duration-150 hover:text-foreground hover:pl-1"
                     >
                       {link.label}
                     </a>
@@ -76,22 +96,26 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-sm text-muted-foreground sm:flex-row">
-          <p>
-            &copy; {year} Waira Solutions. {t.footer.rights}
+        {/* Bottom bar */}
+        <div
+          className="mt-12 flex flex-col items-center justify-between gap-4 pt-6 text-sm text-muted-foreground/60 sm:flex-row"
+          style={{ borderTop: '1px solid oklch(1 0 0 / 0.06)' }}
+        >
+          <p className="font-mono text-xs">
+            © {year} Waira Solutions. {t.footer.rights}
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 font-mono text-xs">
             <a href="/privacidad" className="transition-colors hover:text-foreground">
               Privacidad
             </a>
-            <span className="text-border">/</span>
+            <span style={{ color: 'oklch(0.65 0.22 230 / 0.4)' }}>|</span>
             <a href="/terminos" className="transition-colors hover:text-foreground">
               Términos
             </a>
-            <span className="text-border">/</span>
+            <span style={{ color: 'oklch(0.65 0.22 230 / 0.4)' }}>|</span>
             <p className="flex items-center gap-1.5">
               {t.footer.madeIn}
-              <span className="text-brand" aria-hidden>●</span>
+              <span className="animate-pulse-glow" style={{ color: 'oklch(0.65 0.22 230)' }} aria-hidden>◆</span>
             </p>
           </div>
         </div>

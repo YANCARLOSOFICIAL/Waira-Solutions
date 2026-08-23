@@ -30,7 +30,7 @@ export function WhatsAppButton() {
                 {WAIRA.contact.whatsappMessage}
               </div>
               <p className="mt-2 text-xs text-muted-foreground">
-                {WAIRA.name} — {WAIRA.location.full}
+                {WAIRA.name} - {WAIRA.location.full}
               </p>
             </div>
             <div className="border-t border-border px-4 py-3">

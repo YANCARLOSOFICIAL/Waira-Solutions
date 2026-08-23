@@ -101,7 +101,7 @@ export default function OGImage() {
               lineHeight: 1.4,
             }}
           >
-            Software · IA · Cloud · Automatización
+            Software, IA, Cloud y Automatización
           </div>
 
           {/* Bottom badge */}

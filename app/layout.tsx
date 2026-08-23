@@ -1,18 +1,20 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono, Newsreader } from 'next/font/google'
+import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { LanguageProvider } from '@/components/providers/language-provider'
 import { WhatsAppButton } from '@/components/layout/whatsapp-button'
 import { WAIRA } from '@/lib/config'
 import './globals.css'
 
-const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
-const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] })
-const newsreader = Newsreader({
-  variable: '--font-newsreader',
+const spaceGrotesk = Space_Grotesk({
+  variable: '--font-space-grotesk',
   subsets: ['latin'],
-  style: ['normal', 'italic'],
+  weight: ['300', '400', '500', '600', '700'],
+})
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains-mono',
+  subsets: ['latin'],
   weight: ['400', '500', '600'],
 })
 
@@ -77,11 +79,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light dark',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f9f8f5' },
-    { media: '(prefers-color-scheme: dark)', color: '#232220' },
-  ],
+  colorScheme: 'dark',
+  themeColor: '#050c1a',
 }
 
 export default function RootLayout({
@@ -93,13 +92,13 @@ export default function RootLayout({
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} bg-background`}
+      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} dark bg-background`}
       data-scroll-behavior="smooth"
     >
       <body className="font-sans antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
         >

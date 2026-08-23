@@ -13,7 +13,7 @@ export const dictionary = {
       cta: 'Hablemos',
     },
     hero: {
-      eyebrow: 'Ingeniería · IA · Productos',
+      eyebrow: 'Ingeniería de Software e Inteligencia Artificial',
       titleLine1: 'Construimos la tecnología que',
       titleHighlight: 'resuelve',
       titleLine2: 'problemas reales',
@@ -109,7 +109,7 @@ export const dictionary = {
       items: [
         {
           icon: 'ChatCircle',
-          title: 'Guaca — Asistente educativo con IA',
+          title: 'Guaca: Asistente educativo con IA',
           text: 'Chatbot inteligente basado en RAG para instituciones educativas. Responde sobre programas, admisiones y servicios usando documentos institucionales. Soporta texto y voz.',
           tags: ['RAG', 'LLM', 'Educación', 'Voz'],
           badge: 'ready',
@@ -151,7 +151,7 @@ export const dictionary = {
       subtitle: 'Cada proyecto tiene un problema real detrás. Así los resolvimos.',
       items: [
         {
-          tag: 'Automatización · Finanzas',
+          tag: 'Automatización Financiera',
           problem: 'Una empresa necesitaba procesar cientos de facturas en PDF cada semana. El proceso manual tomaba horas y generaba errores.',
           solution: 'Construimos una API que lee facturas en cualquier formato, extrae los datos estructurados con IA y los entrega como JSON listo para integrar.',
           tech: ['FastAPI', 'GPT-4o', 'Python', 'Docker'],
@@ -159,7 +159,7 @@ export const dictionary = {
           result: 'Reducción del tiempo de procesamiento de horas a segundos. Datos precisos, sin intervención manual.',
         },
         {
-          tag: 'Educación',
+          tag: 'Educación Digital',
           problem: 'Docentes invertían horas creando exámenes, resúmenes y material educativo manualmente, sin herramientas de apoyo.',
           solution: 'Desarrollamos una plataforma que genera automáticamente exámenes, rúbricas, resúmenes y juegos educativos usando IA, con un sistema de créditos por institución.',
           tech: ['Next.js', 'FastAPI', 'PostgreSQL', 'OpenAI'],
@@ -167,7 +167,7 @@ export const dictionary = {
           result: 'Docentes crean material educativo en minutos en lugar de horas. Plataforma usada por múltiples instituciones.',
         },
         {
-          tag: 'Atención al usuario · IA',
+          tag: 'Atención al Usuario con IA',
           problem: 'Una universidad recibía cientos de consultas diarias sobre programas, admisiones y sedes. El equipo de atención no daba abasto.',
           solution: 'Implementamos Guaca, un chatbot con sistema RAG que consulta documentos institucionales oficiales y responde con precisión por texto y voz.',
           tech: ['Next.js', 'FastAPI', 'pgvector', 'Redis'],
@@ -330,7 +330,7 @@ export const dictionary = {
       cta: "Let's talk",
     },
     hero: {
-      eyebrow: 'Engineering · AI · Products',
+      eyebrow: 'Software Engineering & Artificial Intelligence',
       titleLine1: 'We build technology that',
       titleHighlight: 'solves',
       titleLine2: 'real problems',
@@ -426,7 +426,7 @@ export const dictionary = {
       items: [
         {
           icon: 'ChatCircle',
-          title: 'Guaca — AI Educational Assistant',
+          title: 'Guaca: AI Educational Assistant',
           text: 'A RAG-powered smart chatbot for educational institutions. Answers questions about programs, admissions and services using official documents. Supports text and voice.',
           tags: ['RAG', 'LLM', 'Education', 'Voice'],
           badge: 'ready',
@@ -468,7 +468,7 @@ export const dictionary = {
       subtitle: 'Every project has a real problem behind it. Here is how we solved them.',
       items: [
         {
-          tag: 'Automation · Finance',
+          tag: 'Financial Automation',
           problem: 'A company needed to process hundreds of PDF invoices every week. Manual processing took hours and caused errors.',
           solution: 'We built an API that reads invoices in any format, extracts structured data with AI and delivers clean JSON ready to integrate.',
           tech: ['FastAPI', 'GPT-4o', 'Python', 'Docker'],
@@ -476,7 +476,7 @@ export const dictionary = {
           result: 'Processing time reduced from hours to seconds. Accurate data, no manual intervention.',
         },
         {
-          tag: 'Education',
+          tag: 'Digital Education',
           problem: 'Teachers spent hours creating exams, summaries and educational materials manually without support tools.',
           solution: 'We developed a platform that automatically generates exams, rubrics, summaries and educational games using AI, with a per-institution credit system.',
           tech: ['Next.js', 'FastAPI', 'PostgreSQL', 'OpenAI'],
@@ -484,7 +484,7 @@ export const dictionary = {
           result: 'Teachers create educational material in minutes instead of hours. Platform used by multiple institutions.',
         },
         {
-          tag: 'User support · AI',
+          tag: 'AI User Support',
           problem: 'A university received hundreds of daily inquiries about programs, admissions and campuses. The support team was overwhelmed.',
           solution: 'We implemented Guaca, a RAG-powered chatbot that queries official institutional documents and responds accurately by text and voice.',
           tech: ['Next.js', 'FastAPI', 'pgvector', 'Redis'],
