@@ -8,14 +8,23 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main className="pt-28 pb-24 sm:pt-32">
+    <div className="pt-28 pb-24 sm:pt-36">
       <Container className="max-w-3xl">
-        <h1 className="font-heading text-3xl font-medium tracking-tight sm:text-4xl">
+        <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Términos y Condiciones
         </h1>
-        <p className="mt-3 text-sm text-muted-foreground">Última actualización: Julio 2026</p>
+        <p className="mt-3 font-mono text-xs text-muted-foreground/70 uppercase tracking-widest">
+          Última actualización: Julio 2026
+        </p>
 
-        <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-foreground [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-lg [&_h2]:font-medium [&_h2]:tracking-tight [&_h2]:text-foreground [&_p]:mb-4 [&_strong]:text-foreground">
+        <div
+          className="mt-10 rounded-2xl p-6 sm:p-10 space-y-8 text-sm leading-relaxed text-muted-foreground [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:font-heading [&_h2]:text-lg [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:text-foreground [&_p]:mb-3 [&_strong]:text-foreground [&_li]:text-foreground/80"
+          style={{
+            background: 'oklch(0.12 0.022 240 / 0.85)',
+            border: '1px solid oklch(0.65 0.22 230 / 0.18)',
+            boxShadow: '0 0 30px oklch(0 0 0 / 0.4)',
+          }}
+        >
           <section>
             <h2>1. Aceptación de los términos</h2>
             <p>
@@ -86,6 +95,6 @@ export default function TermsPage() {
           </section>
         </div>
       </Container>
-    </main>
+    </div>
   )
 }

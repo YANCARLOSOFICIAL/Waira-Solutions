@@ -13,7 +13,7 @@ export const dictionary = {
       cta: 'Hablemos',
     },
     hero: {
-      eyebrow: 'Ingeniería de Software e Inteligencia Artificial',
+      eyebrow: '',
       titleLine1: 'Construimos la tecnología que',
       titleHighlight: 'resuelve',
       titleLine2: 'problemas reales',
@@ -330,7 +330,7 @@ export const dictionary = {
       cta: "Let's talk",
     },
     hero: {
-      eyebrow: 'Software Engineering & Artificial Intelligence',
+      eyebrow: '',
       titleLine1: 'We build technology that',
       titleHighlight: 'solves',
       titleLine2: 'real problems',

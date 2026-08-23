@@ -45,16 +45,18 @@ export function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
           {/* ── Left: Copy & Main Value Prop ── */}
           <div className="flex flex-col items-start">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <span className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3.5 py-1.5 font-mono text-xs font-semibold tracking-[0.18em] text-brand uppercase backdrop-blur-md">
-                <span className="size-1.5 rounded-full bg-brand animate-pulse-glow" aria-hidden />
-                {t.hero.eyebrow}
-              </span>
-            </motion.div>
+            {t.hero.eyebrow ? (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <span className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3.5 py-1.5 font-mono text-xs font-semibold tracking-[0.18em] text-brand uppercase backdrop-blur-md">
+                  <span className="size-1.5 rounded-full bg-brand animate-pulse-glow" aria-hidden />
+                  {t.hero.eyebrow}
+                </span>
+              </motion.div>
+            ) : null}
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
