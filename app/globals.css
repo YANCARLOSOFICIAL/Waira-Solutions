@@ -68,82 +68,88 @@
   --radius-2xl: calc(var(--radius) + 6px);
   --radius-3xl: calc(var(--radius) + 8px);
 
-  --shadow-card: 0 1px 3px 0 rgba(0,0,0,0.4), 0 1px 2px -1px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03);
-  --shadow-card-hover: 0 4px 16px rgba(14, 165, 255, 0.12), 0 1px 3px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+  --shadow-card: 0 1px 3px 0 rgba(0,0,0,0.45), 0 1px 2px -1px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.03);
+  --shadow-card-hover: 0 6px 24px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
   --shadow-elevated: 0 8px 32px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.4);
   --shadow-dialog: 0 16px 64px rgba(0,0,0,0.7), 0 4px 16px rgba(0,0,0,0.5);
-  --shadow-neon: 0 0 20px rgba(14, 165, 255, 0.35), 0 0 60px rgba(14, 165, 255, 0.15);
-  --shadow-neon-cyan: 0 0 20px rgba(34, 211, 238, 0.35), 0 0 60px rgba(34, 211, 238, 0.15);
+  /* Warm amber glow — used with extreme restraint */
+  --shadow-neon: 0 0 24px rgba(226, 122, 52, 0.28), 0 0 64px rgba(226, 122, 52, 0.10);
+  --shadow-neon-cyan: 0 0 24px rgba(90, 190, 205, 0.24), 0 0 64px rgba(90, 190, 205, 0.10);
+
+  /* Wind — organic, physics-flavoured easings (Waira = viento) */
+  --ease-wind: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-gust: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-drift: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark Corporate Tech — Default (single dark theme) */
+/* Organic Tech — Waira (single dark theme, warm charcoal + amber DNA) */
 :root,
 .light,
 .dark {
   color-scheme: dark;
 
-  /* Base backgrounds — deep navy */
-  --background: oklch(0.09 0.025 240);
-  --foreground: oklch(0.94 0.01 220);
+  /* Base — warm charcoal, like dark editorial paper (hue ~65, near-zero chroma) */
+  --background: oklch(0.115 0.006 65);
+  --foreground: oklch(0.95 0.004 75);
 
-  --card: oklch(0.12 0.022 240);
-  --card-foreground: oklch(0.94 0.01 220);
+  --card: oklch(0.145 0.006 65);
+  --card-foreground: oklch(0.95 0.004 75);
 
-  --popover: oklch(0.13 0.022 240);
-  --popover-foreground: oklch(0.94 0.01 220);
+  --popover: oklch(0.155 0.006 65);
+  --popover-foreground: oklch(0.95 0.004 75);
 
-  --primary: oklch(0.65 0.22 230);
-  --primary-foreground: oklch(0.05 0.02 240);
+  /* Primary = Waira amber — the single deliberate accent (logo circuit trails) */
+  --primary: oklch(0.705 0.15 52);
+  --primary-foreground: oklch(0.17 0.03 52);
 
-  --secondary: oklch(0.15 0.025 240);
-  --secondary-foreground: oklch(0.82 0.015 220);
+  --secondary: oklch(0.17 0.006 65);
+  --secondary-foreground: oklch(0.82 0.005 72);
 
-  --muted: oklch(0.14 0.022 240);
-  --muted-foreground: oklch(0.55 0.02 230);
+  --muted: oklch(0.16 0.006 65);
+  --muted-foreground: oklch(0.635 0.008 68);
 
-  --accent: oklch(0.18 0.04 240);
-  --accent-foreground: oklch(0.88 0.05 220);
+  --accent: oklch(0.19 0.025 52);
+  --accent-foreground: oklch(0.88 0.03 65);
 
-  --destructive: oklch(0.62 0.22 25);
+  --destructive: oklch(0.62 0.2 25);
 
   --border: oklch(1 0 0 / 8%);
   --input: oklch(1 0 0 / 10%);
-  --ring: oklch(0.65 0.22 230);
+  --ring: oklch(0.705 0.15 52);
 
-  /* Brand — Electric Blue */
-  --brand: oklch(0.65 0.22 230);
-  /* Brand 2 — Cyan */
-  --brand-2: oklch(0.78 0.18 195);
-  --brand-glow: oklch(0.65 0.22 230 / 0.18);
-  --success: oklch(0.72 0.18 150);
-  --warning: oklch(0.78 0.18 75);
-  --info: oklch(0.65 0.22 230);
+  /* Brand — amber primary + teal secondary, straight from the Waira panther logo */
+  --brand: oklch(0.705 0.15 52);
+  --brand-2: oklch(0.74 0.09 205);
+  --brand-glow: oklch(0.705 0.15 52 / 0.16);
+  --success: oklch(0.72 0.15 150);
+  --warning: oklch(0.78 0.16 75);
+  --info: oklch(0.74 0.09 205);
 
-  --surface-1: oklch(0.11 0.022 240);
-  --surface-2: oklch(0.14 0.025 240);
+  --surface-1: oklch(0.135 0.006 65);
+  --surface-2: oklch(0.165 0.007 65);
 
-  /* Cyber-specific tokens */
-  --cyber-glow: oklch(0.65 0.22 230 / 0.25);
-  --neon-cyan: oklch(0.78 0.18 195);
-  --neon-green: oklch(0.75 0.2 150);
-  --circuit-line: oklch(0.65 0.22 230 / 0.12);
-  --glass-border: oklch(1 0 0 / 10%);
+  /* Organic-tech tokens (formerly "cyber") */
+  --cyber-glow: oklch(0.705 0.15 52 / 0.2);
+  --neon-cyan: oklch(0.74 0.09 205);
+  --neon-green: oklch(0.72 0.14 150);
+  --circuit-line: oklch(0.705 0.15 52 / 0.1);
+  --glass-border: oklch(1 0 0 / 9%);
 
-  /* Pastel overrides → neon dark equivalents */
-  --pastel-blue-bg: oklch(0.18 0.06 230);
-  --pastel-blue-fg: oklch(0.72 0.18 230);
-  --pastel-coral-bg: oklch(0.18 0.06 30);
-  --pastel-coral-fg: oklch(0.72 0.18 30);
-  --pastel-green-bg: oklch(0.16 0.06 150);
-  --pastel-green-fg: oklch(0.72 0.18 150);
-  --pastel-yellow-bg: oklch(0.18 0.06 80);
-  --pastel-yellow-fg: oklch(0.78 0.18 80);
+  /* Pastel overrides → warm dark equivalents */
+  --pastel-blue-bg: oklch(0.18 0.05 205);
+  --pastel-blue-fg: oklch(0.74 0.1 205);
+  --pastel-coral-bg: oklch(0.19 0.06 40);
+  --pastel-coral-fg: oklch(0.74 0.15 45);
+  --pastel-green-bg: oklch(0.16 0.05 150);
+  --pastel-green-fg: oklch(0.72 0.15 150);
+  --pastel-yellow-bg: oklch(0.19 0.06 75);
+  --pastel-yellow-fg: oklch(0.8 0.16 75);
 
-  --chart-1: oklch(0.65 0.22 230);
-  --chart-2: oklch(0.78 0.18 195);
-  --chart-3: oklch(0.72 0.18 150);
-  --chart-4: oklch(0.78 0.18 75);
-  --chart-5: oklch(0.65 0.18 280);
+  --chart-1: oklch(0.705 0.15 52);
+  --chart-2: oklch(0.74 0.09 205);
+  --chart-3: oklch(0.72 0.15 150);
+  --chart-4: oklch(0.8 0.16 75);
+  --chart-5: oklch(0.6 0.13 25);
 
   --radius: 0.625rem;
 }
@@ -162,8 +168,8 @@
     scroll-behavior: smooth;
   }
   ::selection {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    background-color: oklch(0.705 0.15 52 / 0.28);
+    color: oklch(0.98 0.01 75);
   }
 }
 
@@ -174,42 +180,42 @@
   /* Circuit board grid pattern */
   .bg-grid {
     background-image:
-      linear-gradient(to right, oklch(0.65 0.22 230 / 0.07) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0.65 0.22 230 / 0.07) 1px, transparent 1px);
+      linear-gradient(to right, oklch(0.705 0.15 52 / 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.705 0.15 52 / 0.07) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 
   .bg-grid-dense {
     background-image:
-      linear-gradient(to right, oklch(0.65 0.22 230 / 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0.65 0.22 230 / 0.06) 1px, transparent 1px);
+      linear-gradient(to right, oklch(0.705 0.15 52 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.705 0.15 52 / 0.06) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
   .bg-dot {
-    background-image: radial-gradient(circle, oklch(0.65 0.22 230 / 0.15) 1px, transparent 1px);
+    background-image: radial-gradient(circle, oklch(0.705 0.15 52 / 0.15) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
   /* Circuit board with nodes */
   .bg-circuit {
     background-image:
-      linear-gradient(to right, oklch(0.65 0.22 230 / 0.08) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0.65 0.22 230 / 0.08) 1px, transparent 1px),
-      radial-gradient(circle, oklch(0.65 0.22 230 / 0.2) 1.5px, transparent 1.5px);
+      linear-gradient(to right, oklch(0.705 0.15 52 / 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.705 0.15 52 / 0.08) 1px, transparent 1px),
+      radial-gradient(circle, oklch(0.705 0.15 52 / 0.2) 1.5px, transparent 1.5px);
     background-size: 48px 48px, 48px 48px, 48px 48px;
     background-position: 0 0, 0 0, 24px 24px;
   }
 
   /* Glass effects */
   .glass {
-    background-color: oklch(0.09 0.025 240 / 0.85);
+    background-color: oklch(0.115 0.006 65 / 0.85);
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
   }
 
   .glass-card {
-    background-color: oklch(0.12 0.022 240 / 0.7);
+    background-color: oklch(0.145 0.006 65 / 0.7);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid oklch(1 0 0 / 8%);
@@ -217,33 +223,33 @@
   }
 
   .glass-strong {
-    background-color: oklch(0.09 0.025 240 / 0.92);
+    background-color: oklch(0.115 0.006 65 / 0.92);
     backdrop-filter: blur(24px) saturate(200%);
     -webkit-backdrop-filter: blur(24px) saturate(200%);
   }
 
   /* Neon glow borders */
   .border-neon {
-    border-color: oklch(0.65 0.22 230 / 0.35);
-    box-shadow: 0 0 0 1px oklch(0.65 0.22 230 / 0.1), inset 0 0 0 1px oklch(0.65 0.22 230 / 0.05);
+    border-color: oklch(0.705 0.15 52 / 0.35);
+    box-shadow: 0 0 0 1px oklch(0.705 0.15 52 / 0.1), inset 0 0 0 1px oklch(0.705 0.15 52 / 0.05);
   }
 
   .border-neon-cyan {
-    border-color: oklch(0.78 0.18 195 / 0.35);
-    box-shadow: 0 0 0 1px oklch(0.78 0.18 195 / 0.1);
+    border-color: oklch(0.74 0.09 205 / 0.35);
+    box-shadow: 0 0 0 1px oklch(0.74 0.09 205 / 0.1);
   }
 
   /* Neon glow on hover for cards */
   .card-cyber {
     border: 1px solid oklch(1 0 0 / 8%);
-    background: oklch(0.12 0.022 240 / 0.8);
+    background: oklch(0.145 0.006 65 / 0.8);
     transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   }
 
   .card-cyber:hover {
-    border-color: oklch(0.65 0.22 230 / 0.4);
-    box-shadow: 0 0 24px oklch(0.65 0.22 230 / 0.1), 0 4px 16px oklch(0 0 0 / 0.4), inset 0 1px 0 oklch(1 0 0 / 0.06);
-    background: oklch(0.13 0.024 240 / 0.9);
+    border-color: oklch(0.705 0.15 52 / 0.4);
+    box-shadow: 0 0 24px oklch(0.705 0.15 52 / 0.1), 0 4px 16px oklch(0 0 0 / 0.4), inset 0 1px 0 oklch(1 0 0 / 0.06);
+    background: oklch(0.15 0.006 65 / 0.9);
   }
 
   /* Animated gradient border */
@@ -255,7 +261,7 @@
     position: absolute;
     inset: -1px;
     border-radius: inherit;
-    background: linear-gradient(135deg, oklch(0.65 0.22 230 / 0.6), transparent 40%, oklch(0.78 0.18 195 / 0.4) 60%, transparent);
+    background: linear-gradient(135deg, oklch(0.705 0.15 52 / 0.6), transparent 40%, oklch(0.74 0.09 205 / 0.4) 60%, transparent);
     z-index: -1;
     animation: border-rotate 4s linear infinite;
     background-size: 200% 200%;
@@ -263,13 +269,13 @@
 
   /* Neon accent text */
   .text-neon {
-    color: oklch(0.65 0.22 230);
-    text-shadow: 0 0 20px oklch(0.65 0.22 230 / 0.6);
+    color: oklch(0.705 0.15 52);
+    text-shadow: 0 0 20px oklch(0.705 0.15 52 / 0.6);
   }
 
   .text-neon-cyan {
-    color: oklch(0.78 0.18 195);
-    text-shadow: 0 0 20px oklch(0.78 0.18 195 / 0.5);
+    color: oklch(0.74 0.09 205);
+    text-shadow: 0 0 20px oklch(0.74 0.09 205 / 0.5);
   }
 
   /* Mask utilities */
@@ -368,7 +374,7 @@
     100% { background-position: -200% 0; }
   }
   .animate-shimmer {
-    background: linear-gradient(90deg, transparent, oklch(0.65 0.22 230 / 0.12), transparent);
+    background: linear-gradient(90deg, transparent, oklch(0.705 0.15 52 / 0.12), transparent);
     background-size: 200% 100%;
     animation: shimmer 3s ease-in-out infinite;
   }
@@ -429,11 +435,52 @@
   @keyframes line-dash {
     to { stroke-dashoffset: -200; }
   }
+
+  /* ─── Waira: textura editorial + interacciones de viento ─── */
+
+  /* Grano/ruido apenas perceptible — rompe el "plástico digital" */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 140px 140px;
+  }
+
+  /* Hover elástico — el elemento cede como empujado por una brisa */
+  .wind-hover {
+    transition: transform 0.5s var(--ease-gust), border-color 0.4s var(--ease-wind),
+      background-color 0.4s var(--ease-wind), box-shadow 0.4s var(--ease-wind);
+    will-change: transform;
+  }
+  .wind-hover:hover {
+    transform: translateY(-3px);
+  }
+
+  /* Deriva orgánica para líneas SVG de flujo de aire */
+  @keyframes breeze-sway {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(6px, -4px, 0); }
+  }
+  .animate-breeze {
+    animation: breeze-sway 9s var(--ease-wind) infinite;
+  }
+  .animate-breeze-slow {
+    animation: breeze-sway 14s var(--ease-wind) infinite;
+  }
+
+  .animate-flow-line {
+    stroke-dasharray: 10 200;
+    animation: line-dash 7s linear infinite;
+  }
 }
 
 /* Scrollbar — minimal style */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-track { background: oklch(0.1 0.005 65); }
 ::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.1);
   border-radius: 2px;

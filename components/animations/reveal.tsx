@@ -1,27 +1,48 @@
 'use client'
 
-import { motion, type Variants } from 'framer-motion'
+import { motion, useReducedMotion, type Transition, type Variants } from 'framer-motion'
 import type { ReactNode } from 'react'
 
 type Direction = 'up' | 'down' | 'left' | 'right' | 'none'
 
-const offset = 24
+const offset = 28
 
-function getVariants(direction: Direction): Variants {
+/**
+ * Movimiento "viento" (Waira): en vez de un fade lineal, los elementos entran
+ * con una física de resorte suave y una leve deriva lateral, como empujados
+ * por una brisa. Respeta prefers-reduced-motion.
+ */
+const windSpring: Transition = {
+  type: 'spring',
+  stiffness: 120,
+  damping: 20,
+  mass: 0.9,
+}
+
+function getVariants(direction: Direction, reduce: boolean): Variants {
   const map: Record<Direction, { x?: number; y?: number }> = {
-    up: { y: offset },
-    down: { y: -offset },
+    up: { y: offset, x: 4 },
+    down: { y: -offset, x: -4 },
     left: { x: offset },
     right: { x: -offset },
     none: {},
   }
+
+  if (reduce) {
+    return {
+      hidden: { opacity: 0 },
+      visible: { opacity: 1, transition: { duration: 0.2 } },
+    }
+  }
+
   return {
-    hidden: { opacity: 0, ...map[direction] },
+    hidden: { opacity: 0, filter: 'blur(6px)', ...map[direction] },
     visible: {
       opacity: 1,
+      filter: 'blur(0px)',
       x: 0,
       y: 0,
-      transition: { duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] },
+      transition: windSpring,
     },
   }
 }
@@ -43,11 +64,12 @@ export function Reveal({
   once = true,
   as = 'div',
 }: RevealProps) {
+  const reduce = useReducedMotion() ?? false
   const MotionTag = motion[as]
   return (
     <MotionTag
       className={className}
-      variants={getVariants(direction)}
+      variants={getVariants(direction, reduce)}
       initial="hidden"
       whileInView="visible"
       viewport={{ once, margin: '-80px' }}
@@ -60,12 +82,7 @@ export function Reveal({
 
 const containerVariants: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
-}
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98] } },
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.04 } },
 }
 
 export function StaggerGroup({
@@ -99,7 +116,20 @@ export function StaggerItem({
   className?: string
   as?: 'div' | 'li' | 'article'
 }) {
+  const reduce = useReducedMotion() ?? false
   const MotionTag = motion[as]
+  const itemVariants: Variants = reduce
+    ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.2 } } }
+    : {
+        hidden: { opacity: 0, y: 22, x: 3, filter: 'blur(5px)' },
+        visible: {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          filter: 'blur(0px)',
+          transition: { type: 'spring', stiffness: 130, damping: 21, mass: 0.85 },
+        },
+      }
   return (
     <MotionTag className={className} variants={itemVariants}>
       {children}

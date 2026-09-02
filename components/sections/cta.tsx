@@ -1,6 +1,7 @@
 'use client'
 
 import { ArrowRight, CalendarBlank } from '@phosphor-icons/react'
+import Image from 'next/image'
 import { Container } from '@/components/ui/container'
 import { Reveal } from '@/components/animations/reveal'
 import { useLanguage } from '@/components/providers/language-provider'
@@ -11,71 +12,88 @@ export function CTA() {
 
   return (
     <section className="relative py-24 sm:py-32">
-      <div className="absolute inset-x-0 top-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, oklch(0.65 0.22 230 / 0.3), transparent)' }} aria-hidden />
+      <div className="absolute inset-x-0 top-0 h-px bg-white/10" aria-hidden />
 
       <Container>
         <Reveal>
-          <div
-            className="relative overflow-hidden rounded-2xl px-6 py-16 text-center sm:px-12 sm:py-20"
-            style={{
-              background: 'oklch(0.11 0.022 240 / 0.95)',
-              border: '1px solid oklch(0.65 0.22 230 / 0.25)',
-              boxShadow: '0 0 50px oklch(0.65 0.22 230 / 0.1), inset 0 1px 0 oklch(1 0 0 / 0.08)',
-            }}
-          >
-            {/* Scan line effect */}
+          <figure className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0c0b0a] px-6 py-16 text-center sm:px-12 sm:py-24">
+            {/* Popayán — el Morro de Tulcán sobre los tejados */}
+            <Image
+              src="/photos/popayan-morro-tulcan.jpg"
+              alt="Popayán, Cauca — el Morro de Tulcán sobre el centro histórico"
+              fill
+              sizes="(max-width: 1024px) 100vw, 1200px"
+              className="object-cover object-center opacity-[0.5] saturate-[0.8] contrast-[1.05]"
+            />
             <div
-              className="pointer-events-none absolute inset-x-0 top-0 h-px animate-cyber-scan"
-              style={{ background: 'linear-gradient(90deg, transparent, oklch(0.65 0.22 230 / 0.8), transparent)' }}
               aria-hidden
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  'radial-gradient(130% 130% at 50% 42%, oklch(0.09 0.005 65 / 0.5), oklch(0.09 0.005 65 / 0.9))',
+              }}
             />
 
-            {/* Circuit background pattern */}
-            <div className="bg-circuit pointer-events-none absolute inset-0 opacity-40 mask-fade-b" aria-hidden />
-
-            {/* Glow blobs */}
-            <div
-              className="pointer-events-none absolute -top-40 -right-40 size-[400px] rounded-full"
-              style={{ background: 'radial-gradient(circle, oklch(0.65 0.22 230 / 0.15) 0%, transparent 70%)', filter: 'blur(60px)' }}
+            {/* Corrientes de aire — flujo asimétrico */}
+            <svg
               aria-hidden
-            />
-            <div
-              className="pointer-events-none absolute -bottom-40 -left-40 size-[350px] rounded-full"
-              style={{ background: 'radial-gradient(circle, oklch(0.78 0.18 195 / 0.12) 0%, transparent 70%)', filter: 'blur(60px)' }}
-              aria-hidden
-            />
+              className="animate-breeze-slow pointer-events-none absolute inset-0 h-full w-full opacity-40"
+              viewBox="0 0 1200 400"
+              fill="none"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M-20 240 C 240 140, 420 320, 660 220 S 1060 60, 1240 180"
+                stroke="var(--brand)"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                className="animate-flow-line"
+              />
+              <path
+                d="M-20 280 C 260 220, 460 360, 720 260 S 1080 120, 1240 220"
+                stroke="var(--circuit-line)"
+                strokeWidth="1"
+              />
+              <path
+                d="M-20 190 C 300 120, 520 260, 780 180 S 1120 60, 1240 130"
+                stroke="var(--circuit-line)"
+                strokeWidth="1"
+              />
+            </svg>
 
             <div className="relative z-10 mx-auto max-w-2xl">
-              <span className="inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/8 px-3.5 py-1.5 font-mono text-xs font-semibold tracking-[0.18em] text-brand uppercase">
-                <span className="size-1.5 rounded-full bg-brand animate-pulse-glow" aria-hidden />
+              <span className="inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                <span className="h-px w-8 bg-brand" aria-hidden />
                 Transformación Digital
               </span>
 
-              <h2 className="mt-5 text-balance font-heading text-3xl font-bold tracking-tight sm:text-4xl md:text-[2.75rem]">
+              <h2 className="mt-6 text-balance font-heading text-3xl font-bold leading-[1.05] tracking-[-0.02em] sm:text-4xl md:text-5xl">
                 {cta.title}
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-pretty leading-relaxed text-muted-foreground sm:text-lg">
+              <p className="mx-auto mt-5 max-w-xl text-pretty leading-relaxed text-muted-foreground sm:text-lg">
                 {cta.subtitle}
               </p>
-              <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <a
                   href="#contacto"
-                  className="group relative inline-flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-md px-8 text-sm font-bold text-[oklch(0.05_0.02_240)] transition-all duration-300 hover:shadow-[0_0_28px_oklch(0.65_0.22_230_/_0.5)] active:scale-[0.98] sm:w-auto"
-                  style={{ background: 'linear-gradient(135deg, oklch(0.65 0.22 230) 0%, oklch(0.78 0.18 195) 100%)' }}
+                  className="wind-hover group inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-primary px-8 text-sm font-bold text-primary-foreground hover:bg-primary/90 sm:w-auto"
                 >
-                  <span className="relative z-10">{cta.primary}</span>
-                  <ArrowRight className="relative z-10 size-4 transition-transform group-hover:translate-x-1" />
+                  <span>{cta.primary}</span>
+                  <ArrowRight
+                    weight="bold"
+                    className="size-4 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-1"
+                  />
                 </a>
                 <a
                   href="#contacto"
-                  className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-md border border-brand/30 bg-brand/5 px-8 text-sm font-semibold text-foreground transition-all duration-200 hover:border-brand/50 hover:bg-brand/10 hover:text-brand sm:w-auto"
+                  className="wind-hover inline-flex h-12 w-full items-center justify-center gap-2 rounded-md border border-white/15 bg-transparent px-8 text-sm font-semibold text-foreground hover:border-white/30 hover:bg-white/5 sm:w-auto"
                 >
-                  <CalendarBlank className="size-4" />
+                  <CalendarBlank className="size-4" aria-hidden />
                   {cta.secondary}
                 </a>
               </div>
             </div>
-          </div>
+          </figure>
         </Reveal>
       </Container>
     </section>

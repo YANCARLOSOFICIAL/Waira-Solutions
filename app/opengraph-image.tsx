@@ -76,7 +76,7 @@ export default function OGImage() {
                 }}
               >
                 Waira
-                <span style={{ color: '#3E6E8E' }}>.</span>
+                <span style={{ color: '#B5551F' }}>.</span>
               </span>
               <span
                 style={{
@@ -110,15 +110,15 @@ export default function OGImage() {
               display: 'flex',
               alignItems: 'center',
               gap: 8,
-              background: '#E4EEF3',
-              border: '1px solid #CFE0E8',
+              background: '#F4E4D8',
+              border: '1px solid #E6C8B4',
               borderRadius: 999,
               padding: '8px 24px',
-              color: '#3E6E8E',
+              color: '#B5551F',
               fontSize: 18,
             }}
           >
-            🇨🇴 Popayán, Colombia — Transformación Digital
+            Popayán, Colombia — Transformación Digital
           </div>
         </div>
       </div>

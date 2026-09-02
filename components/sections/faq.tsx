@@ -15,24 +15,16 @@ export function FAQ() {
 
   return (
     <section id="faq" className="relative scroll-mt-20 py-24 sm:py-32">
-      <div className="absolute inset-x-0 top-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, oklch(0.65 0.22 230 / 0.3), transparent)' }} aria-hidden />
+      <div className="absolute inset-x-0 top-0 h-px bg-white/10" aria-hidden />
 
       <Container className="max-w-3xl">
         <SectionHeading eyebrow={faq.eyebrow} title={faq.title} align="center" />
 
-        <div className="mt-12 space-y-3">
+        <div className="mt-12 divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10">
           {faq.items.map((item, i) => {
             const isOpen = open === i
             return (
-              <div
-                key={i}
-                className="overflow-hidden rounded-xl transition-all duration-300"
-                style={{
-                  background: isOpen ? 'oklch(0.13 0.025 240 / 0.9)' : 'oklch(0.11 0.022 240 / 0.7)',
-                  border: isOpen ? '1px solid oklch(0.65 0.22 230 / 0.3)' : '1px solid oklch(1 0 0 / 0.07)',
-                  boxShadow: isOpen ? '0 0 20px oklch(0.65 0.22 230 / 0.08)' : 'none',
-                }}
-              >
+              <div key={i} className={cn('bg-card transition-colors duration-300', isOpen && 'bg-white/[0.03]')}>
                 <button
                   type="button"
                   aria-expanded={isOpen}
@@ -44,12 +36,12 @@ export function FAQ() {
                 >
                   <span className="flex-1 font-heading">{item.q}</span>
                   <span
-                    className="flex size-7 shrink-0 items-center justify-center rounded-md border transition-all"
-                    style={{
-                      borderColor: isOpen ? 'oklch(0.65 0.22 230 / 0.4)' : 'oklch(1 0 0 / 0.1)',
-                      color: isOpen ? 'oklch(0.65 0.22 230)' : 'oklch(0.55 0.02 230)',
-                      background: isOpen ? 'oklch(0.65 0.22 230 / 0.1)' : 'transparent',
-                    }}
+                    className={cn(
+                      'flex size-7 shrink-0 items-center justify-center rounded-md border transition-colors duration-300',
+                      isOpen
+                        ? 'border-brand/40 bg-brand/10 text-brand'
+                        : 'border-white/10 text-muted-foreground',
+                    )}
                   >
                     {isOpen ? <Minus className="size-4" /> : <Plus className="size-4" />}
                   </span>
@@ -61,12 +53,10 @@ export function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <p className="px-5 pb-5 text-sm leading-relaxed text-muted-foreground">
-                        {item.a}
-                      </p>
+                      <p className="px-5 pb-5 text-sm leading-relaxed text-muted-foreground">{item.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

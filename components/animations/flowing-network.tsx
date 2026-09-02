@@ -111,7 +111,7 @@ export function FlowingNetwork() {
             ctx.beginPath()
             ctx.moveTo(nodes[i].x, nodes[i].y)
             ctx.lineTo(nodes[j].x, nodes[j].y)
-            ctx.strokeStyle = `oklch(0.52 0.14 240 / ${alpha})`
+            ctx.strokeStyle = `oklch(0.5 0.06 60 / ${alpha})`
             ctx.lineWidth = 0.5
             ctx.stroke()
           }
@@ -123,13 +123,13 @@ export function FlowingNetwork() {
         if (dmDist < 150) {
           ctx.beginPath()
           ctx.arc(nodes[i].x, nodes[i].y, 4, 0, Math.PI * 2)
-          ctx.fillStyle = `oklch(0.52 0.14 240 / ${(1 - dmDist / 150) * 0.8})`
+          ctx.fillStyle = `oklch(0.5 0.06 60 / ${(1 - dmDist / 150) * 0.8})`
           ctx.fill()
         }
 
         ctx.beginPath()
         ctx.arc(nodes[i].x, nodes[i].y, nodes[i].radius, 0, Math.PI * 2)
-        ctx.fillStyle = 'oklch(0.52 0.14 240 / 0.35)'
+        ctx.fillStyle = 'oklch(0.5 0.06 60 / 0.35)'
         ctx.fill()
       }
 

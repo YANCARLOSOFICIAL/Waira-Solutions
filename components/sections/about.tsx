@@ -1,103 +1,140 @@
 'use client'
 
-import { Compass, Heart, Rocket, ShieldCheck, Target } from '@phosphor-icons/react'
 import Image from 'next/image'
-import { Container } from '@/components/ui/container'
-import { StaggerGroup, StaggerItem } from '@/components/animations/reveal'
 import { useLanguage } from '@/components/providers/language-provider'
-
-const valueIcons = [Rocket, ShieldCheck, Heart, Target]
-
-const VALUE_COLORS = [
-  { bg: 'rgba(255,255,255,0.05)', fg: '#fff', glow: 'transparent' },
-  { bg: 'rgba(255,255,255,0.05)', fg: '#fff', glow: 'transparent' },
-  { bg: 'rgba(255,255,255,0.05)', fg: '#fff', glow: 'transparent' },
-  { bg: 'rgba(255,255,255,0.05)', fg: '#fff', glow: 'transparent' },
-]
+import { Container } from '@/components/ui/container'
+import { EditorialImage } from '@/components/ui/editorial-image'
+import { Reveal, StaggerGroup, StaggerItem } from '@/components/animations/reveal'
 
 export function About() {
   const { t } = useLanguage()
 
+  const pillars = [
+    { label: t.about.mission.title, text: t.about.mission.text },
+    { label: t.about.vision.title, text: t.about.vision.text },
+  ]
+
   return (
-    <section id="nosotros" className="relative scroll-mt-20 py-24 sm:py-28 bg-[#050505]">
-      {/* Section separator */}
+    <section id="nosotros" className="relative scroll-mt-20 bg-background py-24 sm:py-32">
       <div className="absolute inset-x-0 top-0 h-px bg-white/10" aria-hidden />
 
       <Container>
-        <div className="grid items-start gap-14 lg:grid-cols-[1fr_1.1fr]">
-          {/* Left col */}
-          <div className="relative flex flex-col gap-6">
-            <div className="inline-flex items-center gap-2 self-start rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-foreground/80 backdrop-blur-md">
-              <span className="text-sm">🇨🇴</span> Orgullosamente desde Colombia
-            </div>
+        {/* ── Encabezado asimétrico ── */}
+        <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+          <div className="flex flex-col">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                <span className="size-1 rounded-full bg-brand" aria-hidden />
+                {t.about.eyebrow} · Popayán y Mocoa, Colombia
+              </span>
+            </Reveal>
 
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-balance sm:text-4xl md:text-[2.75rem]">
-              {t.about.title}
-            </h2>
+            <Reveal delay={0.06}>
+              <h2 className="mt-6 max-w-[16ch] font-heading text-4xl font-bold leading-[1.03] tracking-[-0.02em] text-balance sm:text-5xl lg:text-[3.6rem]">
+                {t.about.title}
+              </h2>
+            </Reveal>
 
-            <p className="max-w-lg text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg">
-              {t.about.description}
-            </p>
+            <Reveal delay={0.12}>
+              <p className="mt-7 max-w-xl text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg">
+                {t.about.description}
+              </p>
+            </Reveal>
 
-            {/* Mission / Vision panels */}
-            <div className="mt-2 grid gap-4 sm:grid-cols-2">
-              <div className="group relative flex h-full flex-col gap-3 overflow-hidden rounded-xl p-6 transition-all duration-200 bg-[#111] border border-white/10 hover:border-white/20">
-                <span className="flex size-9 items-center justify-center rounded-lg bg-white/10">
-                  <Target weight="bold" className="size-4.5 text-white" />
-                </span>
-                <div>
-                  <h3 className="font-heading text-base font-bold">{t.about.mission.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{t.about.mission.text}</p>
-                </div>
-              </div>
-
-              <div className="group relative flex h-full flex-col gap-3 overflow-hidden rounded-xl p-6 transition-all duration-200 bg-[#111] border border-white/10 hover:border-white/20">
-                <span className="flex size-9 items-center justify-center rounded-lg bg-white/10">
-                  <Compass weight="bold" className="size-4.5 text-white" />
-                </span>
-                <div>
-                  <h3 className="font-heading text-base font-bold">{t.about.vision.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{t.about.vision.text}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right col — values grid */}
-          <StaggerGroup className="grid grid-cols-2 gap-4">
-            {t.about.values.map((value, i) => {
-              const Icon = valueIcons[i % valueIcons.length]
-              const colors = VALUE_COLORS[i % VALUE_COLORS.length]
-              return (
-                <StaggerItem key={value.title} as="div">
-                  <div className="group flex h-full flex-col rounded-xl p-6 transition-all duration-200 bg-[#111] border border-white/10 hover:border-white/20 cursor-default">
-                    <span
-                      className="flex size-10 items-center justify-center rounded-lg transition-all duration-300"
-                      style={{ background: colors.bg }}
-                    >
-                      <Icon weight="bold" className="size-5" style={{ color: colors.fg }} />
+            {/* Enfoque / Dirección — lista editorial con filetes */}
+            <StaggerGroup className="mt-10 flex flex-col divide-y divide-white/10 border-y border-white/10">
+              {pillars.map((p) => (
+                <StaggerItem key={p.label}>
+                  <div className="grid gap-2 py-5 sm:grid-cols-[9rem_1fr] sm:gap-6">
+                    <span className="font-mono text-xs uppercase tracking-[0.2em] text-brand/90">
+                      {p.label}
                     </span>
-                    <h4 className="mt-4 font-heading text-base font-bold">{value.title}</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{value.text}</p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{p.text}</p>
                   </div>
                 </StaggerItem>
-              )
-            })}
-          </StaggerGroup>
+              ))}
+            </StaggerGroup>
+          </div>
+
+          {/* Fotografía editorial — las dos ciudades donde está Waira */}
+          <Reveal delay={0.1} className="flex flex-col gap-4 lg:pt-10">
+            <EditorialImage
+              src="/photos/popayan-atardecer.jpg"
+              alt="Atardecer sobre Popayán, Cauca"
+              caption="Popayán, Cauca"
+              className="aspect-[4/3] w-full"
+              sizes="(max-width: 1024px) 90vw, 34vw"
+            />
+            <EditorialImage
+              src="/photos/mocoa-green-hills.jpg"
+              alt="Piedemonte andino-amazónico en Mocoa, Putumayo"
+              caption="Mocoa, Putumayo — puerta de la Amazonía"
+              className="aspect-[4/3] w-full"
+              sizes="(max-width: 1024px) 90vw, 34vw"
+            />
+          </Reveal>
         </div>
 
-        {/* 3D Logo Integration */}
-        <div className="mt-20 flex justify-center opacity-80 mix-blend-screen transition-opacity hover:opacity-100">
-          <div className="relative size-40 sm:size-64 overflow-hidden rounded-full animate-float">
+        {/* ── Valores — tira horizontal, hover de brisa ── */}
+        <StaggerGroup className="mt-20 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+          {t.about.values.map((value, i) => (
+            <StaggerItem key={value.title}>
+              <div className="wind-hover flex h-full flex-col bg-card p-6">
+                <span className="font-mono text-xs text-muted-foreground/60">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="mt-4 font-heading text-lg font-bold">{value.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{value.text}</p>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerGroup>
+
+        {/* ── Banda "viento" — tipografía gigante, sin gráfico 3D genérico ── */}
+        <Reveal className="mt-24">
+          <figure className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0c0b0a] px-6 py-20 text-center sm:py-28">
+            {/* Amanecer con niebla sobre Popayán — el "viento" hecho imagen */}
             <Image
-              src="/waira 3d logo.png"
-              alt="Waira Solutions 3D Logo"
+              src="/photos/popayan-amanecer.jpg"
+              alt="Amanecer con niebla sobre Popayán"
               fill
-              className="object-contain"
-              sizes="(max-width: 768px) 160px, 256px"
+              sizes="(max-width: 1024px) 100vw, 1200px"
+              className="object-cover object-center opacity-[0.5] saturate-[0.85] contrast-[1.05]"
             />
-          </div>
-        </div>
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  'radial-gradient(130% 130% at 50% 50%, oklch(0.09 0.005 65 / 0.45), oklch(0.09 0.005 65 / 0.86))',
+              }}
+            />
+            <svg
+              aria-hidden
+              className="animate-breeze-slow pointer-events-none absolute inset-x-0 top-1/2 h-32 w-full -translate-y-1/2 opacity-40"
+              viewBox="0 0 1200 200"
+              fill="none"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M-20 120 C 220 40, 420 180, 660 100 S 1060 20, 1240 90"
+                stroke="var(--brand)"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                className="animate-flow-line"
+              />
+              <path
+                d="M-20 150 C 260 110, 440 190, 700 130 S 1080 70, 1240 120"
+                stroke="var(--circuit-line)"
+                strokeWidth="1"
+              />
+            </svg>
+            <p className="relative font-heading text-3xl font-bold leading-tight tracking-[-0.02em] text-balance sm:text-4xl lg:text-5xl">
+              Waira significa <span className="text-brand">viento</span>.
+              <br className="hidden sm:block" /> Movimiento, flujo, evolución constante.
+            </p>
+          </figure>
+        </Reveal>
       </Container>
     </section>
   )

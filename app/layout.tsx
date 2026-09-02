@@ -46,6 +46,8 @@ export const metadata: Metadata = {
     'Colombia',
     'Popayán',
     'Cauca',
+    'Mocoa',
+    'Putumayo',
   ],
   authors: [{ name: WAIRA.name }],
   creator: WAIRA.name,
@@ -87,7 +89,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'dark',
-  themeColor: '#050c1a',
+  themeColor: '#161311',
 }
 
 export default function RootLayout({
@@ -113,6 +115,8 @@ export default function RootLayout({
             {children}
             <WhatsAppButton />
           </LanguageProvider>
+          {/* Textura editorial — grano sutil sobre todo el lienzo (Waira ADN) */}
+          <div className="grain-overlay" aria-hidden />
         </ThemeProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

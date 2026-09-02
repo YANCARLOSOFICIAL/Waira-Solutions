@@ -10,84 +10,64 @@ export function Cases() {
   const { t } = useLanguage()
 
   return (
-    <section id="casos" className="relative scroll-mt-20 py-24 sm:py-28">
-      <div className="absolute inset-x-0 top-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, oklch(0.65 0.22 230 / 0.3), transparent)' }} aria-hidden />
+    <section id="casos" className="relative scroll-mt-20 bg-background py-24 sm:py-32">
+      <div className="absolute inset-x-0 top-0 h-px bg-white/10" aria-hidden />
       <Container>
         <SectionHeading eyebrow={t.cases.eyebrow} title={t.cases.title} subtitle={t.cases.subtitle} />
 
-        <StaggerGroup className="mt-14 grid gap-6 lg:grid-cols-3">
+        <StaggerGroup className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 lg:grid-cols-3">
           {t.cases.items.map((item) => (
             <StaggerItem key={item.tag} as="article" className="h-full">
               <a
                 href={`https://github.com/${item.repo}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex h-full flex-col overflow-hidden rounded-xl transition-all duration-300"
-                style={{
-                  background: 'oklch(0.12 0.022 240 / 0.85)',
-                  border: '1px solid oklch(1 0 0 / 0.07)',
-                }}
-                onMouseEnter={e => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.borderColor = 'oklch(0.65 0.22 230 / 0.35)'
-                  el.style.boxShadow = '0 0 28px oklch(0.65 0.22 230 / 0.1)'
-                }}
-                onMouseLeave={e => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.borderColor = 'oklch(1 0 0 / 0.07)'
-                  el.style.boxShadow = 'none'
-                }}
+                className="wind-hover group flex h-full flex-col bg-card"
               >
-                <div
-                  className="flex items-center gap-2 px-6 py-3"
-                  style={{ borderBottom: '1px solid oklch(0.65 0.22 230 / 0.1)', background: 'oklch(0.10 0.02 240 / 0.6)' }}
-                >
-                  <span
-                    className="rounded-md px-2.5 py-1 font-mono text-[10px] font-semibold tracking-widest uppercase"
-                    style={{ background: 'oklch(0.65 0.22 230 / 0.08)', border: '1px solid oklch(0.65 0.22 230 / 0.2)', color: 'oklch(0.65 0.22 230 / 0.85)' }}
-                  >
+                <div className="flex items-center gap-2 border-b border-white/10 px-6 py-3.5">
+                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-brand/90">
                     {item.tag}
                   </span>
-                  <span className="ml-auto flex size-7 items-center justify-center rounded-md border opacity-0 transition-all group-hover:opacity-100"
-                    style={{ borderColor: 'oklch(0.65 0.22 230 / 0.3)', color: 'oklch(0.65 0.22 230)' }}
-                  >
+                  <span className="ml-auto flex size-7 items-center justify-center rounded-md border border-white/10 text-muted-foreground opacity-0 transition-all duration-500 group-hover:border-brand/30 group-hover:text-brand group-hover:opacity-100">
                     <ArrowUpRight className="size-3.5" />
                   </span>
                 </div>
 
                 <div className="flex flex-1 flex-col gap-4 p-6">
                   <div>
-                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: 'oklch(0.55 0.02 230)' }}>Problema</p>
+                    <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground/60">
+                      Problema
+                    </p>
                     <p className="mt-1.5 text-sm leading-relaxed text-foreground/80">{item.problem}</p>
                   </div>
 
                   <div>
-                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: 'oklch(0.55 0.02 230)' }}>Solución</p>
+                    <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground/60">
+                      Solución
+                    </p>
                     <p className="mt-1.5 text-sm leading-relaxed text-foreground/80">{item.solution}</p>
                   </div>
 
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap items-center gap-1.5">
                     {item.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="rounded-md px-2.5 py-1 font-mono text-[10px]"
-                        style={{ background: 'oklch(0.78 0.18 195 / 0.07)', border: '1px solid oklch(0.78 0.18 195 / 0.15)', color: 'oklch(0.78 0.18 195 / 0.75)' }}
+                        className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[10px] text-white/60"
                       >
                         {tech}
                       </span>
                     ))}
-                    <span className="ml-auto flex items-center gap-1 font-mono text-[10px] font-bold" style={{ color: 'oklch(0.65 0.22 230)' }}>
+                    <span className="ml-auto flex items-center gap-1 font-mono text-[10px] font-bold text-brand">
                       <GithubLogo weight="bold" className="size-3.5" />
                       Código
                     </span>
                   </div>
 
-                  <div
-                    className="mt-auto rounded-lg px-4 py-3"
-                    style={{ background: 'oklch(0.72 0.18 150 / 0.08)', border: '1px solid oklch(0.72 0.18 150 / 0.15)' }}
-                  >
-                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: 'oklch(0.72 0.18 150 / 0.8)' }}>Resultado</p>
-                    <p className="mt-0.5 text-sm font-semibold text-foreground/90">{item.result}</p>
+                  <div className="mt-auto border-t border-white/10 pt-4">
+                    <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-brand/80">
+                      Resultado
+                    </p>
+                    <p className="mt-1 text-sm font-semibold text-foreground/90">{item.result}</p>
                   </div>
                 </div>
               </a>

@@ -16,6 +16,15 @@ export function JsonLd() {
       addressRegion: WAIRA.location.region,
       addressCountry: WAIRA.location.country,
     },
+    location: WAIRA.location.cities.map((c) => ({
+      '@type': 'Place',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: c.city,
+        addressRegion: c.region,
+        addressCountry: WAIRA.location.country,
+      },
+    })),
     sameAs: Object.values(WAIRA.social).filter(Boolean),
     areaServed: 'Latin America',
     knowsAbout: [

@@ -30,8 +30,13 @@ const budgetRanges = [
   { value: 'gt50k', label: 'Más de $50.000 USD', labelEn: 'Over $50,000 USD' },
 ]
 
+const fieldClass =
+  'border-input bg-input/30 text-foreground placeholder:text-muted-foreground/40 focus-visible:border-ring focus-visible:ring-ring/30'
+
 const selectClass =
-  'flex h-10 w-full rounded-md border border-[oklch(1_0_0_/_0.1)] bg-[oklch(0.10_0.02_240)] px-3 py-2 text-sm text-foreground transition-all duration-200 focus-visible:border-[oklch(0.65_0.22_230_/_0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.65_0.22_230_/_0.2)] disabled:opacity-50'
+  'flex h-10 w-full rounded-md border border-input bg-input/30 px-3 py-2 text-sm text-foreground transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 disabled:opacity-50'
+
+const labelClass = 'font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground'
 
 export function ContactForm() {
   const { t, locale } = useLanguage()
@@ -72,21 +77,18 @@ export function ContactForm() {
     }
   }
 
+  const isEn = locale === 'en'
+
   if (submitted) {
     return (
-      <div
-        className="flex h-full min-h-72 flex-col items-center justify-center gap-4 rounded-xl p-8 text-center"
-        style={{ background: 'oklch(0.12 0.022 240 / 0.9)', border: '1px solid oklch(0.72 0.18 150 / 0.3)' }}
-      >
-        <span className="flex size-14 items-center justify-center rounded-full" style={{ background: 'oklch(0.72 0.18 150 / 0.15)', color: 'oklch(0.72 0.18 150)' }}>
+      <div className="flex h-full min-h-72 flex-col items-center justify-center gap-4 rounded-2xl border border-white/10 bg-card p-8 text-center">
+        <span className="flex size-14 items-center justify-center rounded-full bg-success/15 text-success">
           <CheckCircle weight="bold" className="size-7" />
         </span>
-        <p className="max-w-sm text-pretty leading-relaxed text-muted-foreground">
-          {form.success}
-        </p>
+        <p className="max-w-sm text-pretty leading-relaxed text-muted-foreground">{form.success}</p>
         <button
           onClick={() => setSubmitted(false)}
-          className="rounded-md border border-brand/30 px-6 py-2 text-sm font-semibold text-brand transition-colors hover:bg-brand/10"
+          className="rounded-md border border-white/15 px-6 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-white/5"
         >
           OK
         </button>
@@ -94,18 +96,11 @@ export function ContactForm() {
     )
   }
 
-  const isEn = locale === 'en'
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
-      className="rounded-xl p-6 sm:p-8"
-      style={{
-        background: 'oklch(0.12 0.022 240 / 0.9)',
-        border: '1px solid oklch(0.65 0.22 230 / 0.18)',
-        boxShadow: '0 0 30px oklch(0.65 0.22 230 / 0.05)',
-      }}
+      className="rounded-2xl border border-white/10 bg-card p-6 sm:p-8"
     >
       <div className="grid gap-5">
         <div aria-hidden className="absolute -left-[9999px]">
@@ -114,65 +109,54 @@ export function ContactForm() {
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="name" className="font-mono text-xs text-muted-foreground uppercase tracking-wide">{form.name}</Label>
-          <Input
-            id="name"
-            autoComplete="name"
-            aria-invalid={!!errors.name}
-            {...register('name')}
-            className="border-[oklch(1_0_0_/_0.1)] bg-[oklch(0.10_0.02_240)] text-foreground placeholder:text-muted-foreground/40 focus-visible:border-[oklch(0.65_0.22_230_/_0.5)] focus-visible:ring-[oklch(0.65_0.22_230_/_0.2)]"
-          />
+          <Label htmlFor="name" className={labelClass}>{form.name}</Label>
+          <Input id="name" autoComplete="name" aria-invalid={!!errors.name} {...register('name')} className={fieldClass} />
           {errors.name && (
-            <p className="text-xs text-[oklch(0.62_0.22_25)]" role="alert">{errors.name.message}</p>
+            <p className="text-xs text-destructive" role="alert">{errors.name.message}</p>
           )}
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="grid gap-2">
-            <Label htmlFor="email" className="font-mono text-xs text-muted-foreground uppercase tracking-wide">{form.email}</Label>
+            <Label htmlFor="email" className={labelClass}>{form.email}</Label>
             <Input
               id="email"
               type="email"
               autoComplete="email"
               aria-invalid={!!errors.email}
               {...register('email')}
-              className="border-[oklch(1_0_0_/_0.1)] bg-[oklch(0.10_0.02_240)] text-foreground placeholder:text-muted-foreground/40 focus-visible:border-[oklch(0.65_0.22_230_/_0.5)] focus-visible:ring-[oklch(0.65_0.22_230_/_0.2)]"
+              className={fieldClass}
             />
             {errors.email && (
-              <p className="text-xs text-[oklch(0.62_0.22_25)]" role="alert">{errors.email.message}</p>
+              <p className="text-xs text-destructive" role="alert">{errors.email.message}</p>
             )}
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="company" className="font-mono text-xs text-muted-foreground uppercase tracking-wide">{form.company}</Label>
-            <Input
-              id="company"
-              autoComplete="organization"
-              {...register('company')}
-              className="border-[oklch(1_0_0_/_0.1)] bg-[oklch(0.10_0.02_240)] text-foreground placeholder:text-muted-foreground/40 focus-visible:border-[oklch(0.65_0.22_230_/_0.5)] focus-visible:ring-[oklch(0.65_0.22_230_/_0.2)]"
-            />
+            <Label htmlFor="company" className={labelClass}>{form.company}</Label>
+            <Input id="company" autoComplete="organization" {...register('company')} className={fieldClass} />
           </div>
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="grid gap-2">
-            <Label htmlFor="projectType" className="font-mono text-xs text-muted-foreground uppercase tracking-wide">
+            <Label htmlFor="projectType" className={labelClass}>
               {isEn ? 'Project type' : 'Tipo de proyecto'}
             </Label>
             <select id="projectType" className={selectClass} {...register('projectType')}>
               {projectTypes.map((pt) => (
-                <option key={pt.value} value={pt.value} className="bg-[oklch(0.12_0.025_240)] text-foreground">
+                <option key={pt.value} value={pt.value} className="bg-card text-foreground">
                   {isEn ? pt.labelEn : pt.label}
                 </option>
               ))}
             </select>
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="budget" className="font-mono text-xs text-muted-foreground uppercase tracking-wide">
+            <Label htmlFor="budget" className={labelClass}>
               {isEn ? 'Estimated budget' : 'Presupuesto estimado'}
             </Label>
             <select id="budget" className={selectClass} {...register('budget')}>
               {budgetRanges.map((b) => (
-                <option key={b.value} value={b.value} className="bg-[oklch(0.12_0.025_240)] text-foreground">
+                <option key={b.value} value={b.value} className="bg-card text-foreground">
                   {isEn ? b.labelEn : b.label}
                 </option>
               ))}
@@ -181,21 +165,15 @@ export function ContactForm() {
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="message" className="font-mono text-xs text-muted-foreground uppercase tracking-wide">{form.message}</Label>
-          <Textarea
-            id="message"
-            rows={5}
-            aria-invalid={!!errors.message}
-            {...register('message')}
-            className="border-[oklch(1_0_0_/_0.1)] bg-[oklch(0.10_0.02_240)] text-foreground placeholder:text-muted-foreground/40 focus-visible:border-[oklch(0.65_0.22_230_/_0.5)] focus-visible:ring-[oklch(0.65_0.22_230_/_0.2)]"
-          />
+          <Label htmlFor="message" className={labelClass}>{form.message}</Label>
+          <Textarea id="message" rows={5} aria-invalid={!!errors.message} {...register('message')} className={fieldClass} />
           {errors.message && (
-            <p className="text-xs text-[oklch(0.62_0.22_25)]" role="alert">{errors.message.message}</p>
+            <p className="text-xs text-destructive" role="alert">{errors.message.message}</p>
           )}
         </div>
 
         {serverError ? (
-          <p className="rounded-md border border-[oklch(0.62_0.22_25_/_0.4)] bg-[oklch(0.62_0.22_25_/_0.1)] px-3 py-2 text-xs text-[oklch(0.62_0.22_25)]" role="alert">
+          <p className="rounded-md border border-destructive/40 bg-destructive/10 px-3 py-2 text-xs text-destructive" role="alert">
             {isEn
               ? 'An error occurred. Please try again or write to us on WhatsApp.'
               : 'Ocurrió un error. Intenta de nuevo o escríbenos por WhatsApp.'}
@@ -206,11 +184,9 @@ export function ContactForm() {
           type="submit"
           disabled={isSubmitting}
           className={cn(
-            'inline-flex h-12 items-center justify-center gap-2 rounded-md font-bold text-[oklch(0.05_0.02_240)] transition-all duration-300',
-            'hover:shadow-[0_0_24px_oklch(0.65_0.22_230_/_0.4)] active:scale-[0.98]',
-            isSubmitting ? 'opacity-70' : '',
+            'wind-hover inline-flex h-12 items-center justify-center gap-2 rounded-md bg-primary font-bold text-primary-foreground hover:bg-primary/90',
+            isSubmitting && 'opacity-70',
           )}
-          style={{ background: 'linear-gradient(135deg, oklch(0.65 0.22 230) 0%, oklch(0.78 0.18 195) 100%)' }}
         >
           {isSubmitting ? (
             <>

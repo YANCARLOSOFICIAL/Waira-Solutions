@@ -22,13 +22,19 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <span className="font-mono text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: 'oklch(0.65 0.22 230)' }}>
+        <span
+          className={cn(
+            'inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground',
+            align === 'center' && 'justify-center',
+          )}
+        >
+          <span className="size-1 rounded-full bg-brand" aria-hidden />
           {eyebrow}
         </span>
       ) : null}
       <h2
         className={cn(
-          'font-heading text-3xl font-bold tracking-tight text-balance sm:text-4xl md:text-[2.75rem]',
+          'font-heading text-3xl font-bold leading-[1.05] tracking-[-0.02em] text-balance sm:text-4xl md:text-[2.9rem]',
           align === 'center' ? 'mx-auto max-w-3xl' : 'max-w-2xl',
         )}
       >

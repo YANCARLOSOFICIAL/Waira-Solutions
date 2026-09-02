@@ -11,32 +11,26 @@ import {
   Gear,
   Lightning,
   Robot,
+  type Icon,
 } from '@phosphor-icons/react'
 import { Container } from '@/components/ui/container'
 import { SectionHeading } from '@/components/ui/section-heading'
+import { StaggerGroup, StaggerItem } from '@/components/animations/reveal'
 import { useLanguage } from '@/components/providers/language-provider'
-import { cn } from '@/lib/utils'
 
-const ecosystemNodes = [
-  { icon: Code, label: 'Software', labelEn: 'Software', color: 'oklch(0.65 0.22 230)', bg: 'oklch(0.65 0.22 230 / 0.1)', x: 0, y: 0 },
-  { icon: Brain, label: 'Inteligencia Artificial', labelEn: 'AI', color: 'oklch(0.78 0.18 195)', bg: 'oklch(0.78 0.18 195 / 0.1)', x: 1, y: 0 },
-  { icon: FlowArrow, label: 'Automatización', labelEn: 'Automation', color: 'oklch(0.72 0.18 150)', bg: 'oklch(0.72 0.18 150 / 0.1)', x: 2, y: 0 },
-  { icon: Cloud, label: 'Cloud & DevOps', labelEn: 'Cloud & DevOps', color: 'oklch(0.78 0.18 75)', bg: 'oklch(0.78 0.18 75 / 0.1)', x: 3, y: 0 },
-  { icon: ChartLineUp, label: 'Datos & Analítica', labelEn: 'Data & Analytics', color: 'oklch(0.65 0.18 280)', bg: 'oklch(0.65 0.18 280 / 0.1)', x: 0, y: 1 },
-  { icon: Robot, label: 'Agentes de IA', labelEn: 'AI Agents', color: 'oklch(0.78 0.18 195)', bg: 'oklch(0.78 0.18 195 / 0.1)', x: 1, y: 1 },
-  { icon: Gear, label: 'APIs e Integración', labelEn: 'APIs & Integration', color: 'oklch(0.65 0.22 230)', bg: 'oklch(0.65 0.22 230 / 0.1)', x: 2, y: 1 },
-  { icon: CreditCard, label: 'Infraestructura Financiera', labelEn: 'Fin. Infrastructure', color: 'oklch(0.72 0.18 150)', bg: 'oklch(0.72 0.18 150 / 0.1)', x: 3, y: 1 },
-  { icon: Compass, label: 'Consultoría', labelEn: 'Consulting', color: 'oklch(0.78 0.18 75)', bg: 'oklch(0.78 0.18 75 / 0.1)', x: 1, y: 2 },
-  { icon: Lightning, label: 'Productos Propios', labelEn: 'Own Products', color: 'oklch(0.65 0.22 230)', bg: 'oklch(0.65 0.22 230 / 0.1)', x: 2, y: 2 },
-]
+type Node = { icon: Icon; label: string; labelEn: string; wide?: boolean }
 
-const connections = [
-  [0, 1], [1, 2], [2, 3],
-  [4, 5], [5, 6], [6, 7],
-  [8, 9],
-  [0, 4], [1, 5], [2, 6], [3, 7],
-  [4, 8], [5, 8], [5, 9],
-  [0, 5], [1, 6],
+const ecosystemNodes: Node[] = [
+  { icon: Code, label: 'Software', labelEn: 'Software' },
+  { icon: Brain, label: 'Inteligencia Artificial', labelEn: 'AI' },
+  { icon: FlowArrow, label: 'Automatización', labelEn: 'Automation' },
+  { icon: Cloud, label: 'Cloud & DevOps', labelEn: 'Cloud & DevOps' },
+  { icon: ChartLineUp, label: 'Datos & Analítica', labelEn: 'Data & Analytics' },
+  { icon: Robot, label: 'Agentes de IA', labelEn: 'AI Agents' },
+  { icon: Gear, label: 'APIs e Integración', labelEn: 'APIs & Integration' },
+  { icon: CreditCard, label: 'Infraestructura Financiera', labelEn: 'Fin. Infrastructure' },
+  { icon: Compass, label: 'Consultoría', labelEn: 'Consulting', wide: true },
+  { icon: Lightning, label: 'Productos Propios', labelEn: 'Own Products', wide: true },
 ]
 
 export function Ecosystem() {
@@ -44,10 +38,27 @@ export function Ecosystem() {
   const isEn = locale === 'en'
 
   return (
-    <section className="relative py-24 sm:py-32">
-      <div className="absolute inset-x-0 top-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, oklch(0.78 0.18 195 / 0.3), transparent)' }} aria-hidden />
+    <section className="relative bg-background py-24 sm:py-32">
+      <div className="absolute inset-x-0 top-0 h-px bg-white/10" aria-hidden />
 
-      <Container>
+      {/* Corriente de aire que atraviesa el sistema */}
+      <svg
+        aria-hidden
+        className="animate-breeze-slow pointer-events-none absolute inset-x-0 top-1/3 h-48 w-full opacity-30"
+        viewBox="0 0 1440 240"
+        fill="none"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M-40 160 C 320 60, 520 220, 800 120 S 1180 20, 1480 110"
+          stroke="var(--brand)"
+          strokeWidth="1.25"
+          strokeLinecap="round"
+          className="animate-flow-line"
+        />
+      </svg>
+
+      <Container className="relative">
         <SectionHeading
           eyebrow={isEn ? 'Ecosystem' : 'Ecosistema'}
           title={isEn ? 'Connected capabilities' : 'Capacidades conectadas'}
@@ -58,66 +69,25 @@ export function Ecosystem() {
           }
         />
 
-        <div className="relative mx-auto mt-16 max-w-3xl">
-          <svg className="absolute inset-0 size-full overflow-visible hidden sm:block" aria-hidden>
-            {connections.map(([i, j], idx) => {
-              const ni = ecosystemNodes[i]
-              const nj = ecosystemNodes[j]
-              const x1 = `${(ni.x + 0.5) * 25}%`
-              const y1 = `${(ni.y + 0.5) * 33.33}%`
-              const x2 = `${(nj.x + 0.5) * 25}%`
-              const y2 = `${(nj.y + 0.5) * 33.33}%`
-              return (
-                <line
-                  key={idx}
-                  x1={x1}
-                  y1={y1}
-                  x2={x2}
-                  y2={y2}
-                  stroke="oklch(0.65 0.22 230 / 0.2)"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
+        <StaggerGroup className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-4">
+          {ecosystemNodes.map((node, i) => (
+            <StaggerItem
+              key={i}
+              className={node.wide ? 'col-span-2' : undefined}
+            >
+              <div className="wind-hover group flex h-full flex-col items-center justify-center gap-3 bg-card p-6 text-center">
+                <node.icon
+                  weight="light"
+                  className="size-7 text-muted-foreground transition-colors duration-500 group-hover:text-brand"
+                  aria-hidden
                 />
-              )
-            })}
-          </svg>
-
-          <div className="relative grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-            {ecosystemNodes.map((node, i) => (
-              <div
-                key={i}
-                className={cn(
-                  'group flex flex-col items-center justify-center gap-2 rounded-xl p-3 sm:p-5 transition-all duration-300 cursor-default',
-                )}
-                style={{
-                  background: 'oklch(0.12 0.022 240 / 0.9)',
-                  border: '1px solid oklch(1 0 0 / 0.08)',
-                  gridColumn: i === 8 ? '1 / 3' : i === 9 ? '3 / 5' : undefined,
-                }}
-                onMouseEnter={e => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.borderColor = node.color.replace(')', ' / 0.4)')
-                  el.style.boxShadow = `0 0 20px ${node.color.replace(')', ' / 0.15)')}`
-                }}
-                onMouseLeave={e => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.borderColor = 'oklch(1 0 0 / 0.08)'
-                  el.style.boxShadow = 'none'
-                }}
-              >
-                <span
-                  className="flex size-9 shrink-0 items-center justify-center rounded-lg sm:size-11 transition-transform group-hover:scale-110"
-                  style={{ background: node.bg }}
-                >
-                  <node.icon weight="bold" className="size-4 sm:size-5" style={{ color: node.color }} />
-                </span>
-                <span className="text-center font-mono text-[10px] font-medium leading-tight text-foreground/90 sm:text-xs">
+                <span className="font-mono text-[10px] font-medium uppercase leading-tight tracking-[0.14em] text-foreground/80 sm:text-[11px]">
                   {isEn ? node.labelEn : node.label}
                 </span>
               </div>
-            ))}
-          </div>
-        </div>
+            </StaggerItem>
+          ))}
+        </StaggerGroup>
       </Container>
     </section>
   )

@@ -11,10 +11,16 @@ export const WAIRA = {
   taglineEn: 'Software engineering, artificial intelligence and technology products.',
 
   location: {
+    /** Sede principal — usada para datos estructurados de dirección */
     city: 'Popayán',
     region: 'Cauca',
     country: 'CO',
-    full: 'Popayán, Cauca, Colombia',
+    full: 'Popayán, Cauca · Mocoa, Putumayo — Colombia',
+    /** Todas las ciudades donde Waira tiene presencia */
+    cities: [
+      { city: 'Popayán', region: 'Cauca' },
+      { city: 'Mocoa', region: 'Putumayo' },
+    ],
   },
 
   contact: {

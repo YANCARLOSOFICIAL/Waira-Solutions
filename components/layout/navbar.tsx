@@ -61,9 +61,9 @@ export function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50">
       <div
         className={cn(
-          'transition-all duration-400 ease-out',
+          'transition-all duration-300 ease-out',
           scrolled
-            ? 'glass-strong border-b border-[oklch(0.65_0.22_230_/_0.15)] shadow-[0_4px_32px_oklch(0_0_0_/_0.4)]'
+            ? 'glass-strong border-b border-white/10'
             : 'border-b border-transparent',
         )}
       >
@@ -89,11 +89,7 @@ export function Navbar() {
                   {isActive && (
                     <motion.span
                       layoutId="nav-active"
-                      className="absolute inset-0 rounded-md"
-                      style={{
-                        background: 'oklch(0.65 0.22 230 / 0.08)',
-                        boxShadow: 'inset 0 0 0 1px oklch(0.65 0.22 230 / 0.15)',
-                      }}
+                      className="absolute inset-0 rounded-md bg-brand/8 ring-1 ring-inset ring-brand/15"
                       transition={{ type: 'spring', stiffness: 400, damping: 35 }}
                     />
                   )}
@@ -110,17 +106,15 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
-              className="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-all hover:text-[#25D366] hover:bg-[#25D366]/10 hover:shadow-[0_0_12px_oklch(0.72_0.18_150_/_0.2)]"
+              className="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-[#25D366]/10 hover:text-[#25D366]"
             >
               <WhatsappLogo weight="bold" className="size-5" />
             </a>
             <a
               href="#contacto"
               className={cn(
-                'relative inline-flex h-9 items-center gap-2 overflow-hidden rounded-md px-5 text-sm font-semibold',
-                'bg-brand text-[oklch(0.05_0.02_240)] transition-all duration-200',
-                'hover:shadow-[0_0_20px_oklch(0.65_0.22_230_/_0.4)] hover:brightness-110',
-                'active:scale-[0.98]',
+                'wind-hover inline-flex h-9 items-center gap-2 rounded-md px-5 text-sm font-semibold',
+                'bg-primary text-primary-foreground hover:bg-primary/90',
               )}
             >
               {t.nav.cta}
@@ -161,8 +155,8 @@ export function Navbar() {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="glass-strong border-b border-[oklch(0.65_0.22_230_/_0.15)] lg:hidden"
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="glass-strong border-b border-white/10 lg:hidden"
           >
             <Container className="flex flex-col gap-1 py-5">
               {t.nav.links.map((link, i) => (
@@ -201,7 +195,7 @@ export function Navbar() {
                 <a
                   href="#contacto"
                   onClick={() => setOpen(false)}
-                  className="flex flex-1 items-center justify-center rounded-md bg-brand px-4 py-3 text-sm font-semibold text-[oklch(0.05_0.02_240)] transition-all hover:brightness-110"
+                  className="flex flex-1 items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
                 >
                   {t.nav.cta}
                 </a>
