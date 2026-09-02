@@ -1,14 +1,21 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
+import { Calistoga, Inter, JetBrains_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { LanguageProvider } from '@/components/providers/language-provider'
 import { WhatsAppButton } from '@/components/layout/whatsapp-button'
 import { WAIRA } from '@/lib/config'
 import './globals.css'
 
-const spaceGrotesk = Space_Grotesk({
-  variable: '--font-space-grotesk',
+// Calistoga — serif display con calidez humana para headings (rompe el AI look)
+const calistoga = Calistoga({
+  variable: '--font-calistoga',
+  subsets: ['latin'],
+  weight: ['400'],
+})
+// Inter — la más legible para body, reemplaza Space Grotesk genérico
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
 })
@@ -92,7 +99,7 @@ export default function RootLayout({
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} dark bg-background`}
+      className={`${calistoga.variable} ${inter.variable} ${jetbrainsMono.variable} dark bg-background`}
       data-scroll-behavior="smooth"
     >
       <body className="font-sans antialiased">

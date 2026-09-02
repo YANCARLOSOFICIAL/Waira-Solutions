@@ -4,20 +4,21 @@ import { Container } from '@/components/ui/container'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { StaggerGroup, StaggerItem } from '@/components/animations/reveal'
 import { useLanguage } from '@/components/providers/language-provider'
+import { TechLogo } from '@/components/ui/tech-logos'
 
 const GROUP_ACCENTS = [
-  { dot: 'oklch(0.65 0.22 230)', tagBg: 'oklch(0.65 0.22 230 / 0.08)', tagBorder: 'oklch(0.65 0.22 230 / 0.2)', tagFg: 'oklch(0.72 0.18 230)' },
-  { dot: 'oklch(0.78 0.18 195)', tagBg: 'oklch(0.78 0.18 195 / 0.08)', tagBorder: 'oklch(0.78 0.18 195 / 0.2)', tagFg: 'oklch(0.78 0.18 195)' },
-  { dot: 'oklch(0.72 0.18 150)', tagBg: 'oklch(0.72 0.18 150 / 0.08)', tagBorder: 'oklch(0.72 0.18 150 / 0.2)', tagFg: 'oklch(0.72 0.18 150)' },
-  { dot: 'oklch(0.78 0.18 75)', tagBg: 'oklch(0.78 0.18 75 / 0.08)', tagBorder: 'oklch(0.78 0.18 75 / 0.2)', tagFg: 'oklch(0.78 0.18 75)' },
+  { dot: '#fff', border: 'rgba(255,255,255,0.1)' },
+  { dot: '#fff', border: 'rgba(255,255,255,0.1)' },
+  { dot: '#fff', border: 'rgba(255,255,255,0.1)' },
+  { dot: '#fff', border: 'rgba(255,255,255,0.1)' },
 ]
 
 export function Technologies() {
   const { t } = useLanguage()
 
   return (
-    <section id="tecnologias" className="relative scroll-mt-20 py-24 sm:py-28">
-      <div className="absolute inset-x-0 top-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, oklch(0.65 0.22 230 / 0.3), transparent)' }} aria-hidden />
+    <section id="tecnologias" className="relative scroll-mt-20 py-24 sm:py-28 bg-[#0a0a0a]">
+      <div className="absolute inset-x-0 top-0 h-px bg-white/10" aria-hidden />
       <Container>
         <SectionHeading eyebrow={t.tech.eyebrow} title={t.tech.title} subtitle={t.tech.subtitle} />
 
@@ -26,23 +27,7 @@ export function Technologies() {
             const accent = GROUP_ACCENTS[gi % GROUP_ACCENTS.length]
             return (
               <StaggerItem key={group.name} as="article" className="h-full">
-                <div
-                  className="flex h-full flex-col overflow-hidden rounded-xl transition-all duration-300"
-                  style={{
-                    background: 'oklch(0.12 0.022 240 / 0.8)',
-                    border: '1px solid oklch(1 0 0 / 0.07)',
-                  }}
-                  onMouseEnter={e => {
-                    const el = e.currentTarget as HTMLElement
-                    el.style.borderColor = `${accent.dot.replace(')', ' / 0.3)')}`
-                    el.style.boxShadow = `0 0 20px ${accent.dot.replace(')', ' / 0.1)')}`
-                  }}
-                  onMouseLeave={e => {
-                    const el = e.currentTarget as HTMLElement
-                    el.style.borderColor = 'oklch(1 0 0 / 0.07)'
-                    el.style.boxShadow = 'none'
-                  }}
-                >
+                <div className="flex h-full flex-col overflow-hidden rounded-xl transition-all duration-200 bg-[#111] border border-white/10 hover:border-white/20">
                   <div className="px-6 pt-6 pb-4">
                     <h3 className="flex items-center gap-2 font-heading text-base font-bold">
                       <span
@@ -53,15 +38,15 @@ export function Technologies() {
                       {group.name}
                     </h3>
                   </div>
-                  <div className="flex flex-wrap gap-2 px-6 pb-6">
+                  <div className="grid grid-cols-4 gap-3 px-6 pb-6">
                     {group.items.map((item) => (
-                      <span
+                      <div
                         key={item}
-                        className="inline-block rounded-md px-3 py-1.5 font-mono text-xs"
-                        style={{ background: accent.tagBg, border: `1px solid ${accent.tagBorder}`, color: accent.tagFg }}
+                        className="group/tech flex aspect-square items-center justify-center rounded-lg border bg-[#161616] border-white/5 transition-all hover:bg-white/5"
+                        title={item}
                       >
-                        {item}
-                      </span>
+                        <TechLogo name={item} size={24} className="opacity-80 transition-opacity group-hover/tech:opacity-100 grayscale group-hover/tech:grayscale-0" />
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -76,13 +61,12 @@ export function Technologies() {
               ...t.tech.groups.flatMap((g) => g.items),
               ...t.tech.groups.flatMap((g) => g.items),
             ].map((item, i) => (
-              <span
+              <div
                 key={`${item}-${i}`}
-                className="rounded-md px-4 py-1.5 font-mono text-xs whitespace-nowrap"
-                style={{ border: '1px solid oklch(0.65 0.22 230 / 0.18)', color: 'oklch(0.65 0.22 230 / 0.55)' }}
+                className="flex items-center justify-center rounded-xl bg-[#111] p-4 border border-white/10"
               >
-                {item}
-              </span>
+                <TechLogo name={item} size={36} className="opacity-50 hover:opacity-100 hover:grayscale-0 grayscale transition-all duration-300" />
+              </div>
             ))}
           </div>
         </div>

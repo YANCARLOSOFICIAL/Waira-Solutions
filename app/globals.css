@@ -5,8 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-heading: var(--font-space-grotesk), 'Space Grotesk Fallback', sans-serif;
-  --font-sans: var(--font-space-grotesk), 'Space Grotesk Fallback', sans-serif;
+  /* Calistoga — display serif con calidez humana (anti-AI-slop) */
+  --font-heading: var(--font-calistoga), 'Georgia', serif;
+  /* Inter — body ultra-legible */
+  --font-sans: var(--font-inter), 'system-ui', sans-serif;
   --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono Fallback', monospace;
 
   --color-background: var(--background);
@@ -160,8 +162,8 @@
     scroll-behavior: smooth;
   }
   ::selection {
-    background-color: oklch(0.65 0.22 230 / 0.28);
-    color: oklch(0.98 0.005 220);
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
   }
 }
 
@@ -429,15 +431,15 @@
   }
 }
 
-/* Scrollbar — dark cyber style */
+/* Scrollbar — minimal style */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: oklch(0.07 0.02 240); }
+::-webkit-scrollbar-track { background: #050505; }
 ::-webkit-scrollbar-thumb {
-  background: oklch(0.65 0.22 230 / 0.3);
+  background: rgba(255,255,255,0.1);
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.65 0.22 230 / 0.55);
+  background: rgba(255,255,255,0.2);
 }
 
 @layer base {
