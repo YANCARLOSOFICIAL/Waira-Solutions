@@ -10,6 +10,11 @@ __v0_jsx-dev-runtime.ts
 .env
 .env*.local
 
+# 3D source assets — 300MB+ OBJ recortado (solo web GLB en public/models)
+Meshy_AI_genera_en_3d_el_lo_0912201755_texture_obj/
+*.obj
+*.mtl
+
 # Common ignores
 node_modules
 .next/

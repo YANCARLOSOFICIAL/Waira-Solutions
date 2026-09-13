@@ -2,11 +2,21 @@
 
 import { ArrowRight } from '@phosphor-icons/react'
 import { motion, useReducedMotion } from 'framer-motion'
+import dynamic from 'next/dynamic'
 import { Container } from '@/components/ui/container'
 import { Counter } from '@/components/animations/counter'
-import { EditorialImage } from '@/components/ui/editorial-image'
+import { WairaLogoFallback } from '@/components/animations/waira-3d-viewer'
 import { useLanguage } from '@/components/providers/language-provider'
 import { TechLogo } from '@/components/ui/tech-logos'
+
+// Objeto 3D real — solo cliente (WebGL), con fallback PNG estático.
+const Waira3DViewer = dynamic(
+  () => import('@/components/animations/waira-3d-viewer').then((m) => m.Waira3DViewer),
+  {
+    ssr: false,
+    loading: () => <WairaLogoFallback className="h-[440px] w-full sm:h-[540px] lg:h-[580px]" />,
+  },
+)
 
 const TECHS = [
   'React', 'Next.js', 'TypeScript', 'OpenAI', 'AWS',
@@ -143,20 +153,55 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* ── Columna derecha: fotografía editorial B&N ── */}
+          {/* ── Columna derecha: logo 3D Waira — pieza protagonista ── */}
           <motion.div
             {...rise(0.18)}
             className="relative mx-auto w-full max-w-md lg:mt-6 lg:max-w-none lg:translate-y-4"
           >
-            <EditorialImage
-              src="/photos/server-room.jpg"
-              alt="Infraestructura y salas de servidores que Waira Solutions diseña y opera"
-              caption="Infraestructura · monitoreo 24/7"
-              priority
-              tint={0.25}
-              className="aspect-[4/5] w-full"
-              sizes="(max-width: 1024px) 90vw, 34vw"
-            />
+            <div className="relative">
+              {/* Halos de luz ámbar + cian detrás del logo */}
+              <div
+                aria-hidden
+                className="animate-orb-drift pointer-events-none absolute -top-10 -left-10 size-64 rounded-full bg-brand/20 blur-[100px]"
+              />
+              <div
+                aria-hidden
+                className="animate-orb-drift-2 pointer-events-none absolute -right-10 -bottom-10 size-64 rounded-full bg-neon-cyan/15 blur-[100px]"
+              />
+
+              {/* Anillo orbital decorativo */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-6 rounded-full border border-white/5"
+              />
+
+              {/* Objeto 3D libre — sin recuadro, flota sobre los halos */}
+              <Waira3DViewer className="relative h-[440px] w-full sm:h-[540px] lg:h-[580px]" />
+              {/* Hilo de aire bajo el logo */}
+              <svg
+                aria-hidden
+                className="animate-breeze-slow pointer-events-none absolute -bottom-2 left-0 w-[120%] opacity-40"
+                viewBox="0 0 600 120"
+                fill="none"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M-20 90 C 120 40, 220 120, 340 70 S 560 10, 640 60"
+                  stroke="var(--brand)"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  className="animate-flow-line"
+                />
+              </svg>
+
+              {/* Insignia flotante */}
+              <div className="glass-card absolute -bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full px-5 py-2.5 whitespace-nowrap">
+                <span className="animate-node-pulse size-1.5 rounded-full bg-brand" aria-hidden />
+                <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em] text-foreground/80">
+                  Waira Solutions · Colombia
+                </span>
+              </div>
+            </div>
           </motion.div>
         </div>
 

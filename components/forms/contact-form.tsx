@@ -18,6 +18,8 @@ const projectTypes = [
   { value: 'ai', label: 'Inteligencia Artificial', labelEn: 'Artificial Intelligence' },
   { value: 'automation', label: 'Automatización', labelEn: 'Automation' },
   { value: 'consulting', label: 'Consultoría tecnológica', labelEn: 'Tech consulting' },
+  { value: 'marketing', label: 'Marketing digital', labelEn: 'Digital marketing' },
+  { value: 'impresion3d', label: 'Impresión de piezas 3D', labelEn: '3D printed parts' },
   { value: 'product', label: 'Producto propio', labelEn: 'Own product' },
   { value: 'other', label: 'Otro', labelEn: 'Other' },
 ]

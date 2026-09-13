@@ -95,8 +95,26 @@ export const dictionary = {
           text: 'Estrategia de arquitectura, roadmaps de producto y acompañamiento técnico para tu equipo.',
           benefits: ['Roadmaps técnicos', 'Auditorías de código', 'Mentoría'],
         },
+        {
+          icon: 'Megaphone',
+          title: 'Marketing digital',
+          text: 'Estrategia, contenido y pautas que convierten atención en clientes: redes, SEO y publicidad que sí mide resultados.',
+          benefits: ['Gestión de redes sociales', 'Pautas Meta y Google', 'Contenido + SEO'],
+        },
+        {
+          icon: 'Cube',
+          title: 'Impresión de piezas 3D',
+          text: 'Diseño e impresión 3D de piezas, prototipos y repuestos funcionales: del modelo digital al objeto real.',
+          benefits: ['Prototipado rápido', 'Piezas y repuestos a medida', 'Modelado 3D'],
+        },
       ],
       cta: 'Conversemos sobre tu proyecto',
+      social: {
+        eyebrow: 'TikTok · @wairasolutions',
+        title: 'Waira en acción',
+        text: 'Marketing, tecnología e impresión 3D contados en video: mira cómo llevamos tu idea al siguiente nivel en la nueva era digital.',
+        cta: 'Ver en TikTok',
+      },
     },
     products: {
       eyebrow: 'Productos',
@@ -412,8 +430,26 @@ export const dictionary = {
           text: 'Architecture strategy, product roadmaps and technical guidance for your team.',
           benefits: ['Tech roadmaps', 'Code audits', 'Mentoring'],
         },
+        {
+          icon: 'Megaphone',
+          title: 'Digital marketing',
+          text: 'Strategy, content and ads that turn attention into customers: social, SEO and advertising that actually measures results.',
+          benefits: ['Social media management', 'Meta & Google ads', 'Content + SEO'],
+        },
+        {
+          icon: 'Cube',
+          title: '3D printed parts',
+          text: '3D design and printing of functional parts, prototypes and spares: from digital model to real object.',
+          benefits: ['Rapid prototyping', 'Custom parts & spares', '3D modeling'],
+        },
       ],
       cta: "Let's talk about your project",
+      social: {
+        eyebrow: 'TikTok · @wairasolutions',
+        title: 'Waira in action',
+        text: 'Marketing, tech and 3D printing on video: see how we take your idea to the next level in the new digital era.',
+        cta: 'Watch on TikTok',
+      },
     },
     products: {
       eyebrow: 'Products',

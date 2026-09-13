@@ -12,6 +12,8 @@ const projectTypeLabels: Record<string, string> = {
   ai: 'Inteligencia Artificial',
   automation: 'Automatización',
   consulting: 'Consultoría tecnológica',
+  marketing: 'Marketing digital',
+  impresion3d: 'Impresión de piezas 3D',
   product: 'Producto propio',
   other: 'Otro',
 }

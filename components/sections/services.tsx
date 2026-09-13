@@ -8,7 +8,9 @@ import {
   Compass,
   Brain,
   ChartLineUp,
+  Cube,
   FlowArrow,
+  Megaphone,
   type Icon,
 } from '@phosphor-icons/react'
 import Image from 'next/image'
@@ -25,10 +27,12 @@ const icons: Record<string, Icon> = {
   Cloud,
   LineChart: ChartLineUp,
   Compass,
+  Megaphone,
+  Cube,
 }
 
 // Ritmo asimétrico — algunas tarjetas ocupan más, como corrientes de distinto ancho
-const SPANS = ['lg:col-span-4', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-4', 'lg:col-span-4', 'lg:col-span-2']
+const SPANS = ['lg:col-span-4', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-4', 'lg:col-span-4', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-4']
 
 export function Services() {
   const { t } = useLanguage()
@@ -127,6 +131,66 @@ export function Services() {
               </p>
             </figcaption>
           </figure>
+        </Reveal>
+
+        {/* Video social — Waira en TikTok — presentación grande y cinematográfica */}
+        <Reveal className="mt-12">
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-card">
+            {/* Brillo ámbar/cian de fondo */}
+            <div aria-hidden className="pointer-events-none absolute -top-28 -right-28 size-[520px] rounded-full bg-brand/10 blur-[120px]" />
+            <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 size-[520px] rounded-full bg-neon-cyan/10 blur-[120px]" />
+            <div className="relative grid items-center gap-8 p-6 sm:gap-10 sm:p-10 lg:grid-cols-[1.1fr_380px] lg:p-12">
+              <div>
+                <span className="inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                  <span className="h-px w-8 bg-brand" aria-hidden />
+                  {t.services.social.eyebrow}
+                </span>
+                <h3 className="mt-4 font-heading text-[1.7rem] font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
+                  {t.services.social.title}
+                </h3>
+                <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted-foreground sm:text-base">
+                  {t.services.social.text}
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a
+                    href="https://www.tiktok.com/@wairasolutions/video/7493672445539355909"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="wind-hover inline-flex h-11 items-center gap-2 rounded-md bg-primary px-7 text-sm font-bold text-primary-foreground hover:bg-primary/90"
+                  >
+                    {t.services.social.cta}
+                    <ArrowRight weight="bold" className="size-4" />
+                  </a>
+                  <a
+                    href="https://www.tiktok.com/@wairasolutions"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex h-11 items-center gap-2 rounded-md border border-white/15 px-7 text-sm font-semibold text-foreground hover:border-white/25 hover:bg-white/5"
+                  >
+                    @wairasolutions
+                  </a>
+                </div>
+                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground/60">
+                  Marketing · Tecnología · Impresión 3D
+                </p>
+              </div>
+              <div className="mx-auto w-full max-w-[400px] lg:mx-0 lg:ml-auto">
+                <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-black shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.06)]">
+                  <iframe
+                    src="https://www.tiktok.com/embed/v2/7493672445539355909?lang=es-419"
+                    title="Video de Waira Solutions en TikTok"
+                    loading="lazy"
+                    allowFullScreen
+                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                    className="block h-[680px] w-full sm:h-[700px]"
+                  />
+                </div>
+                <p className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground/50">
+                  Toca para ver con sonido en TikTok
+                </p>
+              </div>
+            </div>
+          </div>
         </Reveal>
 
         <div className="mt-12 flex justify-center">

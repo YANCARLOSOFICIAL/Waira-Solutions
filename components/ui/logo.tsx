@@ -3,14 +3,14 @@ import { cn } from '@/lib/utils'
 
 export function Logo({
   className,
-  showWordmark = true,
+  showWordmark = false,
 }: {
   className?: string
   showWordmark?: boolean
 }) {
   return (
     <span className={cn('inline-flex items-center gap-2.5', className)}>
-      <LogoMark className="size-9" />
+      <LogoMark className="size-10" />
       {showWordmark ? (
         <span className="font-heading text-lg font-semibold tracking-tight text-foreground">
           Waira<span className="text-brand">.</span>
@@ -23,14 +23,20 @@ export function Logo({
 
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <span className={cn('relative inline-flex shrink-0 overflow-hidden rounded-xl', className)}>
+    <span
+      className={cn(
+        'relative inline-flex shrink-0 overflow-hidden rounded-[10px] ring-1 ring-white/10',
+        className,
+      )}
+    >
       <Image
-        src="/waira-logo-fb.jpg"
+        src="/waira-3d-logo.png"
         alt="Waira Solutions"
-        width={36}
-        height={36}
-        className="object-contain"
-        sizes="36px"
+        width={40}
+        height={40}
+        className="object-cover"
+        sizes="40px"
+        priority={false}
       />
     </span>
   )

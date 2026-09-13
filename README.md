@@ -90,7 +90,7 @@ waira-solutions-website/
 │   └── utils.ts          # Helpers (cn, etc.)
 │
 └── public/
-    └── waira-logo-fb.jpg   # Logo (navbar, footer, hero, badges)
+    └── waira-3d-logo.png   # Logo 3D (navbar, footer, hero, badges)
 ```
 
 ---

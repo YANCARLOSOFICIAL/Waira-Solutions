@@ -47,6 +47,8 @@ export function JsonLd() {
       { '@type': 'Service', name: 'Cloud & DevOps', position: 4 },
       { '@type': 'Service', name: 'Datos & Analítica', position: 5 },
       { '@type': 'Service', name: 'Consultoría tecnológica', position: 6 },
+      { '@type': 'Service', name: 'Marketing digital', position: 7 },
+      { '@type': 'Service', name: 'Impresión de piezas 3D', position: 8 },
     ],
   }
 

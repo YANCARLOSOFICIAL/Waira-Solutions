@@ -37,6 +37,7 @@ export const WAIRA = {
   social: {
     linkedin: 'https://www.linkedin.com/company/waira-solutions/',
     facebook: 'https://www.facebook.com/WairaSolutions',
+    tiktok: 'https://www.tiktok.com/@wairasolutions',
   },
 
   /** WhatsApp URL builder */
