@@ -64,14 +64,17 @@ export const metadata: Metadata = {
     title: `${WAIRA.name} | Software, IA y Transformación Digital`,
     description:
       'Empresa colombiana de ingeniería de software e inteligencia artificial. Construimos productos, plataformas y soluciones automatizadas que transforman negocios.',
-    images: [{ url: `${WAIRA.url}/og-image.png`, width: 1200, height: 630 }],
+    // Tarjeta generada por app/opengraph-image.tsx (45 KB, 1200×630).
+    // Antes apuntaba a /og-image.png: 1.14 MB, declarada 1200×630 pero real
+    // 1024×1024. El archivo se eliminó de public/.
+    images: [{ url: `${WAIRA.url}/opengraph-image`, width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${WAIRA.name} | Software, IA y Transformación Digital`,
     description:
       'Ingeniería de software, inteligencia artificial y productos tecnológicos con impacto real.',
-    images: [`${WAIRA.url}/og-image.png`],
+    images: [{ url: `${WAIRA.url}/opengraph-image`, width: 1200, height: 630 }],
   },
   robots: {
     index: true,

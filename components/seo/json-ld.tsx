@@ -6,7 +6,8 @@ export function JsonLd() {
     '@type': 'Organization',
     name: WAIRA.name,
     url: WAIRA.url,
-    logo: `${WAIRA.url}/og-image.png`,
+    // Logo real (192×192), no la tarjeta social: schema.org exige un logo.
+    logo: `${WAIRA.url}/icon-192x192.png`,
     description: WAIRA.tagline,
     email: WAIRA.contact.email,
     telephone: `+${WAIRA.contact.whatsapp}`,
