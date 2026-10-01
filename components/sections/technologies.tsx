@@ -25,7 +25,13 @@ export function Technologies() {
                     {group.name}
                   </h3>
                 </div>
-                <div className="grid grid-cols-4 gap-3 px-6 pb-6">
+                {/* Los grupos de 5 items necesitan 5 columnas: con 4, el último
+                    quedaba huérfano en una fila propia. */}
+                <div
+                  className={`grid gap-3 px-6 pb-6 ${
+                    group.items.length > 4 ? 'grid-cols-5' : 'grid-cols-4'
+                  }`}
+                >
                   {group.items.map((item) => (
                     <div
                       key={item}

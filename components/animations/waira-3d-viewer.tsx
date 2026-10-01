@@ -1,31 +1,14 @@
 'use client'
 
-import { Suspense, useMemo, useRef, useState } from 'react'
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { ContactShadows, Float, OrbitControls, useGLTF, useProgress } from '@react-three/drei'
 import { useReducedMotion } from 'framer-motion'
-import Image from 'next/image'
+import { WairaLogoFallback } from '@/components/animations/waira-logo-fallback'
 import { cn } from '@/lib/utils'
 
 const MODEL_URL = '/models/waira-logo.glb'
-
-/** PNG estático — se usa mientras carga el modelo, si no hay WebGL o si falla la GPU. */
-export function WairaLogoFallback({ className }: { className?: string }) {
-  return (
-    <div className={cn('relative', className)}>
-      <Image
-        src="/waira-3d-logo.png"
-        alt="Logo 3D de Waira Solutions — jaguar tecnológico"
-        width={1024}
-        height={1024}
-        priority
-        sizes="(max-width: 1024px) 90vw, 34vw"
-        className="h-full w-full object-contain mix-blend-screen"
-      />
-    </div>
-  )
-}
 
 function hasWebGL(): boolean {
   try {
@@ -85,20 +68,37 @@ function LoaderOverlay() {
  * Logo de Waira como objeto 3D interactivo:
  * rotación automática + flotación + arrastre con el mouse.
  * Carga diferida solo en cliente (sin SSR) con fallback PNG.
+ *
+ * Rendimiento: el bucle de render se detiene por completo cuando el hero
+ * sale de pantalla (`frameloop="never"`), así el bucle, el ContactShadows
+ * y las rotaciones dejan de consumir GPU mientras nadie ve el modelo.
  */
 export function Waira3DViewer({ className }: { className?: string }) {
   const reduce = useReducedMotion() ?? false
   // Este módulo solo se importa con ssr:false, así que document existe.
   const [webgl] = useState(hasWebGL)
+  const [inView, setInView] = useState(true)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el || typeof IntersectionObserver === 'undefined') return
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
+      threshold: 0,
+    })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   if (!webgl) {
     return <WairaLogoFallback className={className} />
   }
 
   return (
-    <div className={cn('relative', className)}>
+    <div ref={containerRef} className={cn('relative', className)}>
       <Canvas
         dpr={[1, 1.75]}
+        frameloop={inView ? 'always' : 'never'}
         camera={{ position: [0, 0.35, 4.6], fov: 32 }}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         role="img"
@@ -123,8 +123,6 @@ export function Waira3DViewer({ className }: { className?: string }) {
         </Suspense>
 
         <OrbitControls
-          autoRotate={!reduce}
-          autoRotateSpeed={0.9}
           enableZoom={false}
           enablePan={false}
           minPolarAngle={Math.PI / 3.4}
@@ -136,5 +134,3 @@ export function Waira3DViewer({ className }: { className?: string }) {
     </div>
   )
 }
-
-useGLTF.preload(MODEL_URL)

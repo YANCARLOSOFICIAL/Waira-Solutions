@@ -23,7 +23,7 @@ export function About() {
         <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           <div className="flex flex-col">
             <Reveal>
-              <span className="inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+              <span className="inline-flex items-center gap-2 font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground sm:text-[11px] sm:tracking-[0.28em]">
                 <span className="size-1 rounded-full bg-brand" aria-hidden />
                 {t.about.eyebrow} · Popayán y Mocoa, Colombia
               </span>

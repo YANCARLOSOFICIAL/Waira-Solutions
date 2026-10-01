@@ -1,22 +1,44 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { ArrowRight } from '@phosphor-icons/react'
 import { motion, useReducedMotion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { Container } from '@/components/ui/container'
 import { Counter } from '@/components/animations/counter'
-import { WairaLogoFallback } from '@/components/animations/waira-3d-viewer'
+import { WairaLogoFallback } from '@/components/animations/waira-logo-fallback'
 import { useLanguage } from '@/components/providers/language-provider'
 import { TechLogo } from '@/components/ui/tech-logos'
 
+const HERO_MEDIA_CLASS = 'relative h-[440px] w-full sm:h-[540px] lg:h-[580px]'
+
 // Objeto 3D real — solo cliente (WebGL), con fallback PNG estático.
+// En <768px ni siquiera se descarga este chunk (three.js + el .glb de 1.83 MB).
 const Waira3DViewer = dynamic(
   () => import('@/components/animations/waira-3d-viewer').then((m) => m.Waira3DViewer),
   {
     ssr: false,
-    loading: () => <WairaLogoFallback className="h-[440px] w-full sm:h-[540px] lg:h-[580px]" />,
+    loading: () => <WairaLogoFallback className={HERO_MEDIA_CLASS} />,
   },
 )
+
+/**
+ * Resuelve en cliente tras la hidratación para no provocar un mismatch:
+ * el servidor y el primer render siempre pintan el PNG.
+ */
+function useMinWidth(minWidth: number) {
+  const [match, setMatch] = useState(false)
+
+  useEffect(() => {
+    const query = window.matchMedia(`(min-width: ${minWidth}px)`)
+    const onChange = () => setMatch(query.matches)
+    onChange()
+    query.addEventListener('change', onChange)
+    return () => query.removeEventListener('change', onChange)
+  }, [minWidth])
+
+  return match
+}
 
 const TECHS = [
   'React', 'Next.js', 'TypeScript', 'OpenAI', 'AWS',
@@ -26,13 +48,14 @@ const TECHS = [
 export function Hero() {
   const { t } = useLanguage()
   const reduce = useReducedMotion() ?? false
+  const has3D = useMinWidth(768)
 
   const rise = (delay: number) =>
     reduce
       ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.3, delay } }
       : {
-          initial: { opacity: 0, y: 26, filter: 'blur(6px)' },
-          animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
+          initial: { opacity: 0, y: 26 },
+          animate: { opacity: 1, y: 0 },
           transition: { type: 'spring' as const, stiffness: 120, damping: 20, mass: 0.9, delay },
         }
 
@@ -162,11 +185,13 @@ export function Hero() {
               {/* Halos de luz ámbar + cian detrás del logo */}
               <div
                 aria-hidden
-                className="animate-orb-drift pointer-events-none absolute -top-10 -left-10 size-64 rounded-full bg-brand/20 blur-[100px]"
+                className="orb-glow animate-orb-drift pointer-events-none absolute -top-10 -left-10 size-64 rounded-full bg-brand/20"
+                style={{ '--orb-blur': '100px' } as React.CSSProperties}
               />
               <div
                 aria-hidden
-                className="animate-orb-drift-2 pointer-events-none absolute -right-10 -bottom-10 size-64 rounded-full bg-neon-cyan/15 blur-[100px]"
+                className="orb-glow animate-orb-drift-2 pointer-events-none absolute -right-10 -bottom-10 size-64 rounded-full bg-neon-cyan/15"
+                style={{ '--orb-blur': '100px' } as React.CSSProperties}
               />
 
               {/* Anillo orbital decorativo */}
@@ -176,7 +201,11 @@ export function Hero() {
               />
 
               {/* Objeto 3D libre — sin recuadro, flota sobre los halos */}
-              <Waira3DViewer className="relative h-[440px] w-full sm:h-[540px] lg:h-[580px]" />
+              {has3D ? (
+                <Waira3DViewer className={HERO_MEDIA_CLASS} />
+              ) : (
+                <WairaLogoFallback className={HERO_MEDIA_CLASS} />
+              )}
               {/* Hilo de aire bajo el logo */}
               <svg
                 aria-hidden
@@ -197,7 +226,7 @@ export function Hero() {
               {/* Insignia flotante */}
               <div className="glass-card absolute -bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full px-5 py-2.5 whitespace-nowrap">
                 <span className="animate-node-pulse size-1.5 rounded-full bg-brand" aria-hidden />
-                <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em] text-foreground/80">
+                <span className="font-mono text-[9px] font-medium uppercase tracking-[0.15em] text-foreground/80 sm:text-[10px] sm:tracking-[0.22em]">
                   Waira Solutions · Colombia
                 </span>
               </div>
@@ -225,7 +254,7 @@ export function Hero() {
 
         {/* Muro de tecnologías */}
         <div className="mt-16 sm:mt-20">
-          <p className="font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground/50">
+          <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground/50 sm:tracking-[0.28em]">
             {t.hero.trustedBy}
           </p>
           <div className="mask-fade-x mt-6 overflow-hidden">

@@ -228,6 +228,11 @@
     -webkit-backdrop-filter: blur(24px) saturate(200%);
   }
 
+  /* Halos decorativos — el blur solo donde hay GPU de sobra */
+  .orb-glow {
+    filter: blur(var(--orb-blur, 48px));
+  }
+
   /* Neon glow borders */
   .border-neon {
     border-color: oklch(0.705 0.15 52 / 0.35);
@@ -438,14 +443,15 @@
 
   /* ─── Waira: textura editorial + interacciones de viento ─── */
 
-  /* Grano/ruido apenas perceptible — rompe el "plástico digital" */
+  /* Grano/ruido apenas perceptible — rompe el "plástico digital".
+     Sin mix-blend-mode: el blend global forzaba un pase de composición
+     sobre toda la página en cada repaint. */
   .grain-overlay {
     position: fixed;
     inset: 0;
     z-index: 45;
     pointer-events: none;
-    opacity: 0.04;
-    mix-blend-mode: overlay;
+    opacity: 0.06;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 140px 140px;
   }
@@ -454,7 +460,6 @@
   .wind-hover {
     transition: transform 0.5s var(--ease-gust), border-color 0.4s var(--ease-wind),
       background-color 0.4s var(--ease-wind), box-shadow 0.4s var(--ease-wind);
-    will-change: transform;
   }
   .wind-hover:hover {
     transform: translateY(-3px);
@@ -475,6 +480,40 @@
   .animate-flow-line {
     stroke-dasharray: 10 200;
     animation: line-dash 7s linear infinite;
+  }
+
+  /* ─── Reducción en móvil/tablet (<1024px) ───
+     Las capas decorativas dejan de competir por el frame budget:
+     sin grano sobre toda la página, sin backdrop-filter en el header,
+     sin blur en los halos y sin animaciones ambientales continuas.
+     La composición se conserva; solo deja de repintar cada frame. */
+  @media (max-width: 1023px) {
+    .grain-overlay {
+      display: none;
+    }
+
+    .glass-strong {
+      background-color: oklch(0.115 0.006 65 / 0.96);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .orb-glow {
+      filter: none;
+    }
+
+    .animate-orb-drift,
+    .animate-orb-drift-2,
+    .animate-orb-drift-3,
+    .animate-breeze,
+    .animate-breeze-slow {
+      animation: none;
+    }
+
+    .animate-flow-line {
+      animation: none;
+      stroke-dasharray: none;
+    }
   }
 }
 

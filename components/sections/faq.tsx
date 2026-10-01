@@ -46,17 +46,21 @@ export function FAQ() {
                     {isOpen ? <Minus className="size-4" /> : <Plus className="size-4" />}
                   </span>
                 </button>
+                {/* grid-template-rows 0fr → 1fr en vez de height:'auto':
+                    anima sin forzar un reflow del layout en cada frame. */}
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
                       key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
+                      initial={{ gridTemplateRows: '0fr', opacity: 0 }}
+                      animate={{ gridTemplateRows: '1fr', opacity: 1 }}
+                      exit={{ gridTemplateRows: '0fr', opacity: 0 }}
                       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
+                      className="grid"
                     >
-                      <p className="px-5 pb-5 text-sm leading-relaxed text-muted-foreground">{item.a}</p>
+                      <div className="overflow-hidden">
+                        <p className="px-5 pb-5 text-sm leading-relaxed text-muted-foreground">{item.a}</p>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

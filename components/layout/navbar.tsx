@@ -1,10 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import { List, WhatsappLogo, X } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import { Logo } from '@/components/ui/logo'
 import { LanguageToggle } from './language-toggle'
@@ -19,41 +18,84 @@ export function Navbar() {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('inicio')
   const { scrollY } = useScroll()
+  const scrolledRef = useRef(false)
+  const navigatedRef = useRef(false)
 
+  // Solo se llama a setState al cruzar el umbral — no en cada frame de scroll.
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    setScrolled(latest > 50)
+    const next = latest > 50
+    if (scrolledRef.current !== next) {
+      scrolledRef.current = next
+      setScrolled(next)
+    }
   })
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = []
+    const elements = SECTION_IDS.map((id) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => el !== null,
+    )
+    if (!elements.length || typeof IntersectionObserver === 'undefined') return
 
-    for (const id of SECTION_IDS) {
-      const el = document.getElementById(id)
-      if (!el) continue
+    // Un solo observer para las 9 secciones, en vez de uno por sección.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id)
+        }
+      },
+      { rootMargin: '-40% 0px -55% 0px' },
+    )
+    for (const el of elements) observer.observe(el)
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              setActive(id)
-            }
-          }
-        },
-        { rootMargin: '-40% 0px -55% 0px' },
-      )
-      observer.observe(el)
-      observers.push(observer)
-    }
-
-    return () => {
-      for (const o of observers) o.disconnect()
-    }
+    return () => observer.disconnect()
   }, [])
 
+  // Bloqueo de scroll compatible con iOS Safari, que ignora `overflow:hidden`
+  // en <body>: sacamos el body del flujo y restauramos el offset al cerrar.
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
+    if (!open) return
+
+    const html = document.documentElement
+    const body = document.body
+    const lockedScrollY = window.scrollY
+    const contentWidth = html.clientWidth
+
+    const prev = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      width: body.style.width,
+      overflow: html.style.overflow,
+    }
+
+    body.style.position = 'fixed'
+    body.style.top = `-${lockedScrollY}px`
+    body.style.left = '0'
+    body.style.width = `${contentWidth}px`
+    html.style.overflow = 'hidden'
+
     return () => {
-      document.body.style.overflow = ''
+      // Si el menú se cerró por un link, la navegación al ancla manda:
+      // restaurar el offset anterior desharía el salto a la sección.
+      const fromNav = navigatedRef.current
+      navigatedRef.current = false
+
+      body.style.position = prev.position
+      body.style.top = prev.top
+      body.style.left = prev.left
+      body.style.width = prev.width
+      html.style.overflow = prev.overflow
+
+      if (fromNav && window.location.hash) {
+        const id = decodeURIComponent(window.location.hash.slice(1))
+        const target = document.getElementById(id)
+        if (target) {
+          target.scrollIntoView({ block: 'start', behavior: 'instant' })
+          return
+        }
+      }
+
+      window.scrollTo({ top: lockedScrollY, behavior: 'instant' })
     }
   }, [open])
 
@@ -62,7 +104,7 @@ export function Navbar() {
       <div
         className={cn(
           'transition-all duration-300 ease-out',
-          scrolled
+          scrolled || open
             ? 'glass-strong border-b border-white/10'
             : 'border-b border-transparent',
         )}
@@ -72,7 +114,9 @@ export function Navbar() {
             <Logo />
           </a>
 
-          <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Principal">
+          {/* Los links aparecen desde md (768px); el CTA de texto queda para lg.
+              A 768px: logo + 5 links + lang/whatsapp + menú ≈ 660px, cabe. */}
+          <nav className="hidden items-center gap-0.5 md:flex" aria-label="Principal">
             {t.nav.links.map((link) => {
               const isActive = active === link.href.replace('#', '')
               return (
@@ -163,7 +207,10 @@ export function Navbar() {
                 <motion.a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    navigatedRef.current = true
+                    setOpen(false)
+                  }}
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.25, delay: i * 0.04 }}
@@ -194,7 +241,10 @@ export function Navbar() {
                 </a>
                 <a
                   href="#contacto"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    navigatedRef.current = true
+                    setOpen(false)
+                  }}
                   className="flex flex-1 items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
                 >
                   {t.nav.cta}

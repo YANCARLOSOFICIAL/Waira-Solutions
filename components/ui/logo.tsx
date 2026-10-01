@@ -36,7 +36,6 @@ export function LogoMark({ className }: { className?: string }) {
         height={40}
         className="object-cover"
         sizes="40px"
-        priority={false}
       />
     </span>
   )

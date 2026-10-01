@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useReducedMotion, type Transition, type Variants } from 'framer-motion'
-import type { ReactNode } from 'react'
+import { useMemo, type ReactNode } from 'react'
 
 type Direction = 'up' | 'down' | 'left' | 'right' | 'none'
 
@@ -11,6 +11,10 @@ const offset = 28
  * Movimiento "viento" (Waira): en vez de un fade lineal, los elementos entran
  * con una física de resorte suave y una leve deriva lateral, como empujados
  * por una brisa. Respeta prefers-reduced-motion.
+ *
+ * Solo `opacity` + `transform`: ambos corren en el compositor. Antes se
+ * animaba también `filter: blur()`, que es un efecto de paint y obligaba a
+ * repintar cada uno de los ~55 reveals de la home al entrar en pantalla.
  */
 const windSpring: Transition = {
   type: 'spring',
@@ -36,10 +40,9 @@ function getVariants(direction: Direction, reduce: boolean): Variants {
   }
 
   return {
-    hidden: { opacity: 0, filter: 'blur(6px)', ...map[direction] },
+    hidden: { opacity: 0, ...map[direction] },
     visible: {
       opacity: 1,
-      filter: 'blur(0px)',
       x: 0,
       y: 0,
       transition: windSpring,
@@ -66,10 +69,13 @@ export function Reveal({
 }: RevealProps) {
   const reduce = useReducedMotion() ?? false
   const MotionTag = motion[as]
+  // Memoizadas: crear objetos nuevos en cada render obliga a framer-motion
+  // a reprocesar las variantes cuando un padre re-renderiza.
+  const variants = useMemo(() => getVariants(direction, reduce), [direction, reduce])
   return (
     <MotionTag
       className={className}
-      variants={getVariants(direction, reduce)}
+      variants={variants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once, margin: '-80px' }}
@@ -118,18 +124,21 @@ export function StaggerItem({
 }) {
   const reduce = useReducedMotion() ?? false
   const MotionTag = motion[as]
-  const itemVariants: Variants = reduce
-    ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.2 } } }
-    : {
-        hidden: { opacity: 0, y: 22, x: 3, filter: 'blur(5px)' },
-        visible: {
-          opacity: 1,
-          y: 0,
-          x: 0,
-          filter: 'blur(0px)',
-          transition: { type: 'spring', stiffness: 130, damping: 21, mass: 0.85 },
-        },
-      }
+  const itemVariants: Variants = useMemo(
+    () =>
+      reduce
+        ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.2 } } }
+        : {
+            hidden: { opacity: 0, y: 22, x: 3 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              x: 0,
+              transition: { type: 'spring', stiffness: 130, damping: 21, mass: 0.85 },
+            },
+          },
+    [reduce],
+  )
   return (
     <MotionTag className={className} variants={itemVariants}>
       {children}

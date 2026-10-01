@@ -122,11 +122,11 @@ export function Services() {
                   'linear-gradient(90deg, oklch(0.09 0.005 65 / 0.92) 0%, oklch(0.09 0.005 65 / 0.45) 55%, oklch(0.09 0.005 65 / 0.05) 100%)',
               }}
             />
-            <figcaption className="absolute inset-y-0 left-0 flex max-w-md flex-col justify-center gap-2 px-8 sm:px-10">
-              <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-brand/90">
+            <figcaption className="absolute inset-y-0 left-0 flex max-w-md flex-col justify-center gap-2 px-5 sm:px-10">
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand/90 sm:tracking-[0.28em]">
                 Cloud &amp; DevOps
               </span>
-              <p className="font-heading text-xl font-bold leading-snug text-foreground sm:text-2xl">
+              <p className="font-heading text-lg font-bold leading-snug text-foreground sm:text-2xl">
                 Infraestructura confiable, observabilidad total, despliegues automatizados.
               </p>
             </figcaption>
@@ -137,8 +137,16 @@ export function Services() {
         <Reveal className="mt-12">
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-card">
             {/* Brillo ámbar/cian de fondo */}
-            <div aria-hidden className="pointer-events-none absolute -top-28 -right-28 size-[520px] rounded-full bg-brand/10 blur-[120px]" />
-            <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 size-[520px] rounded-full bg-neon-cyan/10 blur-[120px]" />
+            <div
+              aria-hidden
+              className="orb-glow pointer-events-none absolute -top-28 -right-28 size-[520px] rounded-full bg-brand/10"
+              style={{ '--orb-blur': '120px' } as React.CSSProperties}
+            />
+            <div
+              aria-hidden
+              className="orb-glow pointer-events-none absolute -bottom-40 -left-40 size-[520px] rounded-full bg-neon-cyan/10"
+              style={{ '--orb-blur': '120px' } as React.CSSProperties}
+            />
             <div className="relative grid items-center gap-8 p-6 sm:gap-10 sm:p-10 lg:grid-cols-[1.1fr_380px] lg:p-12">
               <div>
                 <span className="inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
@@ -176,13 +184,15 @@ export function Services() {
               </div>
               <div className="mx-auto w-full max-w-[400px] lg:mx-0 lg:ml-auto">
                 <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-black shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.06)]">
+                  {/* 9:16 en vez de altura fija: en móvil ocupa ~524px en vez de
+                      680px, y en desktop sigue midiendo ~680-710px. */}
                   <iframe
                     src="https://www.tiktok.com/embed/v2/7493672445539355909?lang=es-419"
                     title="Video de Waira Solutions en TikTok"
                     loading="lazy"
                     allowFullScreen
                     allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-                    className="block h-[680px] w-full sm:h-[700px]"
+                    className="block aspect-[9/16] h-auto w-full"
                   />
                 </div>
                 <p className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground/50">
